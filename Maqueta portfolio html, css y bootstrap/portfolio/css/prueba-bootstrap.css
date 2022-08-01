@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body {
+    font-family:'Poppins', sans-serif;
+    overflow-x: hidden; /*?*/
+  }
+/*Claser en la que se encuentra logo del curso, botonera de contacto y login y banner*/
+.header{
+
+    /* la cantidad de ancho que ocupa el elemento*/
+    width: 100%;
+    /*la cantidad de alto que ocupa el elemento*/
+    height: 55vh;
+    /*color de fondo (dependiente del width u height)*/
+    background-color: #191c32;
+    /*aplica color al contenido*/
+    color: aliceblue;
+}
+/*Barra <nav> en la que se encuentra el logo y la botonera*/
+.contact{
+    /*Organiza los elementos como un elemento de bloque y establece su contenido de acuerdo con el modelo de flexbox .*/
+    display: flex;
+    /*Distribuye el espacio entre los elementos de manera espaciada poniendo el primero elemento al principio y el ultimo al final*/
+    justify-content: space-between;
+    /*Alinea los la imagen del logo y la en el centro horizontal */
+    align-items: center;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    font-family:'Poppins', sans-serif;
+}
+/*Imagen<img> del logo*/
+.logo img{
+    width: 100px;
+}
+/*Lista<ul> con la botonera*/
+.menu {
+    padding: 5px;
+    margin-right:30px;
+    display: flex;
+    width: 10%;
+    align-items: flex-start;
+}
+/*Elementos de la lista<li> dentro de la lista*/
+.menu li{
+    /*quita los puntos de la lista*/
+    list-style: none;
+}
+/*Elementos de hipervinculos <a> dentro de la lista*/
+.menu a {
+    color: aliceblue;
+    /*relleno entre cada elemento para que no estene tan juntos*/
+    padding: 10px 20px;
+}
+/*Estilos para cuando se pasa el cursor sobre el hipervinculo*/
+.menu a:hover{
+    color: lightcoral;
+    transition: ease-in .35S;
+}
+/*Estilo para el boton de "Login" y el boton "Tengo interes en"*/
+.login, .boton-interes{
+    font-family:'Poppins', sans-serif;
+    color:#000000;
+    background-color: lightcoral;
+    /*Le quita el borde por default*/
+    border:none;
+    /*Redondea el borde*/
+    border-radius:20px; 
+    /*Espacio de relleno para que el borde no choque con el texto*/
+    padding: 3px 8px;
+    /*Estilo para que al pasar el cursor cambie*/
+    cursor: pointer;
+    /*Agrega sombreado al boton*/
+    box-shadow: 5px 5px 12px -5px rgba(240, 128, 128, .69);
+}
+/*Estilo para que al pasar el cursor cambie el boton*/
+.login:hover,.boton-interes:hover,  .editar:hover{
+    background-color: #fff;
+    color:black;
+    transition: ease-in .35s;
+}
+#banner img{
+    /*Que ocupe el 100% del ancho de  la pantalla*/
+    width: 100vw;
+    /*Que ocupe el 60% de la vista de alto*/
+    height:80vh;
+    /*Redondeo de la imagen*/
+    border-radius: 20px;
+}
+.container{
+    color:#fff;
+}
+/*Estilos para el sector about/sobre*/
+.background{
+    width: 100%;
+    height: 100%;
+    background-color: #191c32;
+}
+/*Estilos para la imagen <img> de la foto de perfil*/
+#profile-picture{
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    margin-top: 25px;
+}
+#profile-picture img{
+    border-radius:45%;
+    width:15%;
+    padding-top: 20px;
+    margin-left: 5em;
+    bottom: 4em;
+}
+/*Estilo para los botones de edicion de informacion*/
+.editar{
+    color:#000000;
+    background-color: lightcoral;
+    /*Le quita el borde por default*/
+    border:none;
+    /*Redondea el borde*/
+    border-radius:20px; 
+    /*Espacio de relleno para que el borde no choque con el texto*/
+    padding: 3px 8px;
+    /*Estilo para que al pasar el cursor cambie*/
+    cursor: pointer;
+}
+/*Estilos para el div que contiene la informacion personal*/
+.datos-personales, .acerca-de{
+    width: 100%;
+    /*Separacion con el resto de los divs y la foto de perfil*/
+    margin: 10px;
+    /*Espacio entre el texto y el borde para que no choque*/
+    padding: 15px;
+    background-color: #202441;
+    /*Estilos para el borde*/
+    border: 2px groove lightcoral;
+    /*Redondeo del borde*/
+    border-radius: 10px;
+}
+.boton-seccion, .boton-mas{
+    /*Tipografia del texto dentro del boton*/
+    font-family:'Poppins', sans-serif;
+    /*Color del texto dentro del boton*/
+    color:#000000;
+    /*Color del boton*/
+    background-color: #fff;
+    /*Le quita el borde por default*/
+    border:none;
+    /*Redondea el borde*/
+    border-radius:20px; 
+    /*Espacio de relleno para que el borde no choque con el texto*/
+    padding: 3px 8px;
+    /*Estilo para que al pasar el cursor cambie*/
+    cursor: pointer;
+    /*Agrega sombreado al boton*/
+    box-shadow: 4px 4px 8px -7px rgba(255, 255, 255, 0.69);
+}
+/*Estilos para cuando el cursor esta sobre los botones agregar seccion y mas*/
+.boton-seccion:hover, .boton-mas:hover{
+    background-color: lightcoral;
+    color:black;
+    transition: ease-in .35s;
+}
+.titulo{
+    color:#0fe7d5;
+}
+.experiencia{
+    width: 100%;
+    background-color:#202441;
+    padding: 15px;
+    margin: 10px;
+    border: 2px groove lightcoral;
+    border-radius: 10px;
+}
+.experiencia img{
+    width: 10vw;
+}
+.divisor{
+    height: 1px;
+    width: 80px;
+    background-color: lightcoral;
+    margin-top: 2px;
+    margin-bottom: 40px;
+}
+.educacion{
+    display: flex;
+    border: 2px groove lightcoral;
+    border-radius: 10px;
+    padding: 15px;
+    margin-right:12px;
+    margin-left: -12px;
+        background-color: #202441
+}
