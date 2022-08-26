@@ -1,0 +1,200 @@
+/*Importacion de la fuente*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+* {
+    /*Fuente de las letras*/
+    font-family:'Poppins', sans-serif;
+    /*ocultar la barra de scrolleo*/
+
+    box-sizing: border-box;
+}
+/*--------------------------------------------------------------------BOTONES-----------------------------------------------------------------*/
+.login, .editar, .crear, .borrar{
+    font-family:'Poppins', sans-serif;
+    color:#000000;
+    background-color: #6eaef7 ;
+    /*Le quita el borde por default*/
+    border:none;
+    /*Redondea el borde*/
+    border-radius:15px; 
+    /*Espacio de relleno para que el borde no choque con el texto*/
+    padding: 2px 10px;
+    /*Estilo para que al pasar el cursor cambie*/
+    cursor: pointer;
+}
+/*Estilos para cuando se pasa el cursor sobre el hipervinculo*/
+.contact-list a:hover{
+    color: #f08080;
+    transition: ease-in .35S;
+}
+.login:hover, .editar:hover,.crear:hover,.borrar:hover{
+    background-color: #fff;
+    color:black;
+    transition: ease-in .35s;
+}
+.botonera{
+    padding:20px;
+}
+
+.editar{
+    cursor: pointer;
+    margin-bottom: 10%;
+}
+/*----------------------------------------------------------------------FOTOS--------------------------------------------------------------*/
+#banner{
+    display: flex;
+    width: 100%;
+    background-image: url(assets/img/Banner.jpg);
+    height: 50vh;
+    z-index:1;
+    border-radius: 20px;
+    align-items:center;
+} 
+
+#profile-picture img{
+    width: 10%;
+    height:20%;
+    border-radius: 25%;
+    z-index: 2;
+    position: absolute;
+    top:55%;
+}
+
+.fotos img{
+    width: 10vw;
+    margin-bottom: 1%;
+}
+/*---------------------------------------------------------------Dividores/Subtitulos------------------------------------------------------*/
+.divisor{
+    height: 1px;
+    width: 70%;
+    background-color: #f08080;
+    margin-top: 2%;
+    margin-bottom: 4%;
+    margin-left: 2%;
+}
+
+.subrayadoTitulos{
+    height: 1px;
+    width: 18%;
+    background-color: #6eaef7;
+    margin-bottom: 1%;
+    margin-left: 0.5%;
+}
+
+
+.subrayadoSubtitulos{
+    height: 1px;
+    width: 10%;
+    background-color: #6eaef7;
+    margin-bottom: 1%;
+    margin-left: 0.5%;
+}
+.tecnologia .subrayadoSubtitulos{
+    margin-bottom: 3%;
+
+}
+
+.proyectos .subrayadoSubtitulos{
+    margin-left: 1%;
+}
+
+.habilidadesFuertes .subrayadoSubtitulos, .habilidadesDebiles .subrayadoSubtitulos{
+    margin-left: 1%;
+    margin-bottom: 2%;
+}
+.experiencia .subrayadoSubtitulos, .educacion .subrayadoSubtitulos{
+    margin-top: -0.5%;
+    margin-bottom: 2%;
+}
+.lsitaLinks .divisor{
+    width: 40%;
+    margin-left: 5%;
+}
+/*--------------------------------------------------------------------CABECERA------------------------------------------------------------*/
+  /*Claser en la que se encuentra logo del curso, botonera de contacto y login y banner*/
+.header{
+    /*color de fondo (dependiente del width u height)*/
+    background-color: #191c32;
+    /*aplica color al contenido*/
+    color: aliceblue;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    font-family:'Poppins', sans-serif;
+}
+/*Imagen<img> del logo*/
+.logo img{
+    width: 100px;
+}
+/*Lista<ul> con la botonera*/
+.contact-list{
+    display: flex;
+    align-items:center;
+}
+/*Elementos de la lista<li> dentro de la lista*/
+.contact-list li{
+    /*quita los puntos de la lista*/
+    list-style: none;
+}
+/*Elementos de hipervinculos <a> dentro de la lista*/
+.contact-list a {
+    color: #ffffff;
+    /*relleno entre cada elemento para que no estene tan juntos*/
+    padding: 20px;
+}
+
+/*------------------------------------------------------------BODY-----------------------------------------------------------------------*/
+.background{
+    height: 100%;
+    background-color: #191c32;
+}
+.usuario, .about,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles,.tecnologia,.proyectos{
+    color:#ffffff;
+    width: 100%;
+    background-color: #33385a;
+    border: 3px groove #f08080;
+    border-radius: 20px;
+    position: relative;
+}
+.educacion app-crear-educacion{
+    margin-bottom: 2%;
+}
+.about,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles{
+    margin:2%;
+}
+.proyectos{
+    margin-top: 2%;
+}
+.informacion{
+    padding:20px;
+}
+.item-list{
+    list-style: none;
+}
+
+.links{
+    margin-left: 1%;
+}
+.progress{
+    width: 90%;
+}
+
+/*-------------------------------------------------------------------------Edicion------------------------------------------------------------*/
+.formularios .form-group{
+    margin-top: -2%;
+    padding: 1.5%
+}
+
+.modal-title{
+    color:#000000
+}
+
+.close{
+    border:none;
+    background-color: #ffffff;
+}
+.form-group label{
+    color:#000000
+}

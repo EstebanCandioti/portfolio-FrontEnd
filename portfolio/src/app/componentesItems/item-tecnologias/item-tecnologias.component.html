@@ -1,0 +1,33 @@
+<!--Template por si el objeto tiene foto-->
+<ng-template [ngIf]="tecnologia.tecnologiaImg">
+    <div class="informacion row">
+        <div class="col-3 fotos">
+            <img [src]="tecnologia.tecnologiaImg"> 
+        </div>
+        <div class="col-8">
+            <h2>{{tecnologia.nombre}}</h2>
+            <div class="subrayadoSubtitulos"></div>
+            <h4>{{tecnologia.descripcion}}</h4>
+        </div>
+        <div class="botonera col-1">
+            <button class="editar"(click)="(onEdit(tecnologia))"><i class="fas fa-pen"></i></button>
+            <button class="editar" (click)="(onDelete(tecnologia))"><i class="fas fa-trash"></i></button>
+        </div>
+    </div>
+    <div class="divisor"></div>
+</ng-template> 
+<!--Template por si el objeto no tiene foto-->
+<ng-template [ngIf]="!tecnologia.tecnologiaImg">
+    <div class="informacion row">
+        <div class="col-11">
+            <h2>{{tecnologia.nombre}}</h2>
+            <div class="subrayadoSubtitulos"></div>
+            <h4>{{tecnologia.descripcion}}</h4>
+        </div>
+        <div class="botonera col-1">
+            <button class="editar"(click)="(onEdit(tecnologia))"><i class="fas fa-pen"></i></button>
+            <button class="editar" (click)="(onDelete(tecnologia))"><i class="fas fa-trash"></i></button>
+        </div>
+    </div>
+    <div class="divisor"></div>
+</ng-template> 

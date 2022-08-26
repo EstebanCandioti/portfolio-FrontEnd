@@ -1,0 +1,135 @@
+{
+  "user": {
+    "id": 1,
+    "nombre": "Esteban Candioti",
+    "titulo": "Full stack develepor Jr",
+    "ubicacion": "Santa Fe (Argentina)",
+    "fotoPerfil": "assets/img/FotoPerfil.jpeg",
+    "fotoBanner": "assets/img/FotoBanner.jpg",
+    "acercaDe": "Programador web full stack jr con conocimiento en HTML, CSS y JavaScript"
+  },
+  "experiencia": [
+    {
+      "id": 1,
+      "nombreTrabajo": "Zafferano",
+      "posicionLaboral": "Encargado",
+      "descripcionLaboral": "Manejo de caja, pago a empleados y proveedores, organizacion del local",
+      "fotoTrabajo": "assets/img/LogoZafferano.JPG",
+      "inicioTrabajo": "Enero 2019",
+      "finalizacionTrabajo": "Enero 2021"
+    },
+    {
+      "id": 2,
+      "nombreTrabajo": "Nesta",
+      "posicionLaboral": "Encargado",
+      "descripcionLaboral": "Manejo de caja, pago a empleados y proveedores, organizacion del local",
+      "fotoTrabajo": "assets/img/logoNesta.jpg",
+      "inicioTrabajo": "Enero 2021",
+      "finalizacionTrabajo": "Actualidad"
+    }
+  ],
+  "educacion": [
+    {
+      "id": "1",
+      "institucion": "Escuela de educacion Secundaria Orientada N° 637 “Domingo Cullen“",
+      "fotoInstitucion": "",
+      "titulo": "Bachiller en informatica",
+      "inicioEducacion": "2014",
+      "finalizacionEducacion": "2018"
+    }
+  ],
+  "hardSkills": [
+    {
+      "id": 1,
+      "habilidad": "Ingles b1-b2",
+      "valor": 50
+    },
+    {
+      "id": 2,
+      "habilidad": "Resolucion de problemas",
+      "valor": 70
+    },
+    {
+      "id": 3,
+      "habilidad": "Adaptabilidad",
+      "valor": 70
+    },
+    {
+      "id": 4,
+      "habilidad": "Comunicacion",
+      "valor": 40
+    },
+    {
+      "id": 5,
+      "habilidad": "Curiocidad",
+      "valor": 60
+    }
+  ],
+  "softSkills": [
+    {
+      "id": 1,
+      "habilidad": "Colaboracion",
+      "valor": 30
+    },
+    {
+      "id": 2,
+      "habilidad": "Productividad",
+      "valor": 50
+    },
+    {
+      "id": 3,
+      "habilidad": "Falta de concentracion",
+      "valor": 60
+    },
+    {
+      "id": 4,
+      "habilidad": "Procrastinacion",
+      "valor": 60
+    },
+    {
+      "id": 5,
+      "habilidad": "Impuntualidad",
+      "valor": 70
+    }
+  ],
+  "tecnologias": [
+    {
+      "id": 1,
+      "nombre": "HTML5",
+      "descripcion": "lenguaje de marcado usado para la elaboración de páginas web.",
+      "tecnologiaImg": "assets/img/html5.png"
+    },
+    {
+      "id": 2,
+      "nombre": "CSS3",
+      "descripcion": "es un lenguaje de diseño gráfico que permite definir y crear la presentación de un documento estructurado escrito en un lenguaje de marcado.",
+      "tecnologiaImg": "assets/img/css3.png"
+    },
+    {
+      "id": 3,
+      "nombre": "JavaScript",
+      "descripcion": "es un lenguaje de programación interpretado, orientado a objetos, basado en prototipos, imperativo, débilmente tipado y dinámico.",
+      "tecnologiaImg": "assets/img/javascript.png"
+    }
+  ],
+  "proyectos": [
+    {
+      "id": 1,
+      "nombre": "Portfolio Web",
+      "fotoProyecto": "",
+      "descripcion": "Portfolio Web desarrollado como trabajo final integrador del curso Argentina Programa #YoProgramo",
+      "inicioProyecto": "Mayo 2022",
+      "finalizacionProyecto": "Agosto 2022",
+      "links": [
+        {
+          "descripcionLink": "Link al repositorio del BackEnd creado para el portfolio web",
+          "url": "https://github.com/EstebanCandioti/portfolio-BackEnd"
+        },
+        {
+          "descripcionLink": "Link al repositorio del FrontEnd creado para el portfolio web",
+          "url": "https://github.com/EstebanCandioti/portfolio-FrontEnd"
+        }
+      ]
+    }
+  ]
+}

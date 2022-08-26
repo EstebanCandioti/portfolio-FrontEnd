@@ -1,0 +1,20 @@
+<div class="habilidadesDebiles container-xxl">
+    <div class="informacion row">
+        <div class="titulo col-11">
+            <h2>Habilidades Debiles</h2>
+            <div class="subrayadoTitulos"></div>
+        </div>
+        <div class="col-1">
+            <button class="editar"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <ul class="item-list">
+            <app-item-habilidad-debil
+            *ngFor="let habilidad of listaHabilidadesDebiles"
+            [habilidad]="habilidad"
+            (onDeleteHabilidadDebil)="deleteHabilidadDebil(habilidad)"
+            (onEditHabilidadDebil)="editHabilidadDebil(habilidad)"
+            >
+            </app-item-habilidad-debil>
+        </ul>
+    </div>
+</div>

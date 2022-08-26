@@ -1,0 +1,39 @@
+<!--Template por si el objeto no tiene foto-->
+<ng-template [ngIf]="!educacion.fotoInstitucion">
+    <div class="row">
+        <div class="institucion col">
+            <h2>{{educacion.institucion}}</h2>
+            <div class="subrayadoSubtitulos"></div>
+            <h4 >{{educacion.titulo}}</h4>
+            <h4>
+                <time>{{educacion.inicioEducacion}}</time>  -
+                <time>{{educacion.finalizacionEducacion}}</time>
+            </h4>
+        </div>
+        <div class="botonera col-1">
+            <app-boton-borrar (btnClickBorrar)="onDelete(educacion)"></app-boton-borrar>
+        </div>
+    </div>
+    <div class="divisor"></div>
+</ng-template>
+<!--Template por si el objeto tiene foto-->
+<ng-template [ngIf]="educacion.fotoInstitucion">
+    <div class="row">
+        <div class="col-3" >
+            <img [src]="educacion.fotoInstitucion">
+        </div>
+        <div class="institucion col-8">
+            <h2>{{educacion.institucion}}</h2>
+            <div class="subrayadoSubtitulos"></div>
+            <h4 >{{educacion.titulo}}</h4>
+            <h4>
+                <time>{{educacion.inicioEducacion}}</time>  -
+                <time>{{educacion.finalizacionEducacion}}</time>
+            </h4>
+        </div>
+        <div class="botonera col-1">
+            <app-boton-borrar (btnClickBorrar)="onDelete(educacion)"></app-boton-borrar>
+        </div>
+    </div>
+    <div class="divisor"></div>
+</ng-template>

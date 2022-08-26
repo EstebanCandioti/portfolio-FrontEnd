@@ -1,0 +1,18 @@
+<div class="experiencia container-xxl">
+    <div class="informacion row">
+        <div class="titulo col-11">
+            <h2>Experiencia</h2>
+            <div class="subrayadoTitulos"></div>
+        </div>
+        <div class="col-1">
+            <app-crear-experiencia (onCrearExperiencia)="crearExperiencia($event)"></app-crear-experiencia>
+        </div>
+    </div>
+    <app-item-experiencia 
+        *ngFor="let experiencia of listaExperiencia"
+        [experiencia]="experiencia"
+        (onDeleteExperiencia)="deleteExperiencia(experiencia)"
+        (onEditExperiencia)="editExperiencia(experiencia)"
+    >
+    </app-item-experiencia>
+</div>

@@ -1,0 +1,18 @@
+<div class="tecnologia container-xxl">
+    <div class="informacion row">
+        <div class=" col-11">
+            <h2>Tecnologias</h2>
+            <div class="subrayadoTitulos"></div>
+        </div>
+        <div class="col-1">
+            <button class="editar"><i class="fa-solid fa-plus"></i></button>
+        </div>
+    </div>
+    <app-item-tecnologias
+    *ngFor="let tecnologia of listaTecnologias"
+    [tecnologia]="tecnologia"
+    (onDeleteTecnologia)="deleteTecnologia(tecnologia)"
+     (onEditTecnologia)="editTecnologia(tecnologia)"
+>
+    </app-item-tecnologias>
+</div>

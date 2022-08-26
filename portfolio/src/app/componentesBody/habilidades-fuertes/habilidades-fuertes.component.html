@@ -1,0 +1,21 @@
+<div class="habilidadesFuertes container-xxl">
+    <div class="informacion row">
+        <div class="titulo col-11">
+            <h2>Habilidades Fuertes</h2>
+            <div class="subrayadoTitulos"></div>
+        </div>
+        <div class="col-1">
+            <app-crear-habilidad-fuerte (onCrearHabilidad)="crearHabilidadFuerte($event)"></app-crear-habilidad-fuerte>
+        </div>
+        <ul class="item-list">
+            <app-item-habilidad-fuerte 
+            *ngFor="let habilidad of listaHabilidadesFuertes"
+            [habilidad]="habilidad"
+            (onDeleteHabilidadFuerte)="deleteHabilidadFuerte(habilidad)"
+            (onEditHabilidadFuerte)="editHabilidadFuerte(habilidad)"
+            >
+            </app-item-habilidad-fuerte>
+        </ul>
+    </div>
+</div>
+

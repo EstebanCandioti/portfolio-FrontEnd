@@ -1,0 +1,18 @@
+<div class=" educacion container-xxl">
+    <div class="informacion row">
+        <div class="titulo col-11">
+            <h2>Educacion</h2>
+            <div class="subrayadoTitulos"></div>
+        </div>
+        <div class="col-1">
+            <app-crear-educacion (onCrearEducacion)="crearEducacion($event)"></app-crear-educacion>
+        </div>
+        <app-item-educacion
+        *ngFor="let educacion of listaEducacion"
+        [educacion]="educacion"
+        (onDeleteEducacion)="deleteEducacion(educacion)"
+        (onEditEducacion)="editEducacion(educacion)"    
+        >
+        </app-item-educacion>
+    </div>
+</div>
