@@ -1,45 +1,26 @@
-<!--
-    No usar lista para las url, hacer un solo input que recibe todas las url
-    pasarlos a una variable, pasarlo a una lista y usar lista=variable.split(",")
-    for (String link: link){
-        "<a href="+link+" target=""> link</a><br>"
-    }
--->
-
 <!--Template por si el objeto tiene foto-->
-<ng-template [ngIf]="proyecto.fotoProyecto">
-    <div class="informacion row">
-        <div class="col-3">
-            <img [src]="proyecto.fotoProyecto"> 
-        </div>
-        <div class="col-8">
-            <h2>{{proyecto.nombre}}</h2>
-            <div class="subrayadoSubitulos"></div>
-            <h4>{{proyecto.descripcion}}</h4>
-            <p><time>{{proyecto.inicioProyecto}}</time> - <time>{{proyecto.finalizacionProyecto}}</time></p>
-        </div>
-        <div class="botonera col-1">
-            <button class="editar"(click)="(onEdit(proyecto))"><i class="fas fa-pen"></i></button>
-            <button class="editar" (click)="(onDelete(proyecto))"><i class="fas fa-trash"></i></button>
-        </div>
-            <ul class="item-list">
-        <h2>Links al proyecto :</h2>
-        <div class="subrayadoSubtitulos"></div>
-        <li class="listaLinks" *ngFor="let link of proyecto.links">
-            <div class="row">
-                <!--columna vacio para generar sangria-->
-                <div class="col-1"></div>
-                <div class="col-5">
-                    {{link.descripcionLink}} :
-                </div>
-                <div class="col-6">
-                    <a href="{{link.url}}">{{link.url}}</a>
-                </div>
+    <ng-template [ngIf]="proyecto.fotoProyecto">
+        <div class="informacion row">
+            <div class="col-3">
+                <img [src]="proyecto.fotoProyecto"> 
             </div>
-        </li>
-    </ul>
-    </div>
-    <div class="divisor"></div>
+            <div class="col-8">
+                <h2>{{proyecto.nombre}}</h2>
+                <div class="subrayadoSubitulos"></div>
+                <h4>{{proyecto.descripcion}}</h4>
+                <p><time>{{proyecto.inicioProyecto}}</time> - <time>{{proyecto.finalizacionProyecto}}</time></p>
+            </div>
+            <div class="botonera col-1">
+                <button class="editar"(click)="(onEdit(proyecto))"><i class="fas fa-pen"></i></button>
+                <button class="editar" (click)="(onDelete(proyecto))"><i class="fas fa-trash"></i></button>
+            </div>
+                <ul class="item-list">
+            <h2>Links al proyecto :</h2>
+            <div class="subrayadoSubtitulos"></div>
+    
+        </ul>
+        </div>
+        <div class="divisor"></div>
 </ng-template> 
 <!--Template por si el objeto no tiene foto-->
 <ng-template [ngIf]="!proyecto.fotoProyecto">
@@ -55,21 +36,25 @@
             <button class="editar" (click)="(onDelete(proyecto))"><i class="fas fa-trash"></i></button>
         </div>
     </div>
-    <ul class="item-list">
-        <h3>Links al proyecto :</h3>
-        <div class="subrayadoSubtitulos"></div>
-        <li class="listaLinks" *ngFor="let link of proyecto.links">
-            <div class="row">
-                <!--columna vacio para generar sangria-->
-                <div class="col-1"></div>
-                <div class="col-5">
-                    {{link.descripcionLink}} :
-                </div>
-                <div class="col-6">
-                    <a href="{{link.url}}">{{link.url}}</a>
-                </div>
-            </div>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-12">
+            <h3>Links al proyecto :</h3>
+        </div>
+        <ul class="item-list links">
+            <li>
+                <p *ngIf="proyecto.descripcionLink1">{{proyecto.descripcionLink1}}</p>
+                <a href="{{proyecto.link1}}">{{proyecto.link1}}</a>
+                <div class="minidivisor"></div>
+            </li>
+            <li *ngIf="proyecto.link2">
+                <p *ngIf="proyecto.descripcionLink2">{{proyecto.descripcionLink2}}</p>
+                <a href="{{proyecto.link2}}">{{proyecto.link2}}</a>
+            </li>
+            <li *ngIf="proyecto.link3">
+                <p *ngIf="proyecto.descripcionLink3">{{proyecto.descripcionLink3}}</p>
+                <a href="{{proyecto.link3}}">{{proyecto.link3}}</a>
+            </li>
+        </ul>
+    </div>
     <div class="divisor"></div>
 </ng-template> 

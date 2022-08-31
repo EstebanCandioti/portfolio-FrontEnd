@@ -23,13 +23,13 @@ export class EducacionComponent implements OnInit {
     });
   }
 
-  deleteEducacion(educacion:IEducacion):void {
+  deleteEducacion(educacion:IEducacion) {
      this.datosPortfolio.deleteEducacion(educacion).subscribe(()=> {
           this.listaEducacion=this.listaEducacion.filter(t=>t.id !== educacion.id);
     })
   }
 
-  editEducacion(educacion:IEducacion):void {
+  editEducacion(educacion:IEducacion) {
     this.datosPortfolio.editEducacion(educacion).subscribe()
   }
 

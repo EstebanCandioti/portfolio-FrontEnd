@@ -28,6 +28,10 @@ import { BotonBorrarComponent } from './componentesEdicion/boton-borrar/boton-bo
 import { CrearEducacionComponent } from './componentesEdicion/crear-educacion/crear-educacion.component';
 import { CrearExperienciaComponent } from './componentesEdicion/crear-experiencia/crear-experiencia.component';
 import { CrearHabilidadFuerteComponent } from './componentesEdicion/crear-habilidad-fuerte/crear-habilidad-fuerte.component';
+import { CrearHabilidadDebilComponent } from './componentesEdicion/crear-habilidad-debil/crear-habilidad-debil.component';
+import { CrearTecnologiaComponent } from './componentesEdicion/crear-tecnologia/crear-tecnologia.component';
+import { CrearProyectoComponent } from './componentesEdicion/crear-proyecto/crear-proyecto.component';
+import { EditarEducacionComponent } from './componentesEdicion/editar-educacion/editar-educacion.component';
 
 
 
@@ -54,7 +58,11 @@ import { CrearHabilidadFuerteComponent } from './componentesEdicion/crear-habili
     CrearEducacionComponent,
     BotonBorrarComponent,
     CrearHabilidadFuerteComponent,
-    CrearExperienciaComponent
+    CrearExperienciaComponent,
+    CrearHabilidadDebilComponent,
+    CrearTecnologiaComponent,
+    CrearProyectoComponent,
+    EditarEducacionComponent
   ],
   imports: [
     BrowserModule,

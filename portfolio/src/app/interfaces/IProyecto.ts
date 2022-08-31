@@ -5,5 +5,10 @@ export interface IProyecto {
     descripcion:string,
     inicioProyecto:string,
     finalizacionProyecto:string,
-    links:Array<{descripcionLink:string, url:string}>
+    link1:string,
+    descripcionLink1:string,
+    link2:string,
+    descripcionLink2:string,
+    link3:string,
+    descripcionLink3:string
 }

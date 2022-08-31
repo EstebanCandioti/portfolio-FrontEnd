@@ -44,19 +44,18 @@
     display: flex;
     width: 100%;
     background-image: url(assets/img/Banner.jpg);
-    height: 50vh;
+    height: 53vh;
     z-index:1;
     border-radius: 20px;
     align-items:center;
 } 
 
 #profile-picture img{
-    width: 10%;
-    height:20%;
-    border-radius: 25%;
-    z-index: 2;
+    width: 8vw;
+    height:17vh;
+    border-radius: 50%;
     position: absolute;
-    top:55%;
+    margin-top:6%;
 }
 
 .fotos img{
@@ -72,7 +71,13 @@
     margin-bottom: 4%;
     margin-left: 2%;
 }
-
+.minidivisor{
+    height: 1px;
+    width: 40%;
+    background-color: #f08080;
+    margin-top: 1%;
+    margin-left: 2%;
+}
 .subrayadoTitulos{
     height: 1px;
     width: 18%;
@@ -114,7 +119,7 @@
   /*Claser en la que se encuentra logo del curso, botonera de contacto y login y banner*/
 .header{
     /*color de fondo (dependiente del width u height)*/
-    background-color: #191c32;
+    background-color: #261a63;
     /*aplica color al contenido*/
     color: aliceblue;
 }
@@ -158,15 +163,11 @@
     border-radius: 20px;
     position: relative;
 }
-.educacion app-crear-educacion{
-    margin-bottom: 2%;
+
+.about,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles, .tecnologia,.proyectos{
+    margin-top:2%;
 }
-.about,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles{
-    margin:2%;
-}
-.proyectos{
-    margin-top: 2%;
-}
+
 .informacion{
     padding:20px;
 }
@@ -175,11 +176,15 @@
 }
 
 .links{
-    margin-left: 1%;
+    margin-left: 5%;
+}
+.links li{
+    margin-bottom: 3%;
 }
 .progress{
     width: 90%;
 }
+
 
 /*-------------------------------------------------------------------------Edicion------------------------------------------------------------*/
 .formularios .form-group{
@@ -197,4 +202,8 @@
 }
 .form-group label{
     color:#000000
+}
+
+small{
+    color: #000000;
 }

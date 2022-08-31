@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IPersona } from 'src/app/interfaces/IPersona';
+import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
   selector: 'app-usuario',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuarioComponent implements OnInit {
 
-  constructor() { }
+  constructor(private datosPortfolio:PortfolioService) { 
+  }
 
   ngOnInit(): void {
+
   }
 
 }

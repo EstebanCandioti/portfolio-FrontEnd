@@ -27,4 +27,11 @@ export class HabilidadesDebilesComponent implements OnInit {
       this.listaHabilidadesDebiles[habilidad.id]=habilidad;
     })
   }
+
+  crearHabilidadDebil(habilidad:IHabilidad){
+    console.log("en el componente")
+    this.datosPortfolio.crearHabilidadDebil(habilidad).subscribe(habilidad=>{
+      this.listaHabilidadesDebiles.push(habilidad);
+    })
+  }
 }

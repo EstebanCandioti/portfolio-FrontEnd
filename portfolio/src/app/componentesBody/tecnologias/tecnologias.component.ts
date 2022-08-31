@@ -27,4 +27,9 @@ export class TecnologiasComponent implements OnInit {
       this.listaTecnologias[tecnologia.id]=tecnologia;
     })
   }
+  crearTecnologia(tecnologia:ITecnologia){
+    this.datosPortfolio.crearTecnologia(tecnologia).subscribe(tecnologia=>{
+      this.listaTecnologias.push(tecnologia);
+    });
+  }
 }

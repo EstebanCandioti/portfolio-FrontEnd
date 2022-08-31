@@ -3,7 +3,7 @@
   type="button"
   class="editar"
   data-toggle="modal"
-  data-target="#habilidad-fuerteForm"
+  data-target="#habilidad-debilForm"
 >
   <i class="fa-solid fa-plus"></i>
 </button>
@@ -11,7 +11,7 @@
 <!-- Modal -->
 <div
   class="modal fade bd-example-modal-lg"
-  id="habilidad-fuerteForm"
+  id="habilidad-debilForm"
   tabindex="-1"
   role="dialog"
   aria-labelledby="myLargeModalLabel"
@@ -37,7 +37,7 @@
           class="formularios"
         >
           <div class="form-group">
-            <label for="habilidad" class="form-label">Habilidad fuerte</label>
+            <label for="habilidad" class="form-label">Habilidad debil</label>
             <input
               type="text"
               class="form-control"
@@ -45,7 +45,7 @@
               name="habilidad"
               required
               formControlName="habilidad"
-              placeholder=" Ingrese una habilidad fuerte"
+              placeholder=" Ingrese una habilidad debil"
             />
             <!--Alerta por si el campo esta vacio-->
             <div
@@ -99,7 +99,6 @@
               El valor debete estar entre el 1 y el 100
             </div>
           </div>
-
           <button
             class="btn btn-primary"
             type="submit"

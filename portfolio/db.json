@@ -1,12 +1,14 @@
 {
-  "user": {
+  "persona": {
     "id": 1,
     "nombre": "Esteban Candioti",
-    "titulo": "Full stack develepor Jr",
-    "ubicacion": "Santa Fe (Argentina)",
+    "titulos": "Full stack develepor Jr",
+    "ubicacion": "Santa Fe - Argentina",
     "fotoPerfil": "assets/img/FotoPerfil.jpeg",
     "fotoBanner": "assets/img/FotoBanner.jpg",
-    "acercaDe": "Programador web full stack jr con conocimiento en HTML, CSS y JavaScript"
+    "descripcion": "Programador web full stack jr con conocimiento en HTML, CSS y JavaScript",
+    "email":"estebancandio@gmail.com",
+    "contrasenia":"YoProgramo2"
   },
   "experiencia": [
     {
@@ -30,7 +32,7 @@
   ],
   "educacion": [
     {
-      "id": "1",
+      "id": 1,
       "institucion": "Escuela de educacion Secundaria Orientada N° 637 “Domingo Cullen“",
       "fotoInstitucion": "",
       "titulo": "Bachiller en informatica",
@@ -120,16 +122,12 @@
       "descripcion": "Portfolio Web desarrollado como trabajo final integrador del curso Argentina Programa #YoProgramo",
       "inicioProyecto": "Mayo 2022",
       "finalizacionProyecto": "Agosto 2022",
-      "links": [
-        {
-          "descripcionLink": "Link al repositorio del BackEnd creado para el portfolio web",
-          "url": "https://github.com/EstebanCandioti/portfolio-BackEnd"
-        },
-        {
-          "descripcionLink": "Link al repositorio del FrontEnd creado para el portfolio web",
-          "url": "https://github.com/EstebanCandioti/portfolio-FrontEnd"
-        }
-      ]
+      "link1": "https://github.com/EstebanCandioti/portfolio-BackEnd",
+      "descripcionLink1": "Link que lleva al repositorio de github con el backend del proyecto",
+      "link2": "https://github.com/EstebanCandioti/portfolio-FrontEnd",
+      "descripcionLink2": "Link que lleva al repositorio de github con el frontend del proyecto",
+      "link3": "",
+      "descripcionLink3": ""
     }
   ]
 }

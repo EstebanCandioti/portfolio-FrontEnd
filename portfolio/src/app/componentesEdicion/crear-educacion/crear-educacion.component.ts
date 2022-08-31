@@ -29,7 +29,8 @@ export class CrearEducacionComponent implements OnInit {
       fotoInstitucion:['',[Validators.minLength(10), Validators.maxLength(100)]],
       titulo:['',[Validators.required,Validators.minLength(10), Validators.maxLength(40)]],
       inicioEducacion:['',[Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      finalizacionEducacion:['',[Validators.required, Validators.minLength(4), Validators.maxLength(20)]]
+      finalizacionEducacion:['',[Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      id:[0]
     })
   }
 }

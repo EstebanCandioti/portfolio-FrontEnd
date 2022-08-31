@@ -11,6 +11,7 @@ export class ItemProyectosComponent implements OnInit {
 @Output() onEditProyecto:EventEmitter<IProyecto>=new EventEmitter
 listaProyectos:IProyecto[] = [];
 @Input() proyecto:IProyecto = this.listaProyectos[0];
+
   constructor() { }
 
   ngOnInit(): void {
@@ -21,5 +22,4 @@ listaProyectos:IProyecto[] = [];
   onEdit(proyecto:IProyecto){
     this.onEditProyecto.emit(proyecto)
   }
-
 }

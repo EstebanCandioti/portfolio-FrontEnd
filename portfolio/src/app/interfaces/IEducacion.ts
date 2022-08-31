@@ -4,5 +4,7 @@ export interface IEducacion{
     fotoInstitucion:string,
     titulo:string,
     inicioEducacion:string,
-    finalizacionEducacion:string;
+    finalizacionEducacion:string,
+    idPersona:number;
+
 }

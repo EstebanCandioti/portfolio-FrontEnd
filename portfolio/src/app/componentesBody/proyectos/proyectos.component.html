@@ -1,19 +1,18 @@
 <div class="proyectos container-xxl">
-    <div class="informacion row">
-        <div class="col-11">
-            <h2>Proyectos</h2>
-            <div class="subrayadoTitulos"></div>
-        </div>
-        <div class="col-1">
-            <button class="editar"><i class="fa-solid fa-plus"></i></button>
-        </div>
+  <div class="informacion row">
+    <div class="col-11">
+      <h2>Proyectos</h2>
+      <div class="subrayadoTitulos"></div>
     </div>
-    <app-item-proyectos 
-        *ngFor="let proyecto of listaProyectos"
-        [proyecto]="proyecto"
-        (onDeleteProyecto)="deleteProyecto(proyecto)"
-        (onEditProyecto)="editProyecto(proyecto)"
-    >
-    </app-item-proyectos>   
+    <div class="col-1">
+      <app-crear-proyecto (onCrearProyecto)="crearProyecto($event)"></app-crear-proyecto>
+    </div>
+  </div>
+  <app-item-proyectos
+    *ngFor="let proyecto of listaProyectos"
+    [proyecto]="proyecto"
+    (onDeleteProyecto)="deleteProyecto(proyecto)"
+    (onEditProyecto)="editProyecto(proyecto)"
+  >
+  </app-item-proyectos>
 </div>
-

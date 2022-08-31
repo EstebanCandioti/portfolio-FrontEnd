@@ -1,0 +1,409 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="editar"
+  data-toggle="modal"
+  data-target="#exampleModalLong"
+>
+  <i class="fa-solid fa-plus"></i>
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModalLong"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="proyectoForm"
+          (ngSubmit)="onSubmit()"
+          class="formularios"
+        >
+          <div class="form-group">
+            <label for="nombre" class="form-label">Nombre del proyecto</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              name="nombre"
+              required
+              formControlName="nombre"
+              placeholder=" Ingrese el nombre del proyecto"
+            />
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="proyectoForm.get('nombre')?.touched && proyectoForm.get('nombre')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El nombre del proyecto es requerido
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('nombre')?.touched && proyectoForm.get('nombre')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              El nombre del proyecto debe tener un minimo de 3 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('nombre')?.touched && proyectoForm.get('nombre')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              El nombre del proyecto debe tener un maximo de 40 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="descripcion">Descripcion del proyecto</label>
+            <input
+              type="text"
+              class="form-control"
+              id="descripcion"
+              name="descripcion"
+              required
+              formControlName="descripcion"
+              placeholder="Ingrese una descripcion del proyecto"
+            />
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="proyectoForm.get('descripcion')?.touched && proyectoForm.get('descripcion')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              La descripcion del proyecto es requerida
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('descripcion')?.touched && proyectoForm.get('descripcion')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              la descripcion debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('descripcion')?.touched && proyectoForm.get('descripcion')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La descripcion debe tener un maximo de 200 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inicioProyecto">Inicio del proyecto</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inicioProyecto"
+              name="inicioProyecto"
+              required
+              formControlName="inicioProyecto"
+              placeholder="ingrese cuando inicio el proyecto"
+            />
+
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="proyectoForm.get('inicioProyecto')?.touched && proyectoForm.get('inicioProyecto')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              La fecha de finalizacion es requerida
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('inicioProyecto')?.touched && proyectoForm.get('inicioProyecto')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La fecha de inicio debe tener un minimo de 4 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('inicioProyecto')?.touched && proyectoForm.get('inicioProyecto')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La fecha de inicio debe tener un maximo de 20 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="finalizacionProyecto">Finalizacion proyecto</label>
+            <input
+              type="text"
+              class="form-control"
+              id="finalizacionProyecto"
+              name="finalizacionProyecto"
+              required
+              formControlName="finalizacionProyecto"
+              placeholder="Ingrese cuando finalizo el proyecto"
+            />
+
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="proyectoForm.get('finalizacionProyecto')?.touched && proyectoForm.get('finalizacionProyecto')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              La fecha de finalizacion es requerida
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('finalizacionProyecto')?.touched && proyectoForm.get('finalizacionProyecto')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La fecha de finalizacion debe tener un minimo de 4 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('finalizacionProyecto')?.touched && proyectoForm.get('finalizacionProyecto')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La fecha de finalizacion debe tener un maximo de 20 caracteres
+            </div>
+          </div>
+
+          
+          <div class="form-group">
+            <label for="fotoProyecto">foto proyecto</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fotoProyecto"
+              name="fotoProyecto"
+              required
+              formControlName="fotoProyecto"
+              placeholder="Insgrese el url de la foto (opcional)"
+            />
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('fotoProyecto')?.touched && proyectoForm.get('fotoProyecto')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La url de la foto debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('fotoProyecto')?.touched && proyectoForm.get('fotoProyecto')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La url de la foto debe tener un maximo de 100 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="link1">Link al proyecto 1</label>
+            <input
+              type="text"
+              class="form-control"
+              id="link1"
+              name="link1"
+              required
+              formControlName="link1"
+              placeholder="Insgrese el url al proyecto "
+            />
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="proyectoForm.get('link1')?.touched && proyectoForm.get('link1')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El url al proyecto es requerido
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('link1')?.touched && proyectoForm.get('link1')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La url al proyecto debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('link1')?.touched && proyectoForm.get('link1')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La url del proyecto debe tener un maximo de 100 caracteres
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="descripcionLink1">Descripcion del link 1</label>
+            <input
+              type="text"
+              class="form-control"
+              id="descripcionLink1"
+              name="descripcionLink1"
+              required
+              formControlName="descripcionLink1"
+              placeholder="Insgrese una descripcion para la url puesta(opcional)"
+            />
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('descripcionLink1')?.touched && proyectoForm.get('descripcionLink1')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La descripcion debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('descripcionLink1')?.touched && proyectoForm.get('descripcionLink1')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La descripcion debe tener un maximo de 100 caracteres
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="link2">Link al proyecto 2</label>
+            <input
+              type="text"
+              class="form-control"
+              id="link2"
+              name="link2"
+              required
+              formControlName="link2"
+              placeholder="Insgrese el url al proyecto (opcional)"
+            />
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('link2')?.touched && proyectoForm.get('link2')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La url al proyecto debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('link2')?.touched && proyectoForm.get('link2')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La url del proyecto debe tener un maximo de 100 caracteres
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="descripcionLink2">Descripcion del link 2</label>
+            <input
+              type="text"
+              class="form-control"
+              id="descripcionLink2"
+              name="descripcionLink2"
+              required
+              formControlName="descripcionLink2"
+              placeholder="Ingrese una descripcion para la url puesta (opcional)"
+            />
+            <small>Si ingresa una descripcion y su respectivo link esta vacio, la descripcion no se mostrara</small>
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('descripcionLink2')?.touched && proyectoForm.get('descripcionLink2')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La descripcion debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('descripcionLink2')?.touched && proyectoForm.get('descripcionLink2')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La descripcion debe tener un maximo de 100 caracteres
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="link3">Link al proyecto 3</label>
+            <input
+              type="text"
+              class="form-control"
+              id="link3"
+              name="link3"
+              required
+              formControlName="link3"
+              placeholder="Insgrese el url al proyecto (opcional)"
+            />
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('link3')?.touched && proyectoForm.get('link3')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La url al proyecto debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('link3')?.touched && proyectoForm.get('link3')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La url del proyecto debe tener un maximo de 100 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="descripcionLink3">Descripcion del link 3</label>
+            <input
+              type="text"
+              class="form-control"
+              id="descripcionLink3"
+              name="descripcionLink3"
+              required
+              formControlName="descripcionLink3"
+              placeholder="Ingrese una descripcion para la url puesta (opcional)"
+            />
+            <small>Si ingresa una descripcion y su respectivo link esta vacio, la descripcion no se mostrara</small>
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('descripcionLink3')?.touched && proyectoForm.get('descripcionLink3')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La descripcion debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="proyectoForm.get('descripcionLink3')?.touched && proyectoForm.get('descripcionLink3')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La descripcion debe tener un maximo de 100 caracteres
+            </div>
+          </div>
+
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="
+              proyectoForm.get('nombre')?.invalid ||
+              proyectoForm.get('descripcion')?.invalid ||
+              proyectoForm.get('inicioProyecto')?.invalid ||
+              proyectoForm.get('finalizacionProy')?.invalid ||
+              proyectoForm.get('link1')?.invalid 
+            "
+          >
+            Crear
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

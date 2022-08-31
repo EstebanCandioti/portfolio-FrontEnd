@@ -1,9 +1,9 @@
-export interface IUsuario{
+export interface IPersona{
     id:number,
     nombre: string,
-    titulo: string,
+    titulos: string,
     ubicacion:string,
     fotoPerfil: string,
     fotoBanner:string,    
-    acercaDe: string
+    descripcion: string
 }

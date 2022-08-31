@@ -12,6 +12,7 @@ export class ItemEducacionComponent implements OnInit {
   @Output() onDeleteEducacion:EventEmitter<IEducacion>=new EventEmitter
   educationList:IEducacion[]=[];
   @Input() educacion:IEducacion=this.educationList[0];
+
   constructor() {
   }
   

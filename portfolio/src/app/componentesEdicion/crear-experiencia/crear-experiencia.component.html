@@ -1,178 +1,270 @@
-
 <!-- Button trigger modal -->
-<button type="button" class="editar" data-toggle="modal" data-target="#experienciaForm">
-    <i class="fa-solid fa-plus"></i>
-    </button>
-    
-    <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg" id="experienciaForm"tabindex="-1" role="dialog" aria-labelledby="experienciaForm" aria-hidden="true">
-      <div class="modal-dialog  modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="experienciaForm">Crear experiencia laboral</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form 
-                [formGroup]="experienciaForm"
-                (ngSubmit)="onSubmit()"
-                class="formularios"
-            >
-            <div class="form-group">
-              <label for="nombreTrabajo" class="form-label">Nombre de la empresa</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                id="nombreTrabajo" 
-                name="nombreTrabajo"
-                required formControlName="nombreTrabajo" 
-                placeholder=" Ingrese el nombre de la empresa"
-              >
-                <!--Alerta por si el campo esta vacio-->
-                <div *ngIf="experienciaForm.get('nombreTrabajo')?.touched && experienciaForm.get('nombreTrabajo')?.errors?.['required']"
-                class="alert alert-danger">El nombre del trabajo es requerido</div>
-          
-                <!--Alerta por si el campo tiene pocos caracteres-->
-                <div *ngIf="experienciaForm.get('nombreTrabajo')?.touched && experienciaForm.get('nombreTrabajo')?.errors?.['minlength']"
-                class="alert alert-danger">El nombre del trabajo debe tener un minimo de 3 caracteres</div>
-          
-                <!--Alerta por si el tiene muchos caracteres-->
-                <div *ngIf="experienciaForm.get('nombreTrabajo')?.touched && experienciaForm.get('nombreTrabajo')?.errors?.['maxlength']"
-                class="alert alert-danger">El nombre del trabajo debe tener un maximo de 40 caracteres</div>
-            </div>
-            
-            <div class="form-group">
-              <label for="posicionLaboral">Ingrese su posicion laboral</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                id="posicionLaboral" 
-                name="posicionLaboral" 
-                required formControlName="posicionLaboral" 
-                placeholder="Ingrese su posicion laboral"
-              >
-              <!--Alerta por si el campo esta vacio-->
-              <div *ngIf="experienciaForm.get('posicionLaboral')?.touched && experienciaForm.get('posicionLaboral')?.errors?.['required']"
-              class="alert alert-danger">Su posicion laboral es requerida</div>
-          
-              <!--Alerta por si el campo tiene pocos caracteres-->
-              <div *ngIf="experienciaForm.get('posicionLaboral')?.touched && experienciaForm.get('posicionLaboral')?.errors?.['minlength']"
-              class="alert alert-danger">la posicion debe tener un minimo de 5 caracteres</div>
-          
-              <!--Alerta por si el tiene muchos caracteres-->
-              <div *ngIf="experienciaForm.get('posicionLaboral')?.touched && experienciaForm.get('posicionLaboral')?.errors?.['maxlength']"
-              class="alert alert-danger">El titulo debe tener un maximo de 30 caracteres</div>
-            </div>
-          
-            <div class="form-group">
-              <label for="descripcionLaboral">Descripcion laboral</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                id="descripcionLaboral" 
-                name="descripcionLaboral" 
-                required formControlName="descripcionLaboral"
-                placeholder="Ingrese la descripcion de su labor"
-              >
-          
-              <!--Alerta por si el campo esta vacio-->
-              <div 
-                *ngIf="experienciaForm.get('descripcionLaboral')?.touched && experienciaForm.get('descripcionLaboral')?.errors?.['required']"
-                class="alert alert-danger">La descripcion de su labor es requerida</div>
-          
-              <!--Alerta por si el campo tiene pocos caracteres-->
-              <div 
-                *ngIf="experienciaForm.get('descripcionLaboral')?.touched && experienciaForm.get('descripcionLaboral')?.errors?.['minlength']"
-                class="alert alert-danger">La descripcion laboral debe tener un minimo de 10 caracteres</div>
-          
-              <!--Alerta por si el tiene muchos caracteres-->
-              <div 
-                *ngIf="experienciaForm.get('descripcionLaboral')?.touched && experienciaForm.get('descripcionLaboral')?.errors?.['maxlength']"
-                class="alert alert-danger">La descripcion laboral debe tener un maximo de 200 caracteres</div>
-            </div>
-          
-            <div class="form-group">
-              <label for="inicioTrabajo">Inicio laboral</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                id="inicioTrabajo" 
-                name="inicioTrabajo" 
-                required formControlName="inicioTrabajo"
-                placeholder="ingrese cuando inicio su labor"
-              >
-          
-              <!--Alerta por si el campo esta vacio-->
-              <div 
-                *ngIf="experienciaForm.get('inicioTrabajo')?.touched && experienciaForm.get('inicioTrabajo')?.errors?.['required']"
-                class="alert alert-danger"
-              >La fecha de inicio es requerida</div>
-          
-              <!--Alerta por si el campo tiene pocos caracteres-->
-              <div 
-                *ngIf="experienciaForm.get('inicioTrabajo')?.touched && experienciaForm.get('inicioTrabajo')?.errors?.['minlength']"
-                class="alert alert-danger">La fecha de inicio debe tener un minimo de 4 caracteres</div>
-          
-              <!--Alerta por si el tiene muchos caracteres-->
-              <div 
-                *ngIf="experienciaForm.get('inicioTrabajo')?.touched && experienciaForm.get('inicioTrabajo')?.errors?.['maxlength']"
-                class="alert alert-danger">La fecha de inicio debe tener un maximo de 20 caracteres</div>
-              </div>
+<button
+  type="button"
+  class="editar"
+  data-toggle="modal"
+  data-target="#experienciaForm"
+>
+  <i class="fa-solid fa-plus"></i>
+</button>
 
-              <div class="form-group">
-                <label for="finalizacionTrabajo">Finalizacion laboral</label>
-                <input 
-                  type="text" 
-                  class="form-control" 
-                  id="finalizacionTrabajo" 
-                  name="finalizacionTrabajo" 
-                  required formControlName="finalizacionTrabajo"
-                  placeholder="ingrese cuando Finalizo su labor"
-                >
-            
-                <!--Alerta por si el campo esta vacio-->
-                <div 
-                  *ngIf="experienciaForm.get('finalizacionTrabajo')?.touched && experienciaForm.get('finalizacionTrabajo')?.errors?.['required']"
-                  class="alert alert-danger"
-                >La fecha de finalizacion es requerida</div>
-            
-                <!--Alerta por si el campo tiene pocos caracteres-->
-                <div 
-                  *ngIf="experienciaForm.get('finalizacionTrabajo')?.touched && experienciaForm.get('finalizacionTrabajo')?.errors?.['minlength']"
-                  class="alert alert-danger">La fecha de finalizacion debe tener un minimo de 4 caracteres</div>
-            
-                <!--Alerta por si el tiene muchos caracteres-->
-                <div 
-                  *ngIf="experienciaForm.get('finalizacionTrabajo')?.touched && experienciaForm.get('finalizacionTrabajo')?.errors?.['maxlength']"
-                  class="alert alert-danger">La fecha de finalizacion debe tener un maximo de 20 caracteres</div>
-                </div>
-  
-              <div class="form-group">
-                <label for="fotoTrabajo">logo empresarial</label>
-                <input 
-                  type="text" 
-                  class="form-control" 
-                  id="fotoTrabajo" 
-                  name="fotoTrabajo" 
-                  required formControlName="fotoTrabajo"
-                  placeholder="Insgrese el url de la foto (opcional)"
-                >
-            
-                <!--Alerta por si el campo tiene pocos caracteres-->
-                <div 
-                  *ngIf="experienciaForm.get('fotoTrabajo')?.touched && experienciaForm.get('fotoTrabajo')?.errors?.['minlength']"
-                  class="alert alert-danger">La url de la foto debe tener un minimo de 10 caracteres</div>
-            
-                <!--Alerta por si el tiene muchos caracteres-->
-                <div 
-                  *ngIf="experienciaForm.get('fotoTrabajo')?.touched && experienciaForm.get('fotoTrabajo')?.errors?.['maxlength']"
-                  class="alert alert-danger">La url de la foto debe tener un maximo de 100 caracteres</div>
-                </div>
-              <button class="btn btn-primary" type="submit" [disabled]="experienciaForm.invalid">Crear</button>
-            </form>
+<!-- Modal -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="experienciaForm"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="experienciaForm"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="experienciaForm">
+          Crear experiencia laboral
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="experienciaForm"
+          (ngSubmit)="onSubmit()"
+          class="formularios"
+        >
+          <div class="form-group">
+            <label for="nombreTrabajo" class="form-label"
+              >Nombre de la empresa</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nombreTrabajo"
+              name="nombreTrabajo"
+              required
+              formControlName="nombreTrabajo"
+              placeholder=" Ingrese el nombre de la empresa"
+            />
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="experienciaForm.get('nombreTrabajo')?.touched && experienciaForm.get('nombreTrabajo')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El nombre del trabajo es requerido
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('nombreTrabajo')?.touched && experienciaForm.get('nombreTrabajo')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              El nombre del trabajo debe tener un minimo de 3 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('nombreTrabajo')?.touched && experienciaForm.get('nombreTrabajo')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              El nombre del trabajo debe tener un maximo de 40 caracteres
+            </div>
           </div>
-        </div>
+
+          <div class="form-group">
+            <label for="posicionLaboral">Ingrese su posicion laboral</label>
+            <input
+              type="text"
+              class="form-control"
+              id="posicionLaboral"
+              name="posicionLaboral"
+              required
+              formControlName="posicionLaboral"
+              placeholder="Ingrese su posicion laboral"
+            />
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="experienciaForm.get('posicionLaboral')?.touched && experienciaForm.get('posicionLaboral')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              Su posicion laboral es requerida
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('posicionLaboral')?.touched && experienciaForm.get('posicionLaboral')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              la posicion debe tener un minimo de 5 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('posicionLaboral')?.touched && experienciaForm.get('posicionLaboral')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              El titulo debe tener un maximo de 30 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="descripcionLaboral">Descripcion laboral</label>
+            <input
+              type="text"
+              class="form-control"
+              id="descripcionLaboral"
+              name="descripcionLaboral"
+              required
+              formControlName="descripcionLaboral"
+              placeholder="Ingrese la descripcion de su labor"
+            />
+
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="experienciaForm.get('descripcionLaboral')?.touched && experienciaForm.get('descripcionLaboral')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              La descripcion de su labor es requerida
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('descripcionLaboral')?.touched && experienciaForm.get('descripcionLaboral')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La descripcion laboral debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('descripcionLaboral')?.touched && experienciaForm.get('descripcionLaboral')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La descripcion laboral debe tener un maximo de 200 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inicioTrabajo">Inicio laboral</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inicioTrabajo"
+              name="inicioTrabajo"
+              required
+              formControlName="inicioTrabajo"
+              placeholder="ingrese cuando inicio su labor"
+            />
+
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="experienciaForm.get('inicioTrabajo')?.touched && experienciaForm.get('inicioTrabajo')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              La fecha de inicio es requerida
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('inicioTrabajo')?.touched && experienciaForm.get('inicioTrabajo')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La fecha de inicio debe tener un minimo de 4 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('inicioTrabajo')?.touched && experienciaForm.get('inicioTrabajo')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La fecha de inicio debe tener un maximo de 20 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="finalizacionTrabajo">Finalizacion laboral</label>
+            <input
+              type="text"
+              class="form-control"
+              id="finalizacionTrabajo"
+              name="finalizacionTrabajo"
+              required
+              formControlName="finalizacionTrabajo"
+              placeholder="ingrese cuando Finalizo su labor"
+            />
+
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="experienciaForm.get('finalizacionTrabajo')?.touched && experienciaForm.get('finalizacionTrabajo')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              La fecha de finalizacion es requerida
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('finalizacionTrabajo')?.touched && experienciaForm.get('finalizacionTrabajo')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La fecha de finalizacion debe tener un minimo de 4 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('finalizacionTrabajo')?.touched && experienciaForm.get('finalizacionTrabajo')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La fecha de finalizacion debe tener un maximo de 20 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fotoTrabajo">logo empresarial</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fotoTrabajo"
+              name="fotoTrabajo"
+              required
+              formControlName="fotoTrabajo"
+              placeholder="Insgrese el url de la foto (opcional)"
+            />
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('fotoTrabajo')?.touched && experienciaForm.get('fotoTrabajo')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La url de la foto debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('fotoTrabajo')?.touched && experienciaForm.get('fotoTrabajo')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La url de la foto debe tener un maximo de 100 caracteres
+            </div>
+          </div>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="
+              experienciaForm.get('nombreTrabajo')?.invalid ||
+              experienciaForm.get('descripcionLaboral')?.invalid ||
+              experienciaForm.get('inicioTrabajo')?.invalid ||
+              experienciaForm.get('finalizacionTrabajo')?.invalid
+            "
+          >
+            Crear
+          </button>
+        </form>
       </div>
     </div>
+  </div>
+</div>
