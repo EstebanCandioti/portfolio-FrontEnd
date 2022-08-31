@@ -10,8 +10,8 @@ import { IEducacion } from 'src/app/interfaces/IEducacion';
 export class ItemEducacionComponent implements OnInit {
   @Output() onEditEducacion:EventEmitter<IEducacion>=new EventEmitter
   @Output() onDeleteEducacion:EventEmitter<IEducacion>=new EventEmitter
-  educationList:IEducacion[]=[];
-  @Input() educacion:IEducacion=this.educationList[0];
+  listaEducacion:IEducacion[]=[];
+  @Input() educacion:IEducacion=this.listaEducacion[0];
 
   constructor() {
   }

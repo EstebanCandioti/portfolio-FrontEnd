@@ -12,42 +12,49 @@ import { IProyecto } from '../interfaces/IProyecto';
   providedIn: 'root',
 })
 export class PortfolioService {
-  private apiUrlEducacion: string = 'http://localhost:3000/educacion';
-  private apiUrlPersona: string = 'http://localhost:3000/persona';
-  private apiUrlExperiencia: string = 'http://localhost:3000/experiencia';
-  private apiUrlHabilidadesFuertes: string = 'http://localhost:3000/hardSkills';
-  private apiUrlHabilidadesDebiles: string = 'http://localhost:3000/softSkills';
-  private apiUrlTecnologia: string = 'http://localhost:3000/tecnologias';
-  private apiUrlProyectos: string = 'http://localhost:3000/proyectos';
+  private apiUrlEducacion: string = 'http://localhost:8080/educacion';
+  private apiUrlPersona: string = 'http://localhost:8080/persona/';
+  private apiUrlExperiencia: string = 'http://localhost:8080/experiencia';
+  private apiUrlHabilidadesFuertes: string = 'http://localhost:8080/habilidad-fuerte';
+  private apiUrlHabilidadesDebiles: string = 'http://localhost:8080/habilidad-debil';
+  private apiUrlTecnologia: string = 'http://localhost:8080/tecnologia';
+  private apiUrlProyectos: string = 'http://localhost:8080/proyecto';
 
   constructor(private http: HttpClient) {}
   // --------------------------------------------FUNCIONES GET PARA CADA COMPONENTE BODY-----------------------------------------------------------------------
   obtenerDatosEducacion(): Observable<IEducacion[]> {
-    return this.http.get<IEducacion[]>(this.apiUrlEducacion);
+    const url= `${this.apiUrlPersona}1/educacion`
+    return this.http.get<IEducacion[]>(url);
   }
 
   obtenerDatosPersona(): Observable<IPersona> {
-    return this.http.get<IPersona>(this.apiUrlPersona);
+    const url= `${this.apiUrlPersona}buscar/1`
+    return this.http.get<IPersona>(url);
   }
 
   obtenerDatosExperiencia(): Observable<IExperiencia[]> {
-    return this.http.get<IExperiencia[]>(this.apiUrlExperiencia);
+    const url= `${this.apiUrlPersona}1/experiencia`
+    return this.http.get<IExperiencia[]>(url);
   }
 
   obtenerDatosHabilidadesFuertes(): Observable<IHabilidad[]> {
-    return this.http.get<IHabilidad[]>(this.apiUrlHabilidadesFuertes);
+    const url= `${this.apiUrlPersona}1/habilidad-fuerte`
+    return this.http.get<IHabilidad[]>(url);
   }
 
   obtenerDatosHabilidadesDebiles(): Observable<IHabilidad[]> {
-    return this.http.get<IHabilidad[]>(this.apiUrlHabilidadesDebiles);
+    const url= `${this.apiUrlPersona}1/habilidad-debil`
+    return this.http.get<IHabilidad[]>(url);
   }
 
   obtenerDatosTecnologia(): Observable<ITecnologia[]> {
-    return this.http.get<ITecnologia[]>(this.apiUrlTecnologia);
+    const url= `${this.apiUrlPersona}1/tecnologia`
+    return this.http.get<ITecnologia[]>(url);
   }
 
   obtenerDatosProyectos(): Observable<IProyecto[]> {
-    return this.http.get<IProyecto[]>(this.apiUrlProyectos);
+    const url= `${this.apiUrlPersona}1/proyecto`
+    return this.http.get<IProyecto[]>(url);
   }
 
   //------------------------------------------------FUNCIONES DELETE PARA CADA COMPONENTE BODY-----------------------------------------------------------------
@@ -136,8 +143,9 @@ export class PortfolioService {
 
   //----------------------------------------------------------------FUNCIONES BUSCAR PARA CADA COMPONENTE BODY------------------------------------------------------
 
-  buscarEducacion():Observable<IEducacion> {
-    return this.http.get<IEducacion>("http://localhost:3000/educacion/1");
+  buscarEducacion(educacion:IEducacion):Observable<IEducacion> {
+    const url = `${this.apiUrlEducacion}/buscar/${educacion.id}`;
+    return this.http.get<IEducacion>(url);
   }
   buscarProyecto(id: number):Observable<IProyecto> {
     const url = `"http://localhost:3000/proyectos/${id}"`;

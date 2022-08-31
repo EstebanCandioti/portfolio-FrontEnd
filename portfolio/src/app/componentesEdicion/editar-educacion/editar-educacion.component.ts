@@ -10,16 +10,13 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 })
 export class EditarEducacionComponent implements OnInit {
   @Output() onEditEducacion: EventEmitter<IEducacion> = new EventEmitter();
-  @Input() id:number=1;
-  educacion= this.obtenerEducacion();
   educacionForm!:FormGroup
   constructor(private readonly fb:FormBuilder, private datosPortfolio:PortfolioService) { 
-    
+
   }
 
   ngOnInit(): void {
     this.educacionForm=this.initForm();
-    
   }
   onSubmit():void{
     console.log("En el modal")
@@ -37,8 +34,5 @@ export class EditarEducacionComponent implements OnInit {
       finalizacionEducacion:['',[Validators.required, Validators.minLength(4), Validators.maxLength(20)]]
     })
   }
-  obtenerEducacion(){
-    console.log("editando", this.datosPortfolio.buscarEducacion())
-    return this.datosPortfolio.buscarEducacion()
-  }
+
 }
