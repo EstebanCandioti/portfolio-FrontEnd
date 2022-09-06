@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IHabilidad } from 'src/app/interfaces/IHabilidades';
+import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
   selector: 'app-crear-habilidad-debil',
@@ -9,7 +10,6 @@ import { IHabilidad } from 'src/app/interfaces/IHabilidades';
 })
 export class CrearHabilidadDebilComponent implements OnInit {
   @Output() onCrearHabilidad: EventEmitter<IHabilidad> = new EventEmitter();
-  
   habilidadForm!:FormGroup
   constructor(private readonly fb:FormBuilder) { }
 
@@ -30,4 +30,5 @@ export class CrearHabilidadDebilComponent implements OnInit {
 
     })
   }
+
 }

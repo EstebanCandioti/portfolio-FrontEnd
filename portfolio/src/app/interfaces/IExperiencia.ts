@@ -6,4 +6,5 @@ export interface IExperiencia {
     fotoTrabajo:string,
     inicioTrabajo:string,
     finalizacionTrabajo:string;
+    idPersona:number;
 }

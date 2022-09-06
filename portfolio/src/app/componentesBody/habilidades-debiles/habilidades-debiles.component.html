@@ -8,13 +8,142 @@
             <app-crear-habilidad-debil (onCrearHabilidad)="crearHabilidadDebil($event)"></app-crear-habilidad-debil>
         </div>
         <ul class="item-list">
-            <app-item-habilidad-debil
-            *ngFor="let habilidad of listaHabilidadesDebiles"
-            [habilidad]="habilidad"
-            (onDeleteHabilidadDebil)="deleteHabilidadDebil(habilidad)"
-            (onEditHabilidadDebil)="editHabilidadDebil(habilidad)"
-            >
-            </app-item-habilidad-debil>
+            <li *ngFor="let habilidad of listaHabilidadesDebiles">
+                <div class="row">
+                    <div class="institucion col-11">
+                        <h2>{{habilidad.habilidad}}</h2>
+                        <div class="subrayadoSubtitulos"></div>
+                    </div>
+                    <div class="botonera col-1">
+                        <button class="editar" 
+                            (click)="(buscarHabilidad(habilidad))"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#editar-habilidad-debilForm"
+                        >
+                            <i class="fas fa-pen"></i>
+                        </button>
+                        <button class="editar" (click)="(deleteHabilidadDebil(habilidad))">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" 
+                        role="progressbar" 
+                        [style.width]="habilidad.valor + '%'" 
+                        attr.aria-valuenow="{{habilidad.valor}}" 
+                        aria-valuemin="0" 
+                        aria-valuemax="100"
+                    >  {{habilidad.valor}}%
+                    </div>
+                </div>
+                <div class="divisor"></div>  
+            </li>
         </ul>
     </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="editar-habilidad-debilForm"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editar-habilidad-debilForm"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editar-habilidad-debilForm">Editar habilidad</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="habilidadForm"
+          (ngSubmit)="onSubmit()"
+          class="formularios"
+        >
+          <div class="form-group">
+            <label for="habilidad" class="form-label">Habilidad debil</label>
+            <input
+              type="text"
+              class="form-control"
+              id="habilidad"
+              name="habilidad"
+              required
+              formControlName="habilidad"
+              placeholder=" Ingrese una habilidad debil"
+            />
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="habilidadForm.get('habilidad')?.touched && habilidadForm.get('habilidad')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El nombre del trabajo es requerido
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="habilidadForm.get('habilidad')?.touched && habilidadForm.get('habilidad')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La habilidad debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="habilidadForm.get('habilidad')?.touched && habilidadForm.get('habilidad')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La habilidad debe tener un maximo de 40 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="valor">Ingrese un valor</label>
+            <input
+              type="number"
+              class="form-control"
+              id="valor"
+              name="valor"
+              required
+              formControlName="valor"
+              placeholder="Ingrese un valor entre 1 y 100 que crea tener en la habilidad"
+            />
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="habilidadForm.get('valor')?.touched && habilidadForm.get('valor')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El valor para la habilidad es requerida
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="habilidadForm.get('valor')?.touched && habilidadForm.get('valor')?.errors?.['max']"
+              class="alert alert-danger"
+            >
+              El valor debete estar entre el 1 y el 100
+            </div>
+          </div>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="habilidadForm.invalid"
+          >
+            Editar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

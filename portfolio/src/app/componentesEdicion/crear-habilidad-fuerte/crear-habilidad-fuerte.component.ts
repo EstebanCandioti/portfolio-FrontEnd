@@ -19,15 +19,16 @@ export class CrearHabilidadFuerteComponent implements OnInit {
   onSubmit():void{
     console.log("En el modal")
     const nuevaHabilidad=this.habilidadForm.value;
+    nuevaHabilidad.idPersona=1
     this.onCrearHabilidad.emit(nuevaHabilidad)
     this.habilidadForm.reset()
+    location.reload()
   }
 
   initForm():FormGroup{
     return this.fb.group({
-      habilidad:['', [Validators.required, Validators.minLength(10), Validators.maxLength(30)]],
+      habilidad:['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
       valor:['',[Validators.required, Validators.max(100)]],
-
     })
   }
 }

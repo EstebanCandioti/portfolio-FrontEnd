@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ITecnologia } from 'src/app/interfaces/ITecnologia';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
@@ -8,28 +9,56 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['./tecnologias.component.css']
 })
 export class TecnologiasComponent implements OnInit {
-  listaTecnologias:ITecnologia[]=[];
-  constructor(private datosPortfolio:PortfolioService) { }
+  listaTecnologia:ITecnologia[]=[];
+  tecnologiaForm!: FormGroup
+  tencnologiaAEditar!:ITecnologia
+  idTecnologia!:number
+  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatosTecnologia().subscribe(tecnologias => {
-      this.listaTecnologias=tecnologias;
+      this.listaTecnologia=tecnologias;
     });
+    this.tecnologiaForm=this.initForm();
   }
 
   deleteTecnologia(tecnologia:ITecnologia){
     this.datosPortfolio.deleteTecnologia(tecnologia).subscribe(()=>{
-      this.listaTecnologias=this.listaTecnologias.filter(t=>t.id !== tecnologia.id)
+      this.listaTecnologia=this.listaTecnologia.filter(t=>t.id !== tecnologia.id)
     })
   }
   editTecnologia(tecnologia:ITecnologia){
     this.datosPortfolio.editTecnologia(tecnologia).subscribe(()=>{
-      this.listaTecnologias[tecnologia.id]=tecnologia;
+      this.listaTecnologia[tecnologia.id]=tecnologia;
     })
   }
   crearTecnologia(tecnologia:ITecnologia){
     this.datosPortfolio.crearTecnologia(tecnologia).subscribe(tecnologia=>{
-      this.listaTecnologias.push(tecnologia);
+      this.listaTecnologia.push(tecnologia);
     });
+  }
+  buscarTecnologia(tecnologia:ITecnologia){
+    this.datosPortfolio.buscarTecnologia(tecnologia).subscribe(tecnologia=>{
+      this.tecnologiaForm.get('nombre')?.setValue(tecnologia.nombre);
+      this.tecnologiaForm.get('descripcion')?.setValue(tecnologia.descripcion);
+      this.tecnologiaForm.get('tecnologiaImg')?.setValue(tecnologia.tecnologiaImg);
+      this.idTecnologia=tecnologia.id
+    })
+  }
+  initForm():FormGroup{
+    return this.fb.group({
+      nombre:['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      descripcion:['',[Validators.required,Validators.minLength(10), Validators.maxLength(200)]],
+      tecnologiaImg:['',[Validators.minLength(10), Validators.maxLength(100)]]
+    })
+  }
+  
+  onSubmit():void{
+    console.log("En el modal")
+    this.tencnologiaAEditar=this.tecnologiaForm.value;
+    this.tencnologiaAEditar.id=this.idTecnologia;
+    this.tencnologiaAEditar.idPersona=1
+    this.datosPortfolio.editTecnologia(this.tencnologiaAEditar).subscribe()
+    location.reload();
   }
 }

@@ -43,7 +43,6 @@
 #banner{
     display: flex;
     width: 100%;
-    background-image: url(assets/img/Banner.jpg);
     height: 53vh;
     z-index:1;
     border-radius: 20px;
@@ -55,7 +54,7 @@
     height:17vh;
     border-radius: 50%;
     position: absolute;
-    margin-top:6%;
+    margin-top:5%;
 }
 
 .fotos img{

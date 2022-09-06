@@ -1,18 +1,298 @@
-<div class=" educacion container">
-    <div class="informacion row">
-        <div class="titulo col-11">
-            <h2>Educacion</h2>
-            <div class="subrayadoTitulos"></div>
-        </div>
-        <div class="col-1">
-            <app-crear-educacion (onCrearEducacion)="crearEducacion($event)"></app-crear-educacion>
-        </div>
-        <app-item-educacion
-        *ngFor="let educacion of listaEducacion"
-        [educacion]="educacion"
-        (onDeleteEducacion)="deleteEducacion(educacion)"
-        (onEditEducacion)="editEducacion(educacion)"    
-        >
-        </app-item-educacion>
+<div class="educacion container">
+  <div class="informacion row">
+    <div class="titulo col-11">
+      <h2>Educacion</h2>
+      <div class="subrayadoTitulos"></div>
     </div>
+    <div class="col-1">
+      <app-crear-educacion
+        (onCrearEducacion)="crearEducacion($event)"
+      ></app-crear-educacion>
+    </div>
+    <ul class="item-list">
+      <li *ngFor="let educacion of listaEducacion">
+        <!--Template por si el objeto no tiene foto-->
+        <ng-template [ngIf]="!educacion.fotoInstitucion">
+          <div class="row">
+            <div class="institucion col">
+              <h2>{{ educacion.institucion }}</h2>
+              <div class="subrayadoSubtitulos"></div>
+              <h4>{{ educacion.titulo }}</h4>
+              <h4>
+                <time>{{ educacion.inicioEducacion }}</time> -
+                <time>{{ educacion.finalizacionEducacion }}</time>
+              </h4>
+            </div>
+            <div class="botonera col-1">
+              <button class="editar" (click)="deleteEducacion(educacion)">
+                <i class="fas fa-trash"></i>
+              </button>
+              <button
+                type="button"
+                class="editar"
+                data-toggle="modal"
+                data-target="#editarEducacionForm"
+                (click)="buscarEducacion(educacion)"
+              >
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </div>
+          </div>
+          <div class="divisor"></div>
+        </ng-template>
+        <!--Template por si el objeto tiene foto-->
+        <ng-template [ngIf]="educacion.fotoInstitucion">
+          <div class="row">
+            <div class="col-3">
+              <img [src]="educacion.fotoInstitucion" />
+            </div>
+            <div class="institucion col-8">
+              <h2>{{ educacion.institucion }}</h2>
+              <div class="subrayadoSubtitulos"></div>
+              <h4>{{ educacion.titulo }}</h4>
+              <h4>
+                <time>{{ educacion.inicioEducacion }}</time> -
+                <time>{{ educacion.finalizacionEducacion }}</time>
+              </h4>
+            </div>
+            <div class="botonera col-1">
+              <button class="editar" (click)="deleteEducacion(educacion)">
+                <i class="fas fa-trash"></i>
+              </button>
+              <button
+                type="button"
+                class="editar"
+                data-toggle="modal"
+                data-target="#editarEducacionForm"
+                (click)="buscarEducacion(educacion)"
+              >
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </div>
+          </div>
+          <div class="divisor"></div>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade bd-example-modal-xl"
+  id="editarEducacionForm"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="educacionForm"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="educacionForm">Editar Educacion</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+            [formGroup]="educacionForm"
+          (ngSubmit)="onSubmit()"
+          class="formularios"
+        >
+          <div class="form-group">
+            <label for="institucion" class="form-label">Institucion</label>
+            <input
+              type="text"
+              class="form-control"
+              id="institucion"
+              name="institucion"
+              required
+              formControlName="institucion"
+              placeholder=" Ingrese el nombre de la institucion"
+            />
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="educacionForm.get('institucion')?.touched && educacionForm.get('institucion')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El nombre de la institucion es requerido
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="educacionForm.get('institucion')?.touched && educacionForm.get('institucion')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La institucion debe tener un minimo de 3 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="educacionForm.get('institucion')?.touched && educacionForm.get('institucion')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La institucion debe tener un maximo de 40 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="titulo">Ingrese su titulo</label>
+            <input
+              type="text"
+              class="form-control"
+              id="titulo"
+              name="titulo"
+              required
+              formControlName="titulo"
+              placeholder="Ingrese el titulo recibido"
+            />
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="educacionForm.get('titulo')?.touched && educacionForm.get('titulo')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              Su titulo es requerido
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="educacionForm.get('titulo')?.touched && educacionForm.get('titulo')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              El titulo debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="educacionForm.get('titulo')?.touched && educacionForm.get('titulo')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              El titulo debe tener un maximo de 40 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inicioEducacion">Inicio Institucion</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inicioEducacion"
+              name="inicioEducacion"
+              required
+              formControlName="inicioEducacion"
+              placeholder="Ingrese cuando inicio la educacion"
+            />
+
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="educacionForm.get('inicioEducacion')?.touched && educacionForm.get('inicioEducacion')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              La fecha de inicio es requerida
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="educacionForm.get('inicioEducacion')?.touched && educacionForm.get('inicioEducacion')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La fecha de inicio debe tener un minimo de 4 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="educacionForm.get('inicioEducacion')?.touched && educacionForm.get('inicioEducacion')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La fecha de inicio debe tener un maximo de 20 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="finalizacionEducacion">Finalizacion educacion</label>
+            <input
+              type="text"
+              class="form-control"
+              id="finalizacionEducacion"
+              name="finalizacionEducacion"
+              required
+              formControlName="finalizacionEducacion"
+              placeholder="ingrese cuando finalizo la educacion"
+            />
+
+            <!--Alerta por si el campo esta vacio-->
+            <div
+              *ngIf="educacionForm.get('finalizacionEducacion')?.touched && educacionForm.get('finalizacionEducacion')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              La fecha finalizacion es requerida
+            </div>
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="educacionForm.get('finalizacionEducacion')?.touched && educacionForm.get('finalizacionEducacion')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La fecha de finalizacion debe tener un minimo de 4 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="educacionForm.get('finalizacionEducacion')?.touched && educacionForm.get('finalizacionEducacion')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La fecha de inicio debe tener un maximo de 20 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fotoInstitucion">Logo de la institucion</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fotoInstitucion"
+              name="fotoInstitucion"
+              required
+              formControlName="fotoInstitucion"
+              placeholder="Insgrese el url de la foto(opcional)"
+            />
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="educacionForm.get('fotoInstitucion')?.touched && educacionForm.get('fotoInstitucion')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              La url de la foto debe tener un minimo de 10 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="educacionForm.get('fotoInstitucion')?.touched && educacionForm.get('fotoInstitucion')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              La url de la foto debe tener un maximo de 100 caracteres
+            </div>
+          </div>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="
+              educacionForm.get('institucion')?.invalid ||
+              educacionForm.get('titulo')?.invalid ||
+              educacionForm.get('inicioEducacion')?.invalid ||
+              educacionForm.get('finalizacionEducacion')?.invalid
+            "
+          >
+            Editar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IHabilidad } from 'src/app/interfaces/IHabilidades';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 @Component({
@@ -8,28 +9,50 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 })
 export class HabilidadesFuertesComponent implements OnInit {
   listaHabilidadesFuertes:IHabilidad[]=[];
-  constructor(private datosPortfolio:PortfolioService) { }
+  habilidadForm!:FormGroup;
+  idHabilidad!:number
+  habilidadAEditar!:IHabilidad
+  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatosHabilidadesFuertes().subscribe(habilidades => {
       this.listaHabilidadesFuertes=habilidades;
     });
+    this.habilidadForm= this.initForm();
   }
-  deleteHabilidadFuerte(habilidad:IHabilidad) {
+
+  deleteHabilidadFuerte(habilidad:IHabilidad):void {
     this.datosPortfolio.deleteHabilidadFuerte(habilidad).subscribe(() =>{
       this.listaHabilidadesFuertes=this.listaHabilidadesFuertes.filter(t=>t.id !==habilidad.id)
     })
   }
-  editHabilidadFuerte(habilidad:IHabilidad) {
-    this.datosPortfolio.editHabilidadFuerte(habilidad).subscribe(()=>{
-      this.listaHabilidadesFuertes[habilidad.id]=habilidad;
-    })
+  onSubmit():void{
+    console.log("En el modal")
+    this.habilidadAEditar=this.habilidadForm.value;
+    this.habilidadAEditar.id=this.idHabilidad
+    this.habilidadAEditar.idPersona=1;
+    this.datosPortfolio.editHabilidadFuerte(this.habilidadAEditar).subscribe()
+    location.reload();
   }
-
   crearHabilidadFuerte(habilidad:IHabilidad){
     console.log("en el componente")
-    this.datosPortfolio.crearHabilidadFuerte(habilidad).subscribe(habilidad=>{
+    habilidad.idPersona=1;
+    this.datosPortfolio.crearHabilidadDebil(habilidad).subscribe(habilidad=>{
       this.listaHabilidadesFuertes.push(habilidad);
+    })
+    location.reload();
+  }
+  initForm():FormGroup{
+    return this.fb.group({
+      habilidad:['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+      valor:['',[Validators.required, Validators.max(100)]],
+    })
+  }
+  buscarHabilidadFuerte(habilidad:IHabilidad){
+    this.datosPortfolio.buscarHabilidadFuerte(habilidad).subscribe(habilidad =>{
+      this.habilidadForm.get('habilidad')?.setValue(habilidad.habilidad)
+      this.habilidadForm.get('valor')?.setValue(habilidad.valor)
+      this.idHabilidad =habilidad.id
     })
   }
 }

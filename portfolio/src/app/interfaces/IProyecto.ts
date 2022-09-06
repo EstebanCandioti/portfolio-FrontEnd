@@ -1,3 +1,5 @@
+import { NumberInput } from "@angular/cdk/coercion";
+
 export interface IProyecto {
     id:number,
     nombre:string,
@@ -10,5 +12,6 @@ export interface IProyecto {
     link2:string,
     descripcionLink2:string,
     link3:string,
-    descripcionLink3:string
+    descripcionLink3:string,
+    idPersona:number
 }

@@ -1,26 +1,299 @@
-<div class="usuario container">    
-    <div class="row">
-        <div id="banner" class="col-12">
-            <div id="profile-picture" class="col">
-                <img src="assets/img/FotoPerfil.jpeg" alt="Foto Perfil">
-            </div>
-        </div>
+<div class="usuario container">
+  <div class="row">
+    <div
+      id="banner"
+      [ngStyle]="{ 'background-image': 'url(' + persona.fotoBanner + ')' }"
+      class="col-12"
+    >
+      <div id="profile-picture" class="col">
+        <img src="{{ persona.fotoPerfil }}" alt="Foto Perfil" />
+      </div>
+    </div>
+  </div>
+  <div class="informacion row">
+    <div class="titulo col-11">
+      <h1>Informacion Personal</h1>
+      <div class="subrayadoTitulos"></div>
+    </div>
+    <div class="col-1">
+      <button
+        class="editar"
+        type="button"
+        data-toggle="modal"
+        data-target="#editarPersonaForm"
+        (click)="editarPersona(persona)"
+      >
+        <i class="fas fa-pen"></i>
+      </button>
+    </div>
+    <div class="col-12">
+      <p style="font-size: x-large">{{ persona.nombre }}</p>
+    </div>
 
+    <div class="col-12">
+      <p style="font-size: x-large">{{ persona.ubicacion }}</p>
+    </div>
+
+    <div *ngIf="persona.titulos" class="col-12">
+      <p style="font-size: x-large">{{ persona.titulos }}</p>
     </div>
     <div class="informacion row">
-        <div class="titulo col-11">
-            <h2>Informacion Personal</h2>
-            <div class="subrayadoTitulos"></div>
-        </div>
-        <div class="col-1">
-            <button class="editar"><i class="fas fa-pen"></i></button>
-        </div>
-        <div id="nombres"class="col-12">
-            <h5>Esteban Orfeo Candioti</h5>
-        </div>
-
-        <div id="titulos" class="col-12">
-            <h5>Full stack develepor Jr</h5>
-        </div>
+      <div class="col-12">
+        <h1>Acerca de mi</h1>
+        <div class="subrayadoTitulos"></div>
+      </div>
+      <div class="col-12">
+        <p style="font-size: x-large">{{ persona.descripcion }}</p>
+      </div>
     </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade bd-example-modal-lg"
+      id="editarPersonaForm"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="PersonaForm"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="personaForm">Editar persona</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form
+              [formGroup]="personaForm"
+              (ngSubmit)="onSubmit()"
+              class="formularios"
+            >
+              <div class="form-group">
+                <label for="nombre" class="form-label">Nombre completo</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombre"
+                  name="nombre"
+                  required
+                  formControlName="nombre"
+                  placeholder=" Ingrese su nombre completo"
+                />
+                <!--Alerta por si el campo esta vacio-->
+                <div
+                  *ngIf="personaForm.get('nombre')?.touched && personaForm.get('nombre')?.errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  Su nombre es requerido
+                </div>
+
+                <!--Alerta por si el campo tiene pocos caracteres-->
+                <div
+                  *ngIf="personaForm.get('nombre')?.touched && personaForm.get('nombre')?.errors?.['minlength']"
+                  class="alert alert-danger"
+                >
+                  Su nombre debe tener un minimo de 10 caracteres
+                </div>
+
+                <!--Alerta por si el tiene muchos caracteres-->
+                <div
+                  *ngIf="personaForm.get('nombre')?.touched && personaForm.get('nombre')?.errors?.['maxlength']"
+                  class="alert alert-danger"
+                >
+                  Su nombre debe tener un maximo de 60 caracteres
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="descripcion">Ingrese la ubicacion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="ubicacion"
+                  name="ubicacion"
+                  required
+                  formControlName="ubicacion"
+                  placeholder="Ingrese su ubicacion"
+                />
+                <!--Alerta por si el campo esta vacio-->
+                <div
+                  *ngIf="personaForm.get('ubicacion')?.touched && personaForm.get('ubicacion')?.errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  Su ubicacion es requerida
+                </div>
+
+                <!--Alerta por si el campo tiene pocos caracteres-->
+                <div
+                  *ngIf="personaForm.get('ubicacion')?.touched && personaForm.get('ubicacion')?.errors?.['minlength']"
+                  class="alert alert-danger"
+                >
+                  La ubicacion debe tener un minimo de 10 caracteres
+                </div>
+
+                <!--Alerta por si el tiene muchos caracteres-->
+                <div
+                  *ngIf="personaForm.get('ubicacion')?.touched && personaForm.get('ubicacion')?.errors?.['maxlength']"
+                  class="alert alert-danger"
+                >
+                  La ubicacion debe tener un maximo de 80 caracteres
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="tecnologiaImg">Ingrese sus titulos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="titulos"
+                  name="titulos"
+                  required
+                  formControlName="titulos"
+                  placeholder="Si posee titulos ingreselos"
+                />
+                <!--Alerta por si el campo tiene pocos caracteres-->
+                <div
+                  *ngIf="personaForm.get('titulos')?.touched && personaForm.get('titulos')?.errors?.['minlength']"
+                  class="alert alert-danger"
+                >
+                  Los titulos debe tener un minimo de 5 caracteres
+                </div>
+
+                <!--Alerta por si el tiene muchos caracteres-->
+                <div
+                  *ngIf="personaForm.get('titulos')?.touched && personaForm.get('titulos')?.errors?.['maxlength']"
+                  class="alert alert-danger"
+                >
+                  Los titulos debe tener un maximo de 80 caracteres
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Descripcion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="descripcion"
+                  name="descripcion"
+                  required
+                  formControlName="descripcion"
+                  placeholder="Si posee titulos ingreselos"
+                />
+                <!--Alerta por si el campo esta vacio-->
+                <div
+                  *ngIf="personaForm.get('descripcion')?.touched && personaForm.get('descripcion')?.errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  la descripcion es requerida
+                </div>
+                <!--Alerta por si el campo tiene pocos caracteres-->
+                <div
+                  *ngIf="personaForm.get('descripcion')?.touched && personaForm.get('descripcion')?.errors?.['minlength']"
+                  class="alert alert-danger"
+                >
+                  La descripcion debe tener un minimo de 10 caracteres
+                </div>
+
+                <!--Alerta por si el tiene muchos caracteres-->
+                <div
+                  *ngIf="personaForm.get('descripcion')?.touched && personaForm.get('descripcion')?.errors?.['maxlength']"
+                  class="alert alert-danger"
+                >
+                  La descripcion debe tener un maximo de 200 caracteres
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="fotoPerfil">Foto perfil</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fotoPerfil"
+                  name="fotoPerfil"
+                  required
+                  formControlName="fotoPerfil"
+                  placeholder="Ingrese la url de la foto de perfil"
+                />
+                <!--Alerta por si el campo esta vacio-->
+                <div
+                  *ngIf="personaForm.get('fotoPerfil')?.touched && personaForm.get('fotoPerfil')?.errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  la url es requerida
+                </div>
+                <!--Alerta por si el campo tiene pocos caracteres-->
+                <div
+                  *ngIf="personaForm.get('fotoPerfil')?.touched && personaForm.get('fotoPerfil')?.errors?.['minlength']"
+                  class="alert alert-danger"
+                >
+                  La url debe tener un minimo de 10 caracteres
+                </div>
+                <!--Alerta por si el tiene muchos caracteres-->
+                <div
+                  *ngIf="personaForm.get('fotoPerfil')?.touched && personaForm.get('fotoPerfil')?.errors?.['maxlength']"
+                  class="alert alert-danger"
+                >
+                  La url debe tener un maximo de 100 caracteres
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="fotoBanner">Foto Banner</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fotoBanner"
+                  name="fotoBanner"
+                  required
+                  formControlName="fotoBanner"
+                  placeholder="Ingrese la url de la foto de perfil"
+                />
+                <!--Alerta por si el campo esta vacio-->
+                <div
+                  *ngIf="personaForm.get('fotoBanner')?.touched && personaForm.get('fotoBanner')?.errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  la url es requerida
+                </div>
+                <!--Alerta por si el campo tiene pocos caracteres-->
+                <div
+                  *ngIf="personaForm.get('fotoBanner')?.touched && personaForm.get('fotoBanner')?.errors?.['minlength']"
+                  class="alert alert-danger"
+                >
+                  La url debe tener un minimo de 10 caracteres
+                </div>
+                <!--Alerta por si el tiene muchos caracteres-->
+                <div
+                  *ngIf="personaForm.get('fotoBanner')?.touched && personaForm.get('fotoBanner')?.errors?.['maxlength']"
+                  class="alert alert-danger"
+                >
+                  La url debe tener un maximo de 100 caracteres
+                </div>
+              </div>
+              <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="
+                  personaForm.get('nombre')?.invalid ||
+                  personaForm.get('ubicacion')?.invalid ||
+                  personaForm.get('descripcion')?.invalid ||
+                  personaForm.get('titulos')?.value.length<5 &&
+                  personaForm.get('titulos')?.value.length>0||
+                  personaForm.get('titulos')?.value.length>80||
+                  personaForm.get('fotoPerfil')?.invalid||
+                  personaForm.get('fotoBanner')?.invalid
+                "
+              >
+                Guardar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
