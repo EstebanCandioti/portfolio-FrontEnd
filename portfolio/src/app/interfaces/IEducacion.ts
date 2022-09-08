@@ -6,5 +6,4 @@ export interface IEducacion{
     inicioEducacion:string,
     finalizacionEducacion:string,
     idPersona:number;
-
 }

@@ -20,9 +20,7 @@ export class PortfolioService {
   private apiUrlTecnologia: string = 'http://localhost:8080/tecnologia';
   private apiUrlProyectos: string = 'http://localhost:8080/proyecto';
 
-  constructor(private http: HttpClient) {
-    console.log('portfolio service inicializado');
-  }
+  constructor(private http: HttpClient) {}
   // --------------------------------------------FUNCIONES GET PARA CADA COMPONENTE BODY-----------------------------------------------------------------------
   obtenerPersona():Observable<IPersona>{
     const url = `${this.apiUrlPersona}/buscar/1`
