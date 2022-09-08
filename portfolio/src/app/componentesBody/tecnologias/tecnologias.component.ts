@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ITecnologia } from 'src/app/interfaces/ITecnologia';
+import { AuthService } from 'src/app/servicios/auth.service';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
@@ -13,13 +14,16 @@ export class TecnologiasComponent implements OnInit {
   tecnologiaForm!: FormGroup
   tencnologiaAEditar!:ITecnologia
   idTecnologia!:number
-  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder) { }
+  logeado:any
+  editar!:boolean
+  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder, private readonly auth:AuthService) { }
 
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatosTecnologia().subscribe(tecnologias => {
       this.listaTecnologia=tecnologias;
     });
     this.tecnologiaForm=this.initForm();
+    this.logeado=this.auth.autenticado
   }
 
   deleteTecnologia(tecnologia:ITecnologia){
@@ -37,13 +41,12 @@ export class TecnologiasComponent implements OnInit {
       this.listaTecnologia.push(tecnologia);
     });
   }
-  buscarTecnologia(tecnologia:ITecnologia){
-    this.datosPortfolio.buscarTecnologia(tecnologia).subscribe(tecnologia=>{
-      this.tecnologiaForm.get('nombre')?.setValue(tecnologia.nombre);
-      this.tecnologiaForm.get('descripcion')?.setValue(tecnologia.descripcion);
-      this.tecnologiaForm.get('tecnologiaImg')?.setValue(tecnologia.tecnologiaImg);
-      this.idTecnologia=tecnologia.id
-    })
+  editarTecnologia(tecnologia:ITecnologia){
+    this.editar=true
+    this.tecnologiaForm.get('nombre')?.setValue(tecnologia.nombre);
+    this.tecnologiaForm.get('descripcion')?.setValue(tecnologia.descripcion);
+    this.tecnologiaForm.get('tecnologiaImg')?.setValue(tecnologia.tecnologiaImg);
+    this.idTecnologia=tecnologia.id
   }
   initForm():FormGroup{
     return this.fb.group({
@@ -53,12 +56,20 @@ export class TecnologiasComponent implements OnInit {
     })
   }
   
-  onSubmit():void{
+  onSubmit(event:Event):void{
+    event.preventDefault()
     console.log("En el modal")
     this.tencnologiaAEditar=this.tecnologiaForm.value;
     this.tencnologiaAEditar.id=this.idTecnologia;
     this.tencnologiaAEditar.idPersona=1
     this.datosPortfolio.editTecnologia(this.tencnologiaAEditar).subscribe()
     location.reload();
+  }
+
+  reiniciarForm(){
+    this.editar=false
+    this.idTecnologia=0
+    this.tecnologiaForm.reset()
+    this.tecnologiaForm.get('fotoTrabajo')?.setValue('')
   }
 }

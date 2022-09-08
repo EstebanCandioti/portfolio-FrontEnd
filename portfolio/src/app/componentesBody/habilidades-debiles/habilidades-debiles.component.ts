@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IHabilidad } from 'src/app/interfaces/IHabilidades';
+import { AuthService } from 'src/app/servicios/auth.service';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 @Component({
   selector: 'app-habilidades-debiles',
@@ -12,13 +13,16 @@ export class HabilidadesDebilesComponent implements OnInit {
   habilidadForm!:FormGroup;
   idHabilidad!:number
   habilidadAEditar!:IHabilidad
-  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder) { }
+  editar!:boolean
+  logeado:any
+  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder, private readonly auth:AuthService) { }
 
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatosHabilidadesDebiles().subscribe(habilidades => {
       this.listaHabilidadesDebiles=habilidades;
     });
     this.habilidadForm= this.initForm();
+    this.logeado=this.auth.autenticado
   }
 
   deleteHabilidadDebil(habilidad:IHabilidad):void {
@@ -26,21 +30,14 @@ export class HabilidadesDebilesComponent implements OnInit {
       this.listaHabilidadesDebiles=this.listaHabilidadesDebiles.filter(t=>t.id !==habilidad.id)
     })
   }
-  onSubmit():void{
+  onSubmit(event:Event):void {
+    event.preventDefault()
     console.log("En el modal")
     this.habilidadAEditar=this.habilidadForm.value;
     this.habilidadAEditar.id=this.idHabilidad
     this.habilidadAEditar.idPersona=1;
     this.datosPortfolio.editHabilidadDebil(this.habilidadAEditar).subscribe()
-    location.reload();
-  }
-  crearHabilidadDebil(habilidad:IHabilidad){
-    console.log("en el componente")
-    habilidad.idPersona=1;
-    this.datosPortfolio.crearHabilidadDebil(habilidad).subscribe(habilidad=>{
-      this.listaHabilidadesDebiles.push(habilidad);
-    })
-    location.reload();
+    window.location.reload();
   }
   initForm():FormGroup{
     return this.fb.group({
@@ -48,11 +45,16 @@ export class HabilidadesDebilesComponent implements OnInit {
       valor:['',[Validators.required, Validators.max(100)]],
     })
   }
-  buscarHabilidad(habilidad:IHabilidad){
-    this.datosPortfolio.buscarHabilidadDebil(habilidad).subscribe(habilidad =>{
+  editarHabilidad(habilidad:IHabilidad){
+    this.editar=true
       this.habilidadForm.get('habilidad')?.setValue(habilidad.habilidad)
       this.habilidadForm.get('valor')?.setValue(habilidad.valor)
       this.idHabilidad =habilidad.id
-    })
+  }
+  reiniciarForm(){
+    this.editar=false
+    this.idHabilidad=0
+    this.habilidadForm.reset()
+    this.habilidadForm.get('fotoTrabajo')?.setValue('')
   }
 }

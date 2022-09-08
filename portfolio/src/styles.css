@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 /*--------------------------------------------------------------------BOTONES-----------------------------------------------------------------*/
-.login, .editar, .crear, .borrar{
+.login, .editar, .crear, .borrar, .logout{
     font-family:'Poppins', sans-serif;
     color:#000000;
     background-color: #6eaef7 ;
@@ -85,6 +85,12 @@
     margin-left: 0.5%;
 }
 
+.usuario .minidivisor{
+    margin-left: 0%;
+    margin-top: -1%;
+    margin-bottom: 1%;
+    width:15%
+}
 
 .subrayadoSubtitulos{
     height: 1px;

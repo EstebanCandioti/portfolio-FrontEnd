@@ -5,9 +5,16 @@
       <div class="subrayadoTitulos"></div>
     </div>
     <div class="col-1">
-      <app-crear-proyecto
-        (onCrearProyecto)="crearProyecto($event)"
-      ></app-crear-proyecto>
+      <button
+      *ngIf="logeado"
+      class="editar"
+      type="button"
+      data-toggle="modal"
+      data-target="#proyectoForm"
+      (click)="reiniciarForm()"
+    >
+      <i class="fas fa-plus"></i>
+    </button>
     </div>
   </div>
   <ul class="item-list">
@@ -29,15 +36,16 @@
           </div>
           <div class="botonera col-1">
             <button
+            *ngIf="logeado"
               class="editar"
-              (click)="buscarProyecto(proyecto)"
+              (click)="editarProyecto(proyecto)"
               type="button"
               data-toggle="modal"
-              data-target="#editarProyectoForm"
+              data-target="#proyectoForm"
             >
               <i class="fas fa-pen"></i>
             </button>
-            <button class="editar" (click)="deleteProyecto(proyecto)">
+            <button class="editar" (click)="deleteProyecto(proyecto)"               *ngIf="logeado">
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -85,15 +93,16 @@
           </div>
           <div class="botonera col-1">
             <button
+              *ngIf="logeado"
               class="editar"
-              (click)="buscarProyecto(proyecto)"
+              (click)="editarProyecto(proyecto)"
               type="button"
               data-toggle="modal"
-              data-target="#editarProyectoForm"
+              data-target="#proyectoForm"
             >
               <i class="fas fa-pen"></i>
             </button>
-            <button class="editar" (click)="deleteProyecto(proyecto)">
+            <button class="editar" (click)="deleteProyecto(proyecto)"               *ngIf="logeado">
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -134,16 +143,19 @@
 <!-- Modal -->
 <div
   class="modal fade"
-  id="editarProyectoForm"
+  id="proyectoForm"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="exampleModalLongTitle"
+  aria-labelledby="proyectoForm"
   aria-hidden="true"
 >
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Editar Proyecto</h5>
+        <!--Titulo por si se va a editar-->
+        <h5 class="modal-title" id="proyectoForm" *ngIf="editar===true">Editar Proyecto</h5>
+        <!--Titulo por si se va a crear-->
+        <h5 class="modal-title" id="proyectoForm" *ngIf="editar===false">Crear Proyecto</h5>
         <button
           type="button"
           class="close"
@@ -156,7 +168,7 @@
       <div class="modal-body">
         <form
           [formGroup]="proyectoForm"
-          (ngSubmit)="onSubmit()"
+          (ngSubmit)="onSubmit($event)"
           class="formularios"
         >
           <div class="form-group">
@@ -165,8 +177,6 @@
             <input
               type="text"
               class="form-control"
-              id="nombre"
-              name="nombre"
               required
               formControlName="nombre"
               placeholder=" Ingrese el nombre del proyecto"
@@ -201,8 +211,6 @@
             <input
               type="text"
               class="form-control"
-              id="descripcion"
-              name="descripcion"
               required
               formControlName="descripcion"
               placeholder="Ingrese una descripcion del proyecto"
@@ -237,8 +245,6 @@
             <input
               type="text"
               class="form-control"
-              id="inicioProyecto"
-              name="inicioProyecto"
               required
               formControlName="inicioProyecto"
               placeholder="ingrese cuando inicio el proyecto"
@@ -274,8 +280,6 @@
             <input
               type="text"
               class="form-control"
-              id="finalizacionProyecto"
-              name="finalizacionProyecto"
               required
               formControlName="finalizacionProyecto"
               placeholder="Ingrese cuando finalizo el proyecto"
@@ -311,8 +315,6 @@
             <input
               type="text"
               class="form-control"
-              id="fotoProyecto"
-              name="fotoProyecto"
               required
               formControlName="fotoProyecto"
               placeholder="Insgrese el url de la foto (opcional)"
@@ -340,8 +342,6 @@
             <input
               type="url"
               class="form-control"
-              id="link1"
-              name="link1"
               required
               formControlName="link1"
               placeholder="Insgrese el url al proyecto "
@@ -376,8 +376,6 @@
             <input
               type="text"
               class="form-control"
-              id="descripcionLink1"
-              name="descripcionLink1"
               required
               formControlName="descripcionLink1"
               placeholder="Insgrese una descripcion para la url puesta(opcional)"
@@ -405,8 +403,6 @@
             <input
               type="url"
               class="form-control"
-              id="link2"
-              name="link2"
               required
               formControlName="link2"
               placeholder="Insgrese el url al proyecto (opcional)"
@@ -434,8 +430,6 @@
             <input
               type="text"
               class="form-control"
-              id="descripcionLink2"
-              name="descripcionLink2"
               required
               formControlName="descripcionLink2"
               placeholder="Ingrese una descripcion para la url puesta (opcional)"
@@ -466,8 +460,6 @@
             <input
               type="url"
               class="form-control"
-              id="link3"
-              name="link3"
               required
               formControlName="link3"
               placeholder="Insgrese el url al proyecto (opcional)"
@@ -495,8 +487,6 @@
             <input
               type="text"
               class="form-control"
-              id="descripcionLink3"
-              name="descripcionLink3"
               required
               formControlName="descripcionLink3"
               placeholder="Ingrese una descripcion para la url puesta (opcional)"

@@ -5,9 +5,17 @@
       <div class="subrayadoTitulos"></div>
     </div>
     <div class="col-1">
-      <app-crear-habilidad-fuerte
-        (onCrearHabilidad)="crearHabilidadFuerte($event)"
-      ></app-crear-habilidad-fuerte>
+      <button
+        *ngIf="logeado"
+        class="editar"
+        (click)="reiniciarForm()"
+        type="button"
+        class="editar"
+        data-toggle="modal"
+        data-target="#habilidad-fuerteForm"
+      >
+        <i class="fas fa-plus"></i>
+      </button>
     </div>
     <ul class="item-list">
       <li *ngFor="let habilidad of listaHabilidadesFuertes">
@@ -18,17 +26,22 @@
           </div>
           <div class="botonera col-1">
             <button
+              *ngIf="logeado"
               class="editar"
-              (click)="buscarHabilidadFuerte(habilidad)"
+              (click)="editarHabilidadFuerte(habilidad)"
               type="button"
               class="editar"
               data-toggle="modal"
-              data-target="#editar-habilidad-fuerteForm"
+              data-target="#habilidad-fuerteForm"
             >
               <i class="fas fa-pen"></i>
             </button>
 
-            <button class="editar" (click)="deleteHabilidadFuerte(habilidad)">
+            <button
+              class="editar"
+              (click)="deleteHabilidadFuerte(habilidad)"
+              *ngIf="logeado"
+            >
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -53,17 +66,24 @@
 
 <!-- Modal -->
 <div
-  class="modal fade bd-example-modal-lg"
-  id="editar-habilidad-fuerteForm"
+  class="modal fade"
+  id="habilidad-fuerteForm"
   tabindex="-1"
   role="dialog"
   aria-labelledby="myLargeModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar habilidad</h5>
+        <!--Titulo por si se va a editar-->
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="editar === true">
+          Editar Habilidad Fuerte
+        </h5>
+        <!--Titulo por si se va a crear-->
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="editar === false">
+          Crear Habilidad Fuerte
+        </h5>
         <button
           type="button"
           class="close"
@@ -76,16 +96,14 @@
       <div class="modal-body">
         <form
           [formGroup]="habilidadForm"
-          (ngSubmit)="onSubmit()"
+          (ngSubmit)="onSubmit($event)"
           class="formularios"
         >
           <div class="form-group">
-            <label for="habilidad" class="form-label">Habilidad fuerte</label>
+            <label for="habilidad" class="form-label">Habilidad</label>
             <input
               type="text"
               class="form-control"
-              id="habilidad"
-              name="habilidad"
               required
               formControlName="habilidad"
               placeholder=" Ingrese una habilidad fuerte"
@@ -120,8 +138,6 @@
             <input
               type="number"
               class="form-control"
-              id="valor"
-              name="valor"
               required
               formControlName="valor"
               placeholder="Ingrese un valor entre 1 y 100 que crea tener en la habilidad"

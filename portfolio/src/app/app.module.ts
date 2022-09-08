@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 
@@ -16,13 +16,9 @@ import { HabilidadesDebilesComponent } from './componentesBody/habilidades-debil
 import { HabilidadesFuertesComponent } from './componentesBody/habilidades-fuertes/habilidades-fuertes.component';
 import { TecnologiasComponent } from './componentesBody/tecnologias/tecnologias.component';
 import { ProyectosComponent } from './componentesBody/proyectos/proyectos.component';
-import { LoginComponent } from './login/login.component';
-import { CrearEducacionComponent } from './componentesEdicion/crear-educacion/crear-educacion.component';
-import { CrearExperienciaComponent } from './componentesEdicion/crear-experiencia/crear-experiencia.component';
-import { CrearHabilidadFuerteComponent } from './componentesEdicion/crear-habilidad-fuerte/crear-habilidad-fuerte.component';
-import { CrearHabilidadDebilComponent } from './componentesEdicion/crear-habilidad-debil/crear-habilidad-debil.component';
-import { CrearTecnologiaComponent } from './componentesEdicion/crear-tecnologia/crear-tecnologia.component';
-import { CrearProyectoComponent } from './componentesEdicion/crear-proyecto/crear-proyecto.component';
+import { LoginComponent } from './componentesLogin/login/login.component';
+import { PortfolioService } from './servicios/portfolio.service';
+import { InterceptorService } from './servicios/interceptor.service';
 
 
 @NgModule({
@@ -38,12 +34,6 @@ import { CrearProyectoComponent } from './componentesEdicion/crear-proyecto/crea
     TecnologiasComponent,
     ProyectosComponent,
     LoginComponent,
-    CrearEducacionComponent,
-    CrearHabilidadFuerteComponent,
-    CrearExperienciaComponent,
-    CrearHabilidadDebilComponent,
-    CrearTecnologiaComponent,
-    CrearProyectoComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +42,9 @@ import { CrearProyectoComponent } from './componentesEdicion/crear-proyecto/crea
     HttpClientModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [
+    PortfolioService, { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

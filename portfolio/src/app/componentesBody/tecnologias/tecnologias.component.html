@@ -5,9 +5,16 @@
       <div class="subrayadoTitulos"></div>
     </div>
     <div class="col-1">
-      <app-crear-tecnologia
-        (onCrearTecnologia)="crearTecnologia($event)"
-      ></app-crear-tecnologia>
+      <button
+        *ngIf="logeado"
+        class="editar"
+        (click)="reiniciarForm()"
+        type="button"
+        data-toggle="modal"
+        data-target="#editarTecnologiaForm"
+      >
+        <i class="fas fa-plus"></i>
+      </button>
     </div>
   </div>
   <ul class="item-list">
@@ -25,15 +32,20 @@
           </div>
           <div class="botonera col-1">
             <button
+              *ngIf="logeado"
               class="editar"
-              (click)="buscarTecnologia(tecnologia)"
+              (click)="editarTecnologia(tecnologia)"
               type="button"
               data-toggle="modal"
               data-target="#editarTecnologiaForm"
             >
               <i class="fas fa-pen"></i>
             </button>
-            <button class="editar" (click)="deleteTecnologia(tecnologia)">
+            <button
+              class="editar"
+              (click)="deleteTecnologia(tecnologia)"
+              *ngIf="logeado"
+            >
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -50,8 +62,9 @@
           </div>
           <div class="botonera col-1">
             <button
+              *ngIf="logeado"
               class="editar"
-              (click)="buscarTecnologia(tecnologia)"
+              (click)="editarTecnologia(tecnologia)"
               type="button"
               class="editar"
               data-toggle="modal"
@@ -59,7 +72,11 @@
             >
               <i class="fas fa-pen"></i>
             </button>
-            <button class="editar" (click)="deleteTecnologia(tecnologia)">
+            <button
+              class="editar"
+              (click)="deleteTecnologia(tecnologia)"
+              *ngIf="logeado"
+            >
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -72,17 +89,18 @@
 
 <!-- Modal -->
 <div
-  class="modal fade bd-example-modal-lg"
+  class="modal fade"
   id="editarTecnologiaForm"
   tabindex="-1"
   role="dialog"
   aria-labelledby="educacionForm"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tecnologiaForm">Editar tecnologia</h5>
+        <h5 class="modal-title" id="tecnologiaForm" *ngIf="editar===true">Editar Tecnologia</h5>
+        <h5 class="modal-title" id="tecnologiaForm" *ngIf="editar===false">Crear Tecnologia</h5>
         <button
           type="button"
           class="close"
@@ -95,7 +113,7 @@
       <div class="modal-body">
         <form
           [formGroup]="tecnologiaForm"
-          (ngSubmit)="onSubmit()"
+          (ngSubmit)="onSubmit($event)"
           class="formularios"
         >
           <div class="form-group">
@@ -105,8 +123,6 @@
             <input
               type="text"
               class="form-control"
-              id="nombre"
-              name="nombre"
               required
               formControlName="nombre"
               placeholder=" Ingrese el nombre de la tecnologia"
@@ -141,8 +157,6 @@
             <input
               type="text"
               class="form-control"
-              id="descripcion"
-              name="descripcion"
               required
               formControlName="descripcion"
               placeholder="Ingrese la descripcion de la tecnologia"
@@ -177,8 +191,6 @@
             <input
               type="text"
               class="form-control"
-              id="tecnologiaImg"
-              name="tecnologiaImg"
               required
               formControlName="tecnologiaImg"
               placeholder="Ingrese el url de la foto (opcional)"
@@ -205,9 +217,9 @@
             [disabled]="
               tecnologiaForm.get('nombre')?.invalid ||
               tecnologiaForm.get('descripcion')?.invalid ||
-              tecnologiaForm.get('tecnologiaImg')?.value.length>0 &&
-              tecnologiaForm.get('tecnologiaImg')?.value.length<10||
-              tecnologiaForm.get('tecnologiaImg')?.value.length>100
+              (tecnologiaForm.get('tecnologiaImg')?.value.length > 0 &&
+                tecnologiaForm.get('tecnologiaImg')?.value.length < 10) ||
+              tecnologiaForm.get('tecnologiaImg')?.value.length > 100
             "
           >
             Guardar

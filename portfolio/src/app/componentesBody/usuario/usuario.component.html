@@ -17,6 +17,7 @@
     </div>
     <div class="col-1">
       <button
+        *ngIf="logeado"
         class="editar"
         type="button"
         data-toggle="modal"
@@ -27,7 +28,8 @@
       </button>
     </div>
     <div class="col-12">
-      <p style="font-size: x-large">{{ persona.nombre }}</p>
+      <p style="font-size: xx-large">{{ persona.nombre }}</p>
+      <div class="minidivisor"></div>
     </div>
 
     <div class="col-12">
@@ -80,8 +82,6 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="nombre"
-                  name="nombre"
                   required
                   formControlName="nombre"
                   placeholder=" Ingrese su nombre completo"
@@ -116,8 +116,6 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="ubicacion"
-                  name="ubicacion"
                   required
                   formControlName="ubicacion"
                   placeholder="Ingrese su ubicacion"
@@ -152,8 +150,6 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="titulos"
-                  name="titulos"
                   required
                   formControlName="titulos"
                   placeholder="Si posee titulos ingreselos"
@@ -171,7 +167,7 @@
                   *ngIf="personaForm.get('titulos')?.touched && personaForm.get('titulos')?.errors?.['maxlength']"
                   class="alert alert-danger"
                 >
-                  Los titulos debe tener un maximo de 80 caracteres
+                  Los titulos debe tener un maximo de 100 caracteres
                 </div>
               </div>
               <div class="form-group">
@@ -179,8 +175,6 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="descripcion"
-                  name="descripcion"
                   required
                   formControlName="descripcion"
                   placeholder="Si posee titulos ingreselos"
@@ -213,8 +207,6 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="fotoPerfil"
-                  name="fotoPerfil"
                   required
                   formControlName="fotoPerfil"
                   placeholder="Ingrese la url de la foto de perfil"
@@ -246,8 +238,6 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="fotoBanner"
-                  name="fotoBanner"
                   required
                   formControlName="fotoBanner"
                   placeholder="Ingrese la url de la foto de perfil"
@@ -283,7 +273,7 @@
                   personaForm.get('descripcion')?.invalid ||
                   personaForm.get('titulos')?.value.length<5 &&
                   personaForm.get('titulos')?.value.length>0||
-                  personaForm.get('titulos')?.value.length>80||
+                  personaForm.get('titulos')?.value.length>100||
                   personaForm.get('fotoPerfil')?.invalid||
                   personaForm.get('fotoBanner')?.invalid
                 "

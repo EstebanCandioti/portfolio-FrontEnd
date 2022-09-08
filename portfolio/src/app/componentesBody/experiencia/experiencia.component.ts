@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IExperiencia } from 'src/app/interfaces/IExperiencia';
+import { AuthService } from 'src/app/servicios/auth.service';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
@@ -13,28 +14,23 @@ export class ExperienciaComponent implements OnInit {
   experienciaAEditar!:IExperiencia
   idExperiencia!:number
   experienciaForm!:FormGroup
-  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder) { }
+  editar:boolean=false
+  logeado:any
+  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder, private readonly auth:AuthService) { 
+  }
 
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatosExperiencia().subscribe(experiencia=>{
       this.listaExperiencia = experiencia;
     });
     this.experienciaForm=this.initForm();
+    this.logeado=this.auth.autenticado
     }
     
   deleteExperiencia(experiencia:IExperiencia) {
      this.datosPortfolio.deleteExperiencia(experiencia).subscribe(()=> {
           this.listaExperiencia=this.listaExperiencia.filter(t=>t.id !== experiencia.id);
     })
-  }
-
-  crearExperiencia(experiencia:IExperiencia){
-    console.log("en el componente")
-    experiencia.idPersona=1
-    this.datosPortfolio.crearExperiencia(experiencia).subscribe(experiencia=>{
-      this.listaExperiencia.push(experiencia);
-    })
-    location.reload();
   }
 
   initForm():FormGroup{
@@ -48,7 +44,8 @@ export class ExperienciaComponent implements OnInit {
     })
   }
 
-  onSubmit():void{
+  onSubmit(event:Event):void{
+    event.preventDefault()
     console.log("En el modal")
     this.experienciaAEditar=this.experienciaForm.value;
     this.experienciaAEditar.id=this.idExperiencia;
@@ -56,8 +53,8 @@ export class ExperienciaComponent implements OnInit {
     this.datosPortfolio.editExperiencia(this.experienciaAEditar).subscribe()
     location.reload();
   }
-  buscarExperiencia(experiencia:IExperiencia){
-    this.datosPortfolio.buscarExperiencia(experiencia).subscribe(experiencia =>{
+  editarExperiencia(experiencia:IExperiencia){
+    this.editar=true
       this.experienciaForm.get('nombreTrabajo')?.setValue(experiencia.nombreTrabajo)
       this.experienciaForm.get('posicionLaboral')?.setValue(experiencia.posicionLaboral)
       this.experienciaForm.get('descripcionLaboral')?.setValue(experiencia.descripcionLaboral)
@@ -65,6 +62,12 @@ export class ExperienciaComponent implements OnInit {
       this.experienciaForm.get('finalizacionTrabajo')?.setValue(experiencia.finalizacionTrabajo)
       this.experienciaForm.get('fotoTrabajo')?.setValue(experiencia.fotoTrabajo)
       this.idExperiencia=experiencia.id
-    });
+
+  }
+  reiniciarForm(){
+    this.editar=false
+    this.idExperiencia=0
+    this.experienciaForm.reset()
+    this.experienciaForm.get('fotoTrabajo')?.setValue('')
   }
 }

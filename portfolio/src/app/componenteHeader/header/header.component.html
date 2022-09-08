@@ -23,9 +23,12 @@
                     <i class="fa-solid fa-envelope"></i>
                 </a>
             </li>
-            <li>
-                <button class="login">
-                    Login
+            <li *ngIf="!autenticado">
+                <app-login></app-login>
+            </li>
+            <li *ngIf="autenticado">
+                <button class="logout" (click)="logout()">
+                    logout
                 </button>
             </li>
       </ul>

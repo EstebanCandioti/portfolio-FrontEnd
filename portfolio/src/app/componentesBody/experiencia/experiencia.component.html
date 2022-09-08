@@ -5,9 +5,16 @@
       <div class="subrayadoTitulos"></div>
     </div>
     <div class="col-1">
-      <app-crear-experiencia
-        (onCrearExperiencia)="crearExperiencia($event)"
-      ></app-crear-experiencia>
+      <button
+        *ngIf="logeado"
+        type="button"
+        class="editar"
+        data-toggle="modal"
+        data-target="#experienciaForm"
+        (click)="reiniciarForm()"
+      >
+        <i class="fa-solid fa-plus"></i>
+      </button>
     </div>
   </div>
   <ul class="item-list">
@@ -30,15 +37,20 @@
           </div>
           <div class="botonera col-1">
             <button
+              *ngIf="logeado"
               class="editar"
-              (click)="buscarExperiencia(experiencia)"
+              (click)="editarExperiencia(experiencia)"
               type="button"
               data-toggle="modal"
-              data-target="#editarExperienciaForm"
+              data-target="#experienciaForm"
             >
               <i class="fas fa-pen"></i>
             </button>
-            <button class="editar" (click)="deleteExperiencia(experiencia)">
+            <button
+              class="editar"
+              (click)="deleteExperiencia(experiencia)"
+              *ngIf="logeado"
+            >
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -60,15 +72,20 @@
           </div>
           <div class="botonera col-1">
             <button
+              *ngIf="logeado"
               class="editar"
-              (click)="buscarExperiencia(experiencia)"
+              (click)="editarExperiencia(experiencia)"
               type="button"
               data-toggle="modal"
-              data-target="#editarExperienciaForm"
+              data-target="#experienciaForm"
             >
               <i class="fas fa-pen"></i>
             </button>
-            <button class="editar" (click)="deleteExperiencia(experiencia)">
+            <button
+              class="editar"
+              (click)="deleteExperiencia(experiencia)"
+              *ngIf="logeado"
+            >
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -81,18 +98,23 @@
 
 <!-- Modal -->
 <div
-  class="modal fade bd-example-modal-lg"
-  id="editarExperienciaForm"
+  class="modal fade"
+  id="experienciaForm"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="editarExperienciaForm"
+  aria-labelledby="experienciaForm"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content modal-xl">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content modal">
       <div class="modal-header">
-        <h5 class="modal-title" id="editarExperienciaForm">
-          Editar experiencia laboral
+        <!--Titulo por si se va a crear-->
+        <h5 class="modal-title" id="experienciaForm" *ngIf="editar === true">
+          Editar Experiencia Laboral
+        </h5>
+        <!--Titulo por si se va a editar-->
+        <h5 class="modal-title" id="experienciaForm" *ngIf="editar === false">
+          Crear Experiencia Laboral
         </h5>
         <button
           type="button"
@@ -106,7 +128,7 @@
       <div class="modal-body">
         <form
           [formGroup]="experienciaForm"
-          (ngSubmit)="onSubmit()"
+          (ngSubmit)="onSubmit($event)"
           class="formularios"
         >
           <div class="form-group">
@@ -116,8 +138,6 @@
             <input
               type="text"
               class="form-control"
-              id="nombreTrabajo"
-              name="nombreTrabajo"
               required
               formControlName="nombreTrabajo"
               placeholder=" Ingrese el nombre de la empresa"
@@ -152,8 +172,6 @@
             <input
               type="text"
               class="form-control"
-              id="posicionLaboral"
-              name="posicionLaboral"
               required
               formControlName="posicionLaboral"
               placeholder="Ingrese su posicion laboral"
@@ -188,8 +206,6 @@
             <input
               type="text"
               class="form-control"
-              id="descripcionLaboral"
-              name="descripcionLaboral"
               required
               formControlName="descripcionLaboral"
               placeholder="Ingrese la descripcion de su labor"
@@ -225,8 +241,6 @@
             <input
               type="text"
               class="form-control"
-              id="inicioTrabajo"
-              name="inicioTrabajo"
               required
               formControlName="inicioTrabajo"
               placeholder="ingrese cuando inicio su labor"
@@ -262,8 +276,6 @@
             <input
               type="text"
               class="form-control"
-              id="finalizacionTrabajo"
-              name="finalizacionTrabajo"
               required
               formControlName="finalizacionTrabajo"
               placeholder="ingrese cuando Finalizo su labor"
@@ -299,8 +311,6 @@
             <input
               type="text"
               class="form-control"
-              id="fotoTrabajo"
-              name="fotoTrabajo"
               required
               formControlName="fotoTrabajo"
               placeholder="Insgrese el url de la foto (opcional)"
@@ -329,7 +339,10 @@
               experienciaForm.get('nombreTrabajo')?.invalid ||
               experienciaForm.get('descripcionLaboral')?.invalid ||
               experienciaForm.get('inicioTrabajo')?.invalid ||
-              experienciaForm.get('finalizacionTrabajo')?.invalid
+              experienciaForm.get('finalizacionTrabajo')?.invalid ||
+              (experienciaForm.get('fotoTrabajo')?.value.length > 0 &&
+                experienciaForm.get('fotoTrabajo')?.value.length < 10) ||
+              experienciaForm.get('fotoTrabajo')?.value.length > 100
             "
           >
             Editar

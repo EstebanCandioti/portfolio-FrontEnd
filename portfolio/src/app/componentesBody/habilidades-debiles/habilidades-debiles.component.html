@@ -1,62 +1,94 @@
 <div class="habilidadesDebiles container">
-    <div class="informacion row">
-        <div class="titulo col-11">
-            <h2>Habilidades Debiles</h2>
-            <div class="subrayadoTitulos"></div>
-        </div>
-        <div class="col-1">
-            <app-crear-habilidad-debil (onCrearHabilidad)="crearHabilidadDebil($event)"></app-crear-habilidad-debil>
-        </div>
-        <ul class="item-list">
-            <li *ngFor="let habilidad of listaHabilidadesDebiles">
-                <div class="row">
-                    <div class="institucion col-11">
-                        <h2>{{habilidad.habilidad}}</h2>
-                        <div class="subrayadoSubtitulos"></div>
-                    </div>
-                    <div class="botonera col-1">
-                        <button class="editar" 
-                            (click)="(buscarHabilidad(habilidad))"
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#editar-habilidad-debilForm"
-                        >
-                            <i class="fas fa-pen"></i>
-                        </button>
-                        <button class="editar" (click)="(deleteHabilidadDebil(habilidad))">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="progress">
-                  <div class="progress-bar" 
-                        role="progressbar" 
-                        [style.width]="habilidad.valor + '%'" 
-                        attr.aria-valuenow="{{habilidad.valor}}" 
-                        aria-valuemin="0" 
-                        aria-valuemax="100"
-                    >  {{habilidad.valor}}%
-                    </div>
-                </div>
-                <div class="divisor"></div>  
-            </li>
-        </ul>
+  <div class="informacion row">
+    <div class="titulo col-11">
+      <h2>Habilidades Debiles</h2>
+      <div class="subrayadoTitulos"></div>
     </div>
+    <div class="col-1">
+      <button
+        *ngIf="logeado"
+        type="button"
+        class="editar"
+        data-toggle="modal"
+        data-target="#habilidad-debilForm"
+        (click)="reiniciarForm()"
+      >
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+    <ul class="item-list">
+      <li *ngFor="let habilidad of listaHabilidadesDebiles">
+        <div class="row">
+          <div class="institucion col-11">
+            <h2>{{ habilidad.habilidad }}</h2>
+            <div class="subrayadoSubtitulos"></div>
+          </div>
+          <div class="botonera col-1">
+            <button
+              class="editar"
+              *ngIf="logeado"
+              (click)="editarHabilidad(habilidad)"
+              type="button"
+              data-toggle="modal"
+              data-target="#habilidad-debilForm"
+            >
+              <i class="fas fa-pen"></i>
+            </button>
+            <button
+              class="editar"
+              (click)="deleteHabilidadDebil(habilidad)"
+              *ngIf="logeado"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <div class="progress">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            [style.width]="habilidad.valor + '%'"
+            attr.aria-valuenow="{{ habilidad.valor }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            {{ habilidad.valor }}%
+          </div>
+        </div>
+        <div class="divisor"></div>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <!-- Modal -->
 <div
   class="modal fade bd-example-modal-lg"
-  id="editar-habilidad-debilForm"
+  id="habilidad-debilForm"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="editar-habilidad-debilForm"
+  aria-labelledby="habilidad-debilForm"
   aria-hidden="true"
 >
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editar-habilidad-debilForm">Editar habilidad</h5>
+        <!--Titulo por si se va a editar-->
+        <h5
+          class="modal-title"
+          id="habilidad-debilForm"
+          *ngIf="editar === true"
+        >
+          Editar Habilidad Debil
+        </h5>
+        <!--Titulo por si se va a crear-->
+        <h5
+          class="modal-title"
+          id="habilidad-debilForm"
+          *ngIf="editar === false"
+        >
+          Crear Habilidad Debil
+        </h5>
         <button
           type="button"
           class="close"
@@ -69,7 +101,7 @@
       <div class="modal-body">
         <form
           [formGroup]="habilidadForm"
-          (ngSubmit)="onSubmit()"
+          (ngSubmit)="onSubmit($event)"
           class="formularios"
         >
           <div class="form-group">
@@ -77,8 +109,6 @@
             <input
               type="text"
               class="form-control"
-              id="habilidad"
-              name="habilidad"
               required
               formControlName="habilidad"
               placeholder=" Ingrese una habilidad debil"
@@ -113,8 +143,6 @@
             <input
               type="number"
               class="form-control"
-              id="valor"
-              name="valor"
               required
               formControlName="valor"
               placeholder="Ingrese un valor entre 1 y 100 que crea tener en la habilidad"

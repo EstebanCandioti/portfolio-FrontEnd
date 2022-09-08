@@ -5,9 +5,16 @@
       <div class="subrayadoTitulos"></div>
     </div>
     <div class="col-1">
-      <app-crear-educacion
-        (onCrearEducacion)="crearEducacion($event)"
-      ></app-crear-educacion>
+      <button
+        *ngIf="logeado"
+        type="button"
+        class="editar"
+        data-toggle="modal"
+        data-target="#educacionForm"
+        (click)="reiniciarForm()"
+      >
+        <i class="fa-solid fa-plus"></i>
+      </button>
     </div>
     <ul class="item-list">
       <li *ngFor="let educacion of listaEducacion">
@@ -24,17 +31,22 @@
               </h4>
             </div>
             <div class="botonera col-1">
-              <button class="editar" (click)="deleteEducacion(educacion)">
-                <i class="fas fa-trash"></i>
-              </button>
               <button
+                *ngIf="logeado"
                 type="button"
                 class="editar"
                 data-toggle="modal"
-                data-target="#editarEducacionForm"
-                (click)="buscarEducacion(educacion)"
+                data-target="#educacionForm"
+                (click)="editarEducacion(educacion)"
               >
                 <i class="fa-solid fa-pen"></i>
+              </button>
+              <button
+                class="editar"
+                (click)="deleteEducacion(educacion)"
+                *ngIf="logeado"
+              >
+                <i class="fas fa-trash"></i>
               </button>
             </div>
           </div>
@@ -56,17 +68,22 @@
               </h4>
             </div>
             <div class="botonera col-1">
-              <button class="editar" (click)="deleteEducacion(educacion)">
-                <i class="fas fa-trash"></i>
-              </button>
               <button
+                *ngIf="logeado"
                 type="button"
                 class="editar"
                 data-toggle="modal"
-                data-target="#editarEducacionForm"
-                (click)="buscarEducacion(educacion)"
+                data-target="#educacionForm"
+                (click)="editarEducacion(educacion)"
               >
                 <i class="fa-solid fa-pen"></i>
+              </button>
+              <button
+                class="editar"
+                (click)="deleteEducacion(educacion)"
+                *ngIf="logeado"
+              >
+                <i class="fas fa-trash"></i>
               </button>
             </div>
           </div>
@@ -80,7 +97,7 @@
 <!-- Modal -->
 <div
   class="modal fade bd-example-modal-xl"
-  id="editarEducacionForm"
+  id="educacionForm"
   tabindex="-1"
   role="dialog"
   aria-labelledby="educacionForm"
@@ -89,7 +106,14 @@
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="educacionForm">Editar Educacion</h5>
+        <!--Titulo por si se va a editar-->
+        <h5 class="modal-title" id="educacionForm" *ngIf="editar === true">
+          Editar Educacion
+        </h5>
+        <!--Titulo por si se va a crear-->
+        <h5 class="modal-title" id="educacionForm" *ngIf="editar === false">
+          Crear Educacion
+        </h5>
         <button
           type="button"
           class="close"
@@ -101,8 +125,8 @@
       </div>
       <div class="modal-body">
         <form
-            [formGroup]="educacionForm"
-          (ngSubmit)="onSubmit()"
+          [formGroup]="educacionForm"
+          (ngSubmit)="onSubmit($event)"
           class="formularios"
         >
           <div class="form-group">
@@ -110,8 +134,6 @@
             <input
               type="text"
               class="form-control"
-              id="institucion"
-              name="institucion"
               required
               formControlName="institucion"
               placeholder=" Ingrese el nombre de la institucion"
@@ -146,8 +168,6 @@
             <input
               type="text"
               class="form-control"
-              id="titulo"
-              name="titulo"
               required
               formControlName="titulo"
               placeholder="Ingrese el titulo recibido"
@@ -182,8 +202,6 @@
             <input
               type="text"
               class="form-control"
-              id="inicioEducacion"
-              name="inicioEducacion"
               required
               formControlName="inicioEducacion"
               placeholder="Ingrese cuando inicio la educacion"
@@ -219,8 +237,6 @@
             <input
               type="text"
               class="form-control"
-              id="finalizacionEducacion"
-              name="finalizacionEducacion"
               required
               formControlName="finalizacionEducacion"
               placeholder="ingrese cuando finalizo la educacion"
@@ -256,8 +272,6 @@
             <input
               type="text"
               class="form-control"
-              id="fotoInstitucion"
-              name="fotoInstitucion"
               required
               formControlName="fotoInstitucion"
               placeholder="Insgrese el url de la foto(opcional)"
@@ -286,10 +300,13 @@
               educacionForm.get('institucion')?.invalid ||
               educacionForm.get('titulo')?.invalid ||
               educacionForm.get('inicioEducacion')?.invalid ||
-              educacionForm.get('finalizacionEducacion')?.invalid
+              educacionForm.get('finalizacionEducacion')?.invalid ||
+              (educacionForm.get('fotoInstitucion')?.value.length > 0 &&
+                educacionForm.get('fotoInstitucion')?.value.length < 10) ||
+              educacionForm.get('fotoInstitucion')?.value.length > 100
             "
           >
-            Editar
+            Guardar
           </button>
         </form>
       </div>
