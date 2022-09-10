@@ -17,8 +17,8 @@
       </button>
     </div>
   </div>
-  <ul class="item-list">
-    <li *ngFor="let experiencia of listaExperiencia">
+  <ul class="item-list" cdkDropList (cdkDropListDropped)="drop($event)"> 
+    <li *ngFor="let experiencia of listaExperiencia" cdkDrag>
       <!--Template por si el objeto tiene foto-->
       <ng-template [ngIf]="experiencia.fotoTrabajo">
         <div class="informacion row">
@@ -345,7 +345,7 @@
               experienciaForm.get('fotoTrabajo')?.value.length > 100
             "
           >
-            Editar
+            Guardar
           </button>
         </form>
       </div>

@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IHabilidad } from 'src/app/interfaces/IHabilidades';
@@ -73,4 +74,8 @@ export class HabilidadesFuertesComponent implements OnInit {
     this.habilidadForm.reset();
     this.idHabilidad = 0;
   }
+  drop(event: CdkDragDrop<IHabilidad[]>) {
+    moveItemInArray(this.listaHabilidadesFuertes, event.previousIndex, event.currentIndex);
+  }
 }
+

@@ -17,8 +17,8 @@
       </button>
     </div>
   </div>
-  <ul class="item-list">
-    <li *ngFor="let tecnologia of listaTecnologia">
+  <ul class="item-list" cdkDropList (cdkDropListDropped)="drop($event)">
+    <li *ngFor="let tecnologia of listaTecnologia" cdkDrag>
       <!--Template por si el objeto tiene foto-->
       <ng-template [ngIf]="tecnologia.tecnologiaImg">
         <div class="informacion row">

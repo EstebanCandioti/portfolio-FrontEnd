@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IHabilidad } from 'src/app/interfaces/IHabilidades';
@@ -30,14 +31,22 @@ export class HabilidadesDebilesComponent implements OnInit {
       this.listaHabilidadesDebiles=this.listaHabilidadesDebiles.filter(t=>t.id !==habilidad.id)
     })
   }
-  onSubmit(event:Event):void {
+  onSubmit(event: Event):void{
     event.preventDefault()
     console.log("En el modal")
     this.habilidadAEditar=this.habilidadForm.value;
     this.habilidadAEditar.id=this.idHabilidad
     this.habilidadAEditar.idPersona=1;
     this.datosPortfolio.editHabilidadDebil(this.habilidadAEditar).subscribe()
-    window.location.reload();
+    location.reload();
+  }
+  crearHabilidadDebil(habilidad:IHabilidad){
+    console.log("en el componente")
+    habilidad.idPersona=1;
+    this.datosPortfolio.crearHabilidadDebil(habilidad).subscribe(habilidad=>{
+      this.listaHabilidadesDebiles.push(habilidad);
+    })
+    location.reload();
   }
   initForm():FormGroup{
     return this.fb.group({
@@ -47,14 +56,17 @@ export class HabilidadesDebilesComponent implements OnInit {
   }
   editarHabilidad(habilidad:IHabilidad){
     this.editar=true
-      this.habilidadForm.get('habilidad')?.setValue(habilidad.habilidad)
-      this.habilidadForm.get('valor')?.setValue(habilidad.valor)
-      this.idHabilidad =habilidad.id
+    this.habilidadForm.get('habilidad')?.setValue(habilidad.habilidad)
+    this.habilidadForm.get('valor')?.setValue(habilidad.valor)
+    this.idHabilidad =habilidad.id
   }
   reiniciarForm(){
     this.editar=false
     this.idHabilidad=0
     this.habilidadForm.reset()
     this.habilidadForm.get('fotoTrabajo')?.setValue('')
+  }
+  drop(event: CdkDragDrop<IHabilidad[]>) {
+    moveItemInArray(this.listaHabilidadesDebiles, event.previousIndex, event.currentIndex);
   }
 }

@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IProyecto } from 'src/app/interfaces/IProyecto';
@@ -138,5 +139,8 @@ export class ProyectosComponent implements OnInit {
     this.proyectoForm.get('descripcionLink3')?.setValue('')
     this.proyectoForm.get('link2')?.setValue('')
     this.proyectoForm.get('link3')?.setValue('')
+  }
+  drop(event: CdkDragDrop<IProyecto[]>) {
+    moveItemInArray(this.listaProyectos, event.previousIndex, event.currentIndex);
   }
 }

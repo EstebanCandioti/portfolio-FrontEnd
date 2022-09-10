@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ITecnologia } from 'src/app/interfaces/ITecnologia';
@@ -70,6 +71,10 @@ export class TecnologiasComponent implements OnInit {
     this.editar=false
     this.idTecnologia=0
     this.tecnologiaForm.reset()
-    this.tecnologiaForm.get('fotoTrabajo')?.setValue('')
+    this.tecnologiaForm.get('tecnologiaImg')?.setValue('')
+  }
+
+  drop(event: CdkDragDrop<ITecnologia[]>) {
+    moveItemInArray(this.listaTecnologia, event.previousIndex, event.currentIndex);
   }
 }

@@ -16,8 +16,8 @@
         <i class="fa-solid fa-plus"></i>
       </button>
     </div>
-    <ul class="item-list">
-      <li *ngFor="let educacion of listaEducacion">
+    <ul class="item-list" cdkDropList (cdkDropListDropped)="drop($event)">
+      <li *ngFor="let educacion of listaEducacion" cdkDrag>
         <!--Template por si el objeto no tiene foto-->
         <ng-template [ngIf]="!educacion.fotoInstitucion">
           <div class="row">

@@ -17,8 +17,8 @@
         <i class="fas fa-plus"></i>
       </button>
     </div>
-    <ul class="item-list">
-      <li *ngFor="let habilidad of listaHabilidadesFuertes">
+    <ul class="item-list" cdkDropList (cdkDropListDropped)="drop($event)">
+      <li *ngFor="let habilidad of listaHabilidadesFuertes" cdkDrag>
         <div class="row">
           <div class="institucion col-11">
             <h2>{{ habilidad.habilidad }}</h2>

@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IExperiencia } from 'src/app/interfaces/IExperiencia';
@@ -14,23 +15,31 @@ export class ExperienciaComponent implements OnInit {
   experienciaAEditar!:IExperiencia
   idExperiencia!:number
   experienciaForm!:FormGroup
-  editar:boolean=false
+  editar!:boolean
   logeado:any
-  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder, private readonly auth:AuthService) { 
-  }
+  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder, private readonly auth:AuthService) { }
 
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatosExperiencia().subscribe(experiencia=>{
       this.listaExperiencia = experiencia;
     });
     this.experienciaForm=this.initForm();
-    this.logeado=this.auth.autenticado
+    this.logeado= this.auth.autenticado
     }
     
   deleteExperiencia(experiencia:IExperiencia) {
      this.datosPortfolio.deleteExperiencia(experiencia).subscribe(()=> {
           this.listaExperiencia=this.listaExperiencia.filter(t=>t.id !== experiencia.id);
     })
+  }
+
+  crearExperiencia(experiencia:IExperiencia){
+    console.log("en el componente")
+    experiencia.idPersona=1
+    this.datosPortfolio.crearExperiencia(experiencia).subscribe(experiencia=>{
+      this.listaExperiencia.push(experiencia);
+    })
+    location.reload();
   }
 
   initForm():FormGroup{
@@ -69,5 +78,9 @@ export class ExperienciaComponent implements OnInit {
     this.idExperiencia=0
     this.experienciaForm.reset()
     this.experienciaForm.get('fotoTrabajo')?.setValue('')
+  }
+
+  drop(event: CdkDragDrop<IExperiencia[]>) {
+    moveItemInArray(this.listaExperiencia, event.previousIndex, event.currentIndex);
   }
 }
