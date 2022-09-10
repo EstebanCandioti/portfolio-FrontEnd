@@ -16,6 +16,7 @@ export class AuthService {
     this.currentUserSubject = new BehaviorSubject<any>(
       JSON.parse(sessionStorage.getItem("currentUser") || "{}")
     );
+    console.log("auth service initialized")
   }
   iniciarSesion(credenciales: any): Observable<any> {
     if (

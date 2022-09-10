@@ -59,4 +59,12 @@ export class UsuarioComponent implements OnInit {
     this.personaForm.get('fotoPerfil')?.setValue(persona.fotoPerfil)
     this.personaForm.get('fotoBanner')?.setValue(persona.fotoBanner)
   }
+
+  get Email(){
+    return this.persona.email
+  }
+
+  get Contrasenia (){
+    return this.persona.contrasenia
+  }
 }
