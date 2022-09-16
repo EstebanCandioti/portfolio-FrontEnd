@@ -3,5 +3,6 @@ export interface ITecnologia {
     nombre:string,
     descripcion:string,
     tecnologiaImg:string,
+    posicion:number,
     idPersona:number
 }

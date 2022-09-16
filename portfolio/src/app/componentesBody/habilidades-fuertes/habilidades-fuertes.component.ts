@@ -47,6 +47,7 @@ export class HabilidadesFuertesComponent implements OnInit {
     this.habilidadAEditar = this.habilidadForm.value;
     this.habilidadAEditar.id = this.idHabilidad;
     this.habilidadAEditar.idPersona = 1;
+    this.habilidadAEditar.posicion=this.listaHabilidadesFuertes.length+1
     this.datosPortfolio.editHabilidadFuerte(this.habilidadAEditar).subscribe();
     window.location.reload();
   }
@@ -74,8 +75,28 @@ export class HabilidadesFuertesComponent implements OnInit {
     this.habilidadForm.reset();
     this.idHabilidad = 0;
   }
+
+    //actualizar todos los items de la lista
+    guardarLista(habilidad1: IHabilidad, habilidad2: IHabilidad) {
+        this.datosPortfolio.editHabilidadFuerte(habilidad1).subscribe();
+        this.datosPortfolio.editHabilidadFuerte(habilidad2).subscribe();
+    }
+
   drop(event: CdkDragDrop<IHabilidad[]>) {
     moveItemInArray(this.listaHabilidadesFuertes, event.previousIndex, event.currentIndex);
+    this.listaHabilidadesFuertes.map((habilidad, index) => {
+      habilidad.posicion = index;
+    });
+    console.log(
+      this.listaHabilidadesFuertes[event.currentIndex].habilidad,
+      this.listaHabilidadesFuertes[event.currentIndex].posicion
+    );
+    console.log(
+      this.listaHabilidadesFuertes[event.previousIndex].habilidad,
+      this.listaHabilidadesFuertes[event.previousIndex].posicion
+    );
+    this.guardarLista(this.listaHabilidadesFuertes[event.currentIndex], this.listaHabilidadesFuertes[event.previousIndex]);
+
   }
 }
 

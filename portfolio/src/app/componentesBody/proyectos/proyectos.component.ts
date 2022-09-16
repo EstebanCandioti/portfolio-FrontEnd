@@ -57,6 +57,7 @@ export class ProyectosComponent implements OnInit {
     this.proyectoAEditar=this.proyectoForm.value;
     this.proyectoAEditar.id=this.idProyecto
     this.proyectoAEditar.idPersona=1;
+    this.proyectoAEditar.posicion=this.listaProyectos.length+1
     this.datosPortfolio.editProyecto(this.proyectoAEditar).subscribe()
     location.reload();
   }
@@ -140,7 +141,26 @@ export class ProyectosComponent implements OnInit {
     this.proyectoForm.get('link2')?.setValue('')
     this.proyectoForm.get('link3')?.setValue('')
   }
+
+    //actualizar todos los items de la lista
+    guardarLista(proyecto1:IProyecto,proyecto2:IProyecto) {
+      this.datosPortfolio.editProyecto(proyecto1).subscribe();
+      this.datosPortfolio.editProyecto(proyecto2).subscribe();
+    }
+
   drop(event: CdkDragDrop<IProyecto[]>) {
     moveItemInArray(this.listaProyectos, event.previousIndex, event.currentIndex);
+    this.listaProyectos.map((proyecto, index) => {
+      proyecto.posicion = index;
+    });
+    console.log(
+      this.listaProyectos[event.currentIndex].nombre,
+      this.listaProyectos[event.currentIndex].posicion
+    );
+    console.log(
+      this.listaProyectos[event.previousIndex].nombre,
+      this.listaProyectos[event.previousIndex].posicion
+    );
+    this.guardarLista(this.listaProyectos[event.currentIndex], this.listaProyectos[event.previousIndex]);
   }
 }

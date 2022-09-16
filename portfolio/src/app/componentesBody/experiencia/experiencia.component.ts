@@ -59,6 +59,7 @@ export class ExperienciaComponent implements OnInit {
     this.experienciaAEditar=this.experienciaForm.value;
     this.experienciaAEditar.id=this.idExperiencia;
     this.experienciaAEditar.idPersona=1
+    this.experienciaAEditar.posicion=this.listaExperiencia.length+1
     this.datosPortfolio.editExperiencia(this.experienciaAEditar).subscribe()
     location.reload();
   }
@@ -79,8 +80,24 @@ export class ExperienciaComponent implements OnInit {
     this.experienciaForm.reset()
     this.experienciaForm.get('fotoTrabajo')?.setValue('')
   }
-
+  //actualizar todos los items de la lista
+  guardarLista(experiencia1:IExperiencia, experiencia2:IExperiencia) {
+    this.datosPortfolio.editExperiencia(experiencia1).subscribe();
+    this.datosPortfolio.editExperiencia(experiencia2).subscribe();
+  }
   drop(event: CdkDragDrop<IExperiencia[]>) {
     moveItemInArray(this.listaExperiencia, event.previousIndex, event.currentIndex);
+    this.listaExperiencia.map((tecnologia, index) => {
+      tecnologia.posicion = index;
+    });
+    console.log(
+      this.listaExperiencia[event.currentIndex].nombreTrabajo,
+      this.listaExperiencia[event.currentIndex].posicion
+    );
+    console.log(
+      this.listaExperiencia[event.previousIndex].nombreTrabajo,
+      this.listaExperiencia[event.previousIndex].posicion
+    );
+    this.guardarLista(this.listaExperiencia[event.currentIndex], this.listaExperiencia[event.previousIndex]);
   }
 }

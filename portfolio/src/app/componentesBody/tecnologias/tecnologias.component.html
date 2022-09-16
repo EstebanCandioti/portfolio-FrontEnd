@@ -1,7 +1,7 @@
 <div class="tecnologia container">
   <div class="informacion row">
     <div class="col-11">
-      <h2>Tecnologias</h2>
+      <h2>Tecnologias Y Lenguajes</h2>
       <div class="subrayadoTitulos"></div>
     </div>
     <div class="col-1">
@@ -18,9 +18,9 @@
     </div>
   </div>
   <ul class="item-list" cdkDropList (cdkDropListDropped)="drop($event)">
-    <li *ngFor="let tecnologia of listaTecnologia" cdkDrag>
+    <li *ngFor="let tecnologia of listaTecnologia| sortPortOrden" cdkDragBoundary=".tecnologia" cdkDrag cdkDragLockAxis="y">
       <!--Template por si el objeto tiene foto-->
-      <ng-template [ngIf]="tecnologia.tecnologiaImg">
+      <ng-template [ngIf]="tecnologia.tecnologiaImg" class="example-boundary">
         <div class="informacion row">
           <div class="col-3 fotos">
             <img [src]="tecnologia.tecnologiaImg" />
@@ -31,6 +31,11 @@
             <h4>{{ tecnologia.descripcion }}</h4>
           </div>
           <div class="botonera col-1">
+            <div cdkDragHandle>
+              <button class="editar" *ngIf="logeado">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
             <button
               *ngIf="logeado"
               class="editar"
@@ -61,6 +66,11 @@
             <h4>{{ tecnologia.descripcion }}</h4>
           </div>
           <div class="botonera col-1">
+            <div cdkDragHandle>
+              <button class="editar" *ngIf="logeado">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
             <button
               *ngIf="logeado"
               class="editar"

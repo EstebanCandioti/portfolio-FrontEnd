@@ -1,6 +1,7 @@
 export interface IHabilidad {
     id:number,
     habilidad:string,
-    valor:number;
+    valor:number,
+    posicion:number,
     idPersona:number;
 }

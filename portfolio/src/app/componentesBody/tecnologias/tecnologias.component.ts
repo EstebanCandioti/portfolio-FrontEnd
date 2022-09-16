@@ -8,73 +8,127 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 @Component({
   selector: 'app-tecnologias',
   templateUrl: './tecnologias.component.html',
-  styleUrls: ['./tecnologias.component.css']
+  styleUrls: ['./tecnologias.component.css'],
 })
 export class TecnologiasComponent implements OnInit {
-  listaTecnologia:ITecnologia[]=[];
-  tecnologiaForm!: FormGroup
-  tencnologiaAEditar!:ITecnologia
-  idTecnologia!:number
-  logeado:any
-  editar!:boolean
-  constructor(private datosPortfolio:PortfolioService, private readonly fb:FormBuilder, private readonly auth:AuthService) { }
+  listaTecnologia: ITecnologia[] = [];
+  tecnologiaForm!: FormGroup;
+  tencnologiaAEditar!: ITecnologia;
+  idTecnologia!: number;
+  logeado: any;
+  editar!: boolean;
+  constructor(
+    private datosPortfolio: PortfolioService,
+    private readonly fb: FormBuilder,
+    private readonly auth: AuthService
+  ) {
+  }
 
   ngOnInit(): void {
-    this.datosPortfolio.obtenerDatosTecnologia().subscribe(tecnologias => {
-      this.listaTecnologia=tecnologias;
+    this.datosPortfolio.obtenerDatosTecnologia().subscribe((tecnologias) => {
+      this.listaTecnologia = tecnologias;
     });
-    this.tecnologiaForm=this.initForm();
-    this.logeado=this.auth.autenticado
+    this.tecnologiaForm = this.initForm();
+    this.logeado = this.auth.autenticado;
   }
 
-  deleteTecnologia(tecnologia:ITecnologia){
-    this.datosPortfolio.deleteTecnologia(tecnologia).subscribe(()=>{
-      this.listaTecnologia=this.listaTecnologia.filter(t=>t.id !== tecnologia.id)
-    })
+  //funcion delete
+  deleteTecnologia(tecnologia: ITecnologia) {
+    this.datosPortfolio.deleteTecnologia(tecnologia).subscribe(() => {
+      this.listaTecnologia = this.listaTecnologia.filter(
+        (t) => t.id !== tecnologia.id
+      );
+    });
   }
-  editTecnologia(tecnologia:ITecnologia){
-    this.datosPortfolio.editTecnologia(tecnologia).subscribe(()=>{
-      this.listaTecnologia[tecnologia.id]=tecnologia;
-    })
-  }
-  crearTecnologia(tecnologia:ITecnologia){
-    this.datosPortfolio.crearTecnologia(tecnologia).subscribe(tecnologia=>{
+
+  //funcion create
+  crearTecnologia(tecnologia: ITecnologia) {
+    this.datosPortfolio.crearTecnologia(tecnologia).subscribe((tecnologia) => {
       this.listaTecnologia.push(tecnologia);
     });
   }
-  editarTecnologia(tecnologia:ITecnologia){
-    this.editar=true
+
+  //funcion editar
+  editarTecnologia(tecnologia: ITecnologia) {
+    this.editar = true;
     this.tecnologiaForm.get('nombre')?.setValue(tecnologia.nombre);
     this.tecnologiaForm.get('descripcion')?.setValue(tecnologia.descripcion);
-    this.tecnologiaForm.get('tecnologiaImg')?.setValue(tecnologia.tecnologiaImg);
-    this.idTecnologia=tecnologia.id
+    this.tecnologiaForm
+      .get('tecnologiaImg')
+      ?.setValue(tecnologia.tecnologiaImg);
+    this.idTecnologia = tecnologia.id;
   }
-  initForm():FormGroup{
+
+  //formulario
+  initForm(): FormGroup {
     return this.fb.group({
-      nombre:['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
-      descripcion:['',[Validators.required,Validators.minLength(10), Validators.maxLength(200)]],
-      tecnologiaImg:['',[Validators.minLength(10), Validators.maxLength(100)]]
-    })
+      nombre: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(40),
+        ],
+      ],
+      descripcion: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(200),
+        ],
+      ],
+      tecnologiaImg: [
+        '',
+        [Validators.minLength(10), Validators.maxLength(100)],
+      ],
+    });
   }
-  
-  onSubmit(event:Event):void{
-    event.preventDefault()
-    console.log("En el modal")
-    this.tencnologiaAEditar=this.tecnologiaForm.value;
-    this.tencnologiaAEditar.id=this.idTecnologia;
-    this.tencnologiaAEditar.idPersona=1
-    this.datosPortfolio.editTecnologia(this.tencnologiaAEditar).subscribe()
+
+  //funcion enviar
+  onSubmit(event: Event): void {
+    event.preventDefault();
+    console.log('En el modal');
+    this.tencnologiaAEditar = this.tecnologiaForm.value;
+    this.tencnologiaAEditar.id = this.idTecnologia;
+    this.tencnologiaAEditar.idPersona = 1;
+    this.tencnologiaAEditar.posicion=this.listaTecnologia.length+1;
+    this.datosPortfolio.editTecnologia(this.tencnologiaAEditar).subscribe();
     location.reload();
   }
 
-  reiniciarForm(){
-    this.editar=false
-    this.idTecnologia=0
-    this.tecnologiaForm.reset()
-    this.tecnologiaForm.get('tecnologiaImg')?.setValue('')
+  //limpiar formulario
+  reiniciarForm() {
+    this.editar = false;
+    this.idTecnologia = 0;
+    this.tecnologiaForm.reset();
+    this.tecnologiaForm.get('tecnologiaImg')?.setValue('');
+    this.tecnologiaForm.get('posicion')?.setValue('');
+  }
+
+  guardarLista(tecnologia1:ITecnologia, tecnologia2:ITecnologia) {
+    this.datosPortfolio.editTecnologia(tecnologia1).subscribe();
+    this.datosPortfolio.editTecnologia(tecnologia2).subscribe();
   }
 
   drop(event: CdkDragDrop<ITecnologia[]>) {
-    moveItemInArray(this.listaTecnologia, event.previousIndex, event.currentIndex);
+    console.log(event);
+    moveItemInArray(
+      this.listaTecnologia,
+      event.previousIndex,
+      event.currentIndex
+    );
+    this.listaTecnologia.map((tecnologia, index) => {
+      tecnologia.posicion = index;
+    });
+    console.log(
+      this.listaTecnologia[event.currentIndex].nombre,
+      this.listaTecnologia[event.currentIndex].posicion
+    );
+    console.log(
+      this.listaTecnologia[event.previousIndex].nombre,
+      this.listaTecnologia[event.previousIndex].posicion
+    );
+    this.guardarLista(this.listaTecnologia[event.currentIndex], this.listaTecnologia[event.previousIndex]);
   }
 }

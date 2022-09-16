@@ -18,7 +18,7 @@
     </div>
   </div>
   <ul class="item-list" cdkDropList (cdkDropListDropped)="drop($event)">
-    <li *ngFor="let proyecto of listaProyectos" cdkDrag>
+    <li *ngFor="let proyecto of listaProyectos| sortPortOrden" cdkDrag cdkDragLockAxis="y">
       <!--Template por si el objeto tiene foto-->
       <ng-template [ngIf]="proyecto.fotoProyecto">
         <div class="informacion row">
@@ -35,6 +35,11 @@
             </p>
           </div>
           <div class="botonera col-1">
+            <div cdkDragHandle>
+              <button class="editar" *ngIf="logeado">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
             <button
             *ngIf="logeado"
               class="editar"
@@ -92,6 +97,11 @@
             </p>
           </div>
           <div class="botonera col-1">
+            <div cdkDragHandle>
+              <button class="editar" *ngIf="logeado">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
             <button
               *ngIf="logeado"
               class="editar"

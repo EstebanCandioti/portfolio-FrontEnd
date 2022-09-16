@@ -10,6 +10,8 @@ import {CdkDragDrop, moveItemInArray,} from '@angular/cdk/drag-drop'
   styleUrls: ['./educacion.component.css'],
 })
 export class EducacionComponent implements OnInit {
+  id1!:number
+  id2!:number
   listaEducacion: IEducacion[] = [];
   educacionAEditar!: IEducacion;
   idEducacion!: number;
@@ -110,7 +112,24 @@ export class EducacionComponent implements OnInit {
     this.educacionForm.get('fotoInstitucion')?.setValue('');
   }
 
-  drop(event: CdkDragDrop<IEducacion[]>) {
+  guardarLista(educacion1:IEducacion, educacion2:IEducacion){
+    this.datosPortfolio.editEducacion(educacion1)
+    this.datosPortfolio.editEducacion(educacion2);
+  }
+
+  drop(event: CdkDragDrop<IEducacion>) {
     moveItemInArray(this.listaEducacion, event.previousIndex, event.currentIndex);
+    this.listaEducacion.map((tecnologia, index) => {
+      tecnologia.posicion = index;
+    });
+    console.log(
+      this.listaEducacion[event.currentIndex].institucion,
+      this.listaEducacion[event.currentIndex].posicion
+    );
+    console.log(
+      this.listaEducacion[event.previousIndex].institucion,
+      this.listaEducacion[event.previousIndex].posicion
+    );
+    this.guardarLista(this.listaEducacion[event.currentIndex], this.listaEducacion[event.previousIndex]);
   }
 }

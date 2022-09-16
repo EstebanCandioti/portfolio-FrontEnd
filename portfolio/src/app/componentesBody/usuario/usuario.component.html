@@ -271,10 +271,10 @@
                   personaForm.get('nombre')?.invalid ||
                   personaForm.get('ubicacion')?.invalid ||
                   personaForm.get('descripcion')?.invalid ||
-                  personaForm.get('titulos')?.value.length<5 &&
-                  personaForm.get('titulos')?.value.length>0||
-                  personaForm.get('titulos')?.value.length>100||
-                  personaForm.get('fotoPerfil')?.invalid||
+                  (personaForm.get('titulos')?.value.length < 5 &&
+                    personaForm.get('titulos')?.value.length > 0) ||
+                  personaForm.get('titulos')?.value.length > 100 ||
+                  personaForm.get('fotoPerfil')?.invalid ||
                   personaForm.get('fotoBanner')?.invalid
                 "
               >
@@ -287,4 +287,3 @@
     </div>
   </div>
 </div>
-

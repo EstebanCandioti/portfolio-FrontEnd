@@ -13,5 +13,6 @@ export interface IProyecto {
     descripcionLink2:string,
     link3:string,
     descripcionLink3:string,
+    posicion:number,
     idPersona:number
 }

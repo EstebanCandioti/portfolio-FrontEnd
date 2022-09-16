@@ -37,6 +37,7 @@ export class HabilidadesDebilesComponent implements OnInit {
     this.habilidadAEditar=this.habilidadForm.value;
     this.habilidadAEditar.id=this.idHabilidad
     this.habilidadAEditar.idPersona=1;
+    this.habilidadAEditar.posicion=this.listaHabilidadesDebiles.length+1
     this.datosPortfolio.editHabilidadDebil(this.habilidadAEditar).subscribe()
     location.reload();
   }
@@ -66,7 +67,24 @@ export class HabilidadesDebilesComponent implements OnInit {
     this.habilidadForm.reset()
     this.habilidadForm.get('fotoTrabajo')?.setValue('')
   }
+
+  guardarLista(habilidad1:IHabilidad, habilidad2:IHabilidad){
+    this.datosPortfolio.editHabilidadDebil(habilidad1).subscribe();
+    this.datosPortfolio.editHabilidadDebil(habilidad2).subscribe();
+  }
   drop(event: CdkDragDrop<IHabilidad[]>) {
     moveItemInArray(this.listaHabilidadesDebiles, event.previousIndex, event.currentIndex);
+    this.listaHabilidadesDebiles.map((tecnologia, index) => {
+      tecnologia.posicion = index;
+    });
+    console.log(
+      this.listaHabilidadesDebiles[event.currentIndex].habilidad,
+      this.listaHabilidadesDebiles[event.currentIndex].posicion
+    );
+    console.log(
+      this.listaHabilidadesDebiles[event.previousIndex].habilidad,
+      this.listaHabilidadesDebiles[event.previousIndex].posicion
+    );
+    this.guardarLista(this.listaHabilidadesDebiles[event.currentIndex], this.listaHabilidadesDebiles[event.previousIndex]);
   }
 }

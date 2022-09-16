@@ -5,6 +5,7 @@ export interface IExperiencia {
     descripcionLaboral:string,
     fotoTrabajo:string,
     inicioTrabajo:string,
-    finalizacionTrabajo:string;
+    finalizacionTrabajo:string,
+    posicion:number,
     idPersona:number;
 }

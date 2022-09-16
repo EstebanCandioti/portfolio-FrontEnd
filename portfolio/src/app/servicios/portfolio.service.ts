@@ -21,12 +21,12 @@ export class PortfolioService {
   private apiUrlProyectos: string = 'http://localhost:8080/proyecto';
 
   constructor(private http: HttpClient) {
-    console.log("portfolio service initialized")
+    console.log("portfolio service initialized 1")
   }
   // --------------------------------------------FUNCIONES GET PARA CADA COMPONENTE BODY-----------------------------------------------------------------------
-  obtenerPersona():Observable<IPersona>{
+  obtenerPersona():any{
     const url = `${this.apiUrlPersona}/buscar/1`
-    return this.http.get<IPersona>(url)
+    return this.http.get<any>(url)
   }
 
   obtenerDatosEducacion(): Observable<IEducacion[]> {

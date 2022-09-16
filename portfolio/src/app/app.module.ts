@@ -20,6 +20,7 @@ import { ProyectosComponent } from './componentesBody/proyectos/proyectos.compon
 import { LoginComponent } from './login/login.component';
 import { PortfolioService } from './servicios/portfolio.service';
 import { InterceptorService } from './servicios/interceptor.service';
+import { SortPortOrdenPipe } from './pipes/sort-port-orden.pipe';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { InterceptorService } from './servicios/interceptor.service';
     TecnologiasComponent,
     ProyectosComponent,
     LoginComponent,
+    SortPortOrdenPipe,
   ],
   imports: [
     BrowserModule,

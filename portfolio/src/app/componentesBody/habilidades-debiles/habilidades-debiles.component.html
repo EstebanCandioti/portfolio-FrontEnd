@@ -17,13 +17,18 @@
       </button>
     </div>
     <ul class="item-list" cdkDropList (cdkDropListDropped)="drop($event)">
-      <li *ngFor="let habilidad of listaHabilidadesDebiles" cdkDrag>
+      <li *ngFor="let habilidad of listaHabilidadesDebiles|sortPortOrden" cdkDrag cdkDragLockAxis="y">
         <div class="row">
           <div class="institucion col-11">
             <h2>{{ habilidad.habilidad }}</h2>
             <div class="subrayadoSubtitulos"></div>
           </div>
           <div class="botonera col-1">
+            <div cdkDragHandle>
+              <button class="editar" *ngIf="logeado">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
             <button
               class="editar"
               *ngIf="logeado"
