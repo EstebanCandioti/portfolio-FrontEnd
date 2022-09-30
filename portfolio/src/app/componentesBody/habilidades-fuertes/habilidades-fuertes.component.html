@@ -1,7 +1,7 @@
 <div class="habilidadesFuertes container">
   <div class="informacion row">
     <div class="titulo col-11">
-      <h2>Habilidades Fuertes</h2>
+      <h1>Habilidades Fuertes</h1>
       <div class="subrayadoTitulos"></div>
     </div>
     <div class="col-1">
@@ -18,10 +18,10 @@
       </button>
     </div>
     <ul class="item-list" cdkDropList (cdkDropListDropped)="drop($event)">
-      <li *ngFor="let habilidad of listaHabilidadesFuertes|sortPortOrden" cdkDrag cdkDragLockAxis="y">
+      <li *ngFor="let habilidad of listaHabilidadesFuertes|sortPortOrden" cdkDragBoundary=".habilidadesFuertes" cdkDrag cdkDragLockAxis="y">
         <div class="row">
           <div class="institucion col-11">
-            <h2>{{ habilidad.habilidad }}</h2>
+            <p style="font-size: xx-large">{{ habilidad.habilidad }}</p>
             <div class="subrayadoSubtitulos"></div>
           </div>
           <div class="botonera col-1">

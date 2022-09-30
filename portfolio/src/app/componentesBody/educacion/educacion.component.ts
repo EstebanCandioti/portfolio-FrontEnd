@@ -26,6 +26,7 @@ export class EducacionComponent implements OnInit {
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatosEducacion().subscribe((educacion) => {
       this.listaEducacion = educacion;
+      console.log(this.listaEducacion[0])
     });
     this.educacionForm = this.initForm();
     this.logeado = this.auth.autenticado;
@@ -87,8 +88,6 @@ export class EducacionComponent implements OnInit {
     this.educacionAEditar.id = this.idEducacion;
     this.educacionAEditar.idPersona = 1;
     this.datosPortfolio.editEducacion(this.educacionAEditar).subscribe();
-    window.location.reload();
-
   }
   editarEducacion(educacion: IEducacion) {
     this.editar = true;

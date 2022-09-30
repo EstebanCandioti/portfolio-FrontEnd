@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IPersona } from 'src/app/interfaces/IPersona';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +9,14 @@ import { AuthService } from 'src/app/servicios/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private auth:AuthService) { }
+  persona:IPersona;
+  constructor(private auth:AuthService, private datosPortfolio:PortfolioService) {
+    this.persona = this.datosPortfolio
+    .obtenerPersona()
+    .subscribe((persona: IPersona) => {
+      this.persona = persona;
+    });
+   }
 
   ngOnInit(): void {
   }

@@ -12,6 +12,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 })
 export class TecnologiasComponent implements OnInit {
   listaTecnologia: ITecnologia[] = [];
+  posicionesLista!: number;
   tecnologiaForm!: FormGroup;
   tencnologiaAEditar!: ITecnologia;
   idTecnologia!: number;
@@ -27,6 +28,7 @@ export class TecnologiasComponent implements OnInit {
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatosTecnologia().subscribe((tecnologias) => {
       this.listaTecnologia = tecnologias;
+      this.posicionesLista = this.datosPortfolio.contadorPosiciones(tecnologias);
     });
     this.tecnologiaForm = this.initForm();
     this.logeado = this.auth.autenticado;
@@ -38,13 +40,6 @@ export class TecnologiasComponent implements OnInit {
       this.listaTecnologia = this.listaTecnologia.filter(
         (t) => t.id !== tecnologia.id
       );
-    });
-  }
-
-  //funcion create
-  crearTecnologia(tecnologia: ITecnologia) {
-    this.datosPortfolio.crearTecnologia(tecnologia).subscribe((tecnologia) => {
-      this.listaTecnologia.push(tecnologia);
     });
   }
 
@@ -92,9 +87,10 @@ export class TecnologiasComponent implements OnInit {
     this.tencnologiaAEditar = this.tecnologiaForm.value;
     this.tencnologiaAEditar.id = this.idTecnologia;
     this.tencnologiaAEditar.idPersona = 1;
-    this.tencnologiaAEditar.posicion=this.listaTecnologia.length+1;
+    if (!this.tencnologiaAEditar.posicion) {
+      this.tencnologiaAEditar.posicion = this.listaTecnologia.length + 1;
+    }
     this.datosPortfolio.editTecnologia(this.tencnologiaAEditar).subscribe();
-    location.reload();
   }
 
   //limpiar formulario
@@ -106,9 +102,10 @@ export class TecnologiasComponent implements OnInit {
     this.tecnologiaForm.get('posicion')?.setValue('');
   }
 
-  guardarLista(tecnologia1:ITecnologia, tecnologia2:ITecnologia) {
-    this.datosPortfolio.editTecnologia(tecnologia1).subscribe();
-    this.datosPortfolio.editTecnologia(tecnologia2).subscribe();
+  guardarLista() {
+    for (let tecnologia of this.listaTecnologia) {
+      this.datosPortfolio.editTecnologia(tecnologia).subscribe();
+    }
   }
 
   drop(event: CdkDragDrop<ITecnologia[]>) {
@@ -120,6 +117,7 @@ export class TecnologiasComponent implements OnInit {
     );
     this.listaTecnologia.map((tecnologia, index) => {
       tecnologia.posicion = index;
+
     });
     console.log(
       this.listaTecnologia[event.currentIndex].nombre,
@@ -129,6 +127,7 @@ export class TecnologiasComponent implements OnInit {
       this.listaTecnologia[event.previousIndex].nombre,
       this.listaTecnologia[event.previousIndex].posicion
     );
-    this.guardarLista(this.listaTecnologia[event.currentIndex], this.listaTecnologia[event.previousIndex]);
+
+    this.guardarLista()
   }
 }

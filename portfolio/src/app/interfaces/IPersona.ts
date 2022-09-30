@@ -6,6 +6,9 @@ export interface IPersona{
     email:string,
     ubicacion:string,
     fotoPerfil: string,
-    fotoBanner:string,    
+    fotoBanner:string,
+    instagram:string,
+    numero:string,
+    linkedin:string,
     contrasenia: string;
 }

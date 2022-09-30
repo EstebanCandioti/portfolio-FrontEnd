@@ -1,37 +1,41 @@
 <div class="header container-fluid">
-    <!--Lista con el logo del curso y los botones de contacto-->
-    <nav class="contact row">
-        <!--Logo del curso puesto aqui para poder alinear con los botones-->
-        <div class="logo col-10">
-            <img src="assets/img/ArgentinaPrograma.png" alt="logo curso">
-            <h5>Argentina Programa #YoProgramo</h5>
-        </div>
-        <!--Lista con botones de contacto(wsp, ig) y boton login-->
-        <ul class="contact-list col-2">
-            <li>
-                <a href="https://www.instagram.com/esteban_candioti/">
-                  <i class="fab fa-instagram"></i>
-                </a>
-            </li>
-            <li>
-                <a href="https://wa.me/+5491135657044">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-            </li>
-            <li>
-                <a href="mailto:estebancandio@gmail.com">
-                    <i class="fa-solid fa-envelope"></i>
-                </a>
-            </li>
-            <li *ngIf="!autenticado">
-                <app-login></app-login>
-            </li>
-            <li *ngIf="autenticado">
-                <button class="logout" (click)="logout()">
-                    logout
-                </button>
-            </li>
+  <!--Lista con el logo del curso y los botones de contacto-->
+  <nav class="contact row">
+    <!--Logo del curso puesto aqui para poder alinear con los botones-->
+    <div class="logo col-9">
+      <img src="assets/img/ArgentinaPrograma.png" alt="logo curso" />
+      <h5>Argentina Programa #YoProgramo</h5>
+    </div>
+    <div class="col-3 contact-list">
+      <!--Lista con botones de contacto(wsp, ig) y boton login-->
+      <ul class="contact-list">
+        <li>
+          <a href="https://www.instagram.com/{{ persona.instagram }}/">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://wa.me/{{ persona.numero }}">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:{{ persona.email }}">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/{{ persona.linkedin }}">
+            <i class="fab fa-linkedin"></i>
+          </a>
+        </li>
+        <li *ngIf="!autenticado">
+          <app-login></app-login>
+        </li>
+        <li *ngIf="autenticado" id="punta">
+          <button class="logout" (click)="logout()">logout</button>
+        </li>
       </ul>
-    </nav>
+    </div>
+  </nav>
 </div>
-

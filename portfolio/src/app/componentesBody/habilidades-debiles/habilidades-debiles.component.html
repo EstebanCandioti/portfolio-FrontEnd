@@ -1,7 +1,7 @@
 <div class="habilidadesDebiles container">
   <div class="informacion row">
     <div class="titulo col-11">
-      <h2>Habilidades Debiles</h2>
+      <h1>Habilidades Debiles</h1>
       <div class="subrayadoTitulos"></div>
     </div>
     <div class="col-1">
@@ -17,10 +17,10 @@
       </button>
     </div>
     <ul class="item-list" cdkDropList (cdkDropListDropped)="drop($event)">
-      <li *ngFor="let habilidad of listaHabilidadesDebiles|sortPortOrden" cdkDrag cdkDragLockAxis="y">
+      <li *ngFor="let habilidad of listaHabilidadesDebiles|sortPortOrden" cdkDragBoundary=".habilidadesDebiles" cdkDrag cdkDragLockAxis="y">
         <div class="row">
           <div class="institucion col-11">
-            <h2>{{ habilidad.habilidad }}</h2>
+            <p style="font-size: xx-large">{{ habilidad.habilidad }}</p>
             <div class="subrayadoSubtitulos"></div>
           </div>
           <div class="botonera col-1">
@@ -173,7 +173,7 @@
             type="submit"
             [disabled]="habilidadForm.invalid"
           >
-            Editar
+            Guardar
           </button>
         </form>
       </div>

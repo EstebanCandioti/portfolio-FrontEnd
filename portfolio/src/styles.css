@@ -10,8 +10,8 @@
 /*--------------------------------------------------------------------BOTONES-----------------------------------------------------------------*/
 .login, .editar, .crear, .borrar, .logout{
     font-family:'Poppins', sans-serif;
-    color:#000000;
-    background-color: #6eaef7 ;
+    color:#ffffff;
+    background-color: #75AADB ;
     /*Le quita el borde por default*/
     border:none;
     /*Redondea el borde*/
@@ -21,12 +21,18 @@
     /*Estilo para que al pasar el cursor cambie*/
     cursor: pointer;
 }
+
+.logout{
+    color:#000000;
+    background-color: #91caff ;
+}
+
 /*Estilos para cuando se pasa el cursor sobre el hipervinculo*/
 .contact-list a:hover{
-    color: #f08080;
+    color: #fff;
     transition: ease-in .35S;
 }
-.login:hover, .editar:hover,.crear:hover,.borrar:hover{
+.login:hover, .editar:hover,.crear:hover,.borrar:hover, .logout:hover{
     background-color: #fff;
     color:black;
     transition: ease-in .35s;
@@ -45,16 +51,15 @@
     width: 100%;
     height: 53vh;
     z-index:1;
-    border-radius: 20px;
     align-items:center;
 } 
 
 #profile-picture img{
     width: 8vw;
-    height:17vh;
-    border-radius: 50%;
+    height:16vh;
     position: absolute;
     margin-top:5%;
+    border-radius: 50%; ;
 }
 
 .fotos img{
@@ -65,7 +70,7 @@
 .divisor{
     height: 1px;
     width: 70%;
-    background-color: #f08080;
+    background-color: #479ef3;
     margin-top: 2%;
     margin-bottom: 4%;
     margin-left: 2%;
@@ -73,14 +78,14 @@
 .minidivisor{
     height: 1px;
     width: 40%;
-    background-color: #f08080;
+    background-color: #5894be;
     margin-top: 1%;
     margin-left: 2%;
 }
 .subrayadoTitulos{
     height: 1px;
     width: 18%;
-    background-color: #6eaef7;
+    background-color: #74a0d6;
     margin-bottom: 1%;
     margin-left: 0.5%;
 }
@@ -95,7 +100,7 @@
 .subrayadoSubtitulos{
     height: 1px;
     width: 10%;
-    background-color: #6eaef7;
+    background-color: #5d87bb;
     margin-bottom: 1%;
     margin-left: 0.5%;
 }
@@ -124,9 +129,9 @@
   /*Claser en la que se encuentra logo del curso, botonera de contacto y login y banner*/
 .header{
     /*color de fondo (dependiente del width u height)*/
-    background-color: #261a63;
+    background-color: #a1ddff;
     /*aplica color al contenido*/
-    color: aliceblue;
+    color: #ffffff;
 }
 
 .logo{
@@ -150,7 +155,7 @@
 }
 /*Elementos de hipervinculos <a> dentro de la lista*/
 .contact-list a {
-    color: #ffffff;
+    color: #000000;
     /*relleno entre cada elemento para que no estene tan juntos*/
     padding: 20px;
 }
@@ -158,19 +163,19 @@
 /*------------------------------------------------------------BODY-----------------------------------------------------------------------*/
 .background{
     height: 100%;
-    background-color: #191c32;
+    background-color: #e4e4e4; 
 }
-.usuario, .about,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles,.tecnologia,.proyectos{
+.usuario,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles,.tecnologia,.proyectos{
     color:#ffffff;
-    width: 100%;
-    background-color: #33385a;
-    border: 3px groove #f08080;
-    border-radius: 20px;
-    position: relative;
+    background-color: #91c5f8;
 }
 
 .about,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles, .tecnologia,.proyectos{
     margin-top:2%;
+}
+
+.proyectos{
+    margin-bottom: -4%;
 }
 
 .informacion{

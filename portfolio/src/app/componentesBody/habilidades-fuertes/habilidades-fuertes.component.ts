@@ -11,10 +11,11 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 })
 export class HabilidadesFuertesComponent implements OnInit {
   listaHabilidadesFuertes: IHabilidad[] = [];
+  posicionesLista!: number;
   habilidadForm: FormGroup;
   idHabilidad!: number;
   habilidadAEditar!: IHabilidad;
-  editar!:boolean
+  editar!: boolean;
   logeado: any;
 
   constructor(
@@ -30,6 +31,7 @@ export class HabilidadesFuertesComponent implements OnInit {
       .obtenerDatosHabilidadesFuertes()
       .subscribe((habilidades) => {
         this.listaHabilidadesFuertes = habilidades;
+        this.posicionesLista = this.datosPortfolio.contadorPosiciones(habilidades);
       });
     this.logeado = this.auth.autenticado;
   }
@@ -41,16 +43,19 @@ export class HabilidadesFuertesComponent implements OnInit {
       );
     });
   }
+
   onSubmit(event: Event): void {
     event.preventDefault();
     console.log('En el modal');
     this.habilidadAEditar = this.habilidadForm.value;
     this.habilidadAEditar.id = this.idHabilidad;
     this.habilidadAEditar.idPersona = 1;
-    this.habilidadAEditar.posicion=this.listaHabilidadesFuertes.length+1
+    if(!this.habilidadAEditar.posicion){
+      this.habilidadAEditar.posicion = this.posicionesLista
+    }
     this.datosPortfolio.editHabilidadFuerte(this.habilidadAEditar).subscribe();
-    window.location.reload();
   }
+
   initForm(): FormGroup {
     return this.fb.group({
       habilidad: [
@@ -64,39 +69,49 @@ export class HabilidadesFuertesComponent implements OnInit {
       valor: ['', [Validators.required, Validators.max(100)]],
     });
   }
+
   editarHabilidadFuerte(habilidad: IHabilidad) {
     this.editar = true;
     this.habilidadForm.get('habilidad')?.setValue(habilidad.habilidad);
     this.habilidadForm.get('valor')?.setValue(habilidad.valor);
     this.idHabilidad = habilidad.id;
   }
+
   reiniciarForm() {
     this.editar = false;
     this.habilidadForm.reset();
     this.idHabilidad = 0;
   }
 
-    //actualizar todos los items de la lista
-    guardarLista(habilidad1: IHabilidad, habilidad2: IHabilidad) {
-        this.datosPortfolio.editHabilidadFuerte(habilidad1).subscribe();
-        this.datosPortfolio.editHabilidadFuerte(habilidad2).subscribe();
+  //----------------------------------------- FUNCIONES DRAG AND DROP ----------------------------------------------------
+
+  guardarLista() {
+    for (let habilidad of this.listaHabilidadesFuertes) {
+      this.datosPortfolio.editHabilidadFuerte(habilidad).subscribe();
     }
+  }
 
   drop(event: CdkDragDrop<IHabilidad[]>) {
-    moveItemInArray(this.listaHabilidadesFuertes, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.listaHabilidadesFuertes,
+      event.previousIndex,
+      event.currentIndex
+    );
+
     this.listaHabilidadesFuertes.map((habilidad, index) => {
       habilidad.posicion = index;
     });
+
     console.log(
       this.listaHabilidadesFuertes[event.currentIndex].habilidad,
       this.listaHabilidadesFuertes[event.currentIndex].posicion
     );
+
     console.log(
       this.listaHabilidadesFuertes[event.previousIndex].habilidad,
       this.listaHabilidadesFuertes[event.previousIndex].posicion
     );
-    this.guardarLista(this.listaHabilidadesFuertes[event.currentIndex], this.listaHabilidadesFuertes[event.previousIndex]);
 
+    this.guardarLista();
   }
 }
-

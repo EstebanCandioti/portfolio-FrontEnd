@@ -1,7 +1,7 @@
 <div class="proyectos container-xxl">
   <div class="informacion row">
     <div class="col-11">
-      <h2>Proyectos</h2>
+      <h1>Proyectos</h1>
       <div class="subrayadoTitulos"></div>
     </div>
     <div class="col-1">
@@ -18,7 +18,7 @@
     </div>
   </div>
   <ul class="item-list" cdkDropList (cdkDropListDropped)="drop($event)">
-    <li *ngFor="let proyecto of listaProyectos| sortPortOrden" cdkDrag cdkDragLockAxis="y">
+    <li *ngFor="let proyecto of listaProyectos| sortPortOrden" cdkDrag  cdkDragBoundary=".proyectos" cdkDragLockAxis="y">
       <!--Template por si el objeto tiene foto-->
       <ng-template [ngIf]="proyecto.fotoProyecto">
         <div class="informacion row">
@@ -26,10 +26,10 @@
             <img [src]="proyecto.fotoProyecto" />
           </div>
           <div class="col-8">
-            <h2>{{ proyecto.nombre }}</h2>
+            <p style="font-size: xx-large">{{ proyecto.nombre }}</p>
             <div class="subrayadoSubtitulos"></div>
-            <h4>{{ proyecto.descripcion }}</h4>
-            <p>
+            <p style="font-size: x-large">{{ proyecto.descripcion }}</p>
+            <p style="font-size: large">
               <time>{{ proyecto.inicioProyecto }}</time> -
               <time>{{ proyecto.finalizacionProyecto }}</time>
             </p>
@@ -88,10 +88,10 @@
       <ng-template [ngIf]="!proyecto.fotoProyecto">
         <div class="informacion row">
           <div class="col-11">
-            <h2>{{ proyecto.nombre }}</h2>
+            <p style="font-size: xx-large">{{ proyecto.nombre }}</p>
             <div class="subrayadoSubtitulos"></div>
-            <h4>{{ proyecto.descripcion }}</h4>
-            <p>
+            <p style="font-size: x-large">{{ proyecto.descripcion }}</p>
+            <p style="font-size: large">
               <time>{{ proyecto.inicioProyecto }}</time> -
               <time>{{ proyecto.finalizacionProyecto }}</time>
             </p>
@@ -150,6 +150,8 @@
     </li>
   </ul>
 </div>
+
+
 <!-- Modal -->
 <div
   class="modal fade"
@@ -182,7 +184,8 @@
           class="formularios"
         >
           <div class="form-group">
-            <!--CAMPO NOMBRE DEL PROYECTO-->
+
+            <!-----------------------------------------------------------------CAMPO NOMBRE DEL PROYECTO------------------------------------------------->
             <label for="nombre" class="form-label">Nombre del proyecto</label>
             <input
               type="text"
@@ -215,7 +218,7 @@
               El nombre del proyecto debe tener un maximo de 40 caracteres
             </div>
           </div>
-            <!--CAMPO DESCRIPCION DEL PROYECTO-->
+            <!-----------------------------------------------------CAMPO DESCRIPCION DEL PROYECTO------------------------------------------------>
           <div class="form-group">
             <label for="descripcion">Descripcion del proyecto</label>
             <input
@@ -249,7 +252,8 @@
               La descripcion debe tener un maximo de 200 caracteres
             </div>
           </div>
-            <!--CAMPO INICIO DEL PROYECTO-->
+
+            <!--------------------------------------------------------CAMPO INICIO DEL PROYECTO------------------------------------------------>
           <div class="form-group">
             <label for="inicioProyecto">Inicio del proyecto</label>
             <input
@@ -284,7 +288,8 @@
               La fecha de inicio debe tener un maximo de 20 caracteres
             </div>
           </div>
-            <!--CAMPO FINALIZACION DEL PROYECTO-->
+
+          <!----------------------------------------------CAMPO FINALIZACION DEL PROYECTO--------------------------------------------------->
           <div class="form-group">
             <label for="finalizacionProyecto">Finalizacion proyecto</label>
             <input
@@ -319,7 +324,8 @@
               La fecha de finalizacion debe tener un maximo de 20 caracteres
             </div>
           </div>
-            <!--CAMPO FOTO DEL PROYECTO-->
+
+          <!---------------------------------------------------------CAMPO FOTO DEL PROYECTO----------------------------------------------------------->
           <div class="form-group">
             <label for="fotoProyecto">foto proyecto</label>
             <input
@@ -346,7 +352,8 @@
               La url de la foto debe tener un maximo de 100 caracteres
             </div>
           </div>
-            <!--CAMPO LINK 1 DEL PROYECTO-->
+
+          <!---------------------------------------------------------CAMPO LINK 1 DEL PROYECTO------------------------------------------------------>
           <div class="form-group">
             <label for="link1">Link al proyecto 1</label>
             <input
@@ -380,7 +387,8 @@
               La url del proyecto debe tener un maximo de 100 caracteres
             </div>
           </div>
-          <!--CAMPO DESCRIPCION LINK 1 DEL PROYECTO-->
+
+          <!-----------------------------------------------------CAMPO DESCRIPCION LINK 1 DEL PROYECTO---------------------------------------------------->
           <div class="form-group">
             <label for="descripcionLink1">Descripcion del link 1</label>
             <input
@@ -407,7 +415,8 @@
               La descripcion debe tener un maximo de 100 caracteres
             </div>
           </div>
-          <!--CAMPO LINK 2 DEL PROYECTO-->
+
+          <!-------------------------------------------------------CAMPO LINK 2 DEL PROYECTO---------------------------------------------------->
           <div class="form-group">
             <label for="link2">Link al proyecto 2</label>
             <input
@@ -434,7 +443,8 @@
               La url del proyecto debe tener un maximo de 100 caracteres
             </div>
           </div>
-          <!--CAMPO DESCRIPCION LINK 2 DEL PROYECTO-->
+
+          <!------------------------------------------------------CAMPO DESCRIPCION LINK 2 DEL PROYECTO--------------------------------------------------->
           <div class="form-group">
             <label for="descripcionLink2">Descripcion del link 2</label>
             <input
@@ -464,7 +474,8 @@
               La descripcion debe tener un maximo de 100 caracteres
             </div>
           </div>
-          <!--CAMPO LINK 3 DEL PROYECTO-->
+
+          <!--------------------------------------------------------------------CAMPO LINK 3 DEL PROYECTO-------------------------------------------------->
           <div class="form-group">
             <label for="link3">Link al proyecto 3</label>
             <input
@@ -491,7 +502,8 @@
               La url del proyecto debe tener un maximo de 100 caracteres
             </div>
           </div>
-          <!--CAMPO DESCRIPCION LINK 3 DEL PROYECTO-->
+
+          <!----------------------------------------------------------CAMPO DESCRIPCION LINK 3 DEL PROYECTO---------------------------------------------------------->
           <div class="form-group">
             <label for="descripcionLink3">Descripcion del link 3</label>
             <input

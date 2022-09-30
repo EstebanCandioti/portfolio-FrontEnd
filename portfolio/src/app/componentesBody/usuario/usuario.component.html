@@ -28,8 +28,7 @@
       </button>
     </div>
     <div class="col-12">
-      <p style="font-size: xx-large">{{ persona.nombre }}</p>
-      <div class="minidivisor"></div>
+      <p style="font-size: x-large">{{ persona.nombre }}</p>
     </div>
 
     <div class="col-12">
@@ -262,6 +261,100 @@
                   class="alert alert-danger"
                 >
                   La url debe tener un maximo de 100 caracteres
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="instagram">Instagram</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  formControlName="instagram"
+                  placeholder="Ingrese su usuario de instagram"
+                  >
+                <!--Alerta por si el campo esta vacio-->
+                <div
+                  *ngIf="personaForm.get('instagram')?.touched && personaForm.get('instagram')?.errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  Su cuenta de instagram es requerida
+                </div>
+                <!--Alerta por si el campo tiene pocos caracteres-->
+                <div
+                  *ngIf="personaForm.get('instagram')?.touched && personaForm.get('instagram')?.errors?.['minlength']"
+                  class="alert alert-danger"
+                >
+                  La cuenta debe tener un minimo de 5 caracteres
+                </div>
+                <!--Alerta por si el tiene muchos caracteres-->
+                <div
+                  *ngIf="personaForm.get('instagram')?.touched && personaForm.get('instagram')?.errors?.['maxlength']"
+                  class="alert alert-danger"
+                >
+                  La cuenta debe tener un maximo de 30 caracteres
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="numero">Numero de telefono</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  formControlName="numero"
+                  placeholder="Ingrese su numero de telefono"
+                  >
+                <!--Alerta por si el campo esta vacio-->
+                <div
+                  *ngIf="personaForm.get('numero')?.touched && personaForm.get('numero')?.errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  Su numero de telefono es requerido
+                </div>
+                <!--Alerta por si el campo tiene pocos caracteres-->
+                <div
+                  *ngIf="personaForm.get('numero')?.touched && personaForm.get('numero')?.errors?.['minlength']"
+                  class="alert alert-danger"
+                >
+                  El numero de telefono tiene que tener un minimo de 13 caracteres
+                </div>
+                <!--Alerta por si el tiene muchos caracteres-->
+                <div
+                  *ngIf="personaForm.get('numero')?.touched && personaForm.get('numero')?.errors?.['maxlength']"
+                  class="alert alert-danger"
+                >
+                  El numero de telefono tiene que tener un maximo de 19 caracteres
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="linkedin">Linkedin</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  formControlName="linkedin"
+                  placeholder="Ingrese la url personalizada de su cuenta de linkedin"
+                >
+                <small>La que aparece en la url de su perfil, ejemplo: https://www.linkedin.com/in/<strong>esteban-candioti</strong>/ </small>
+                <!--Alerta por si el campo esta vacio-->
+                <div
+                  *ngIf="personaForm.get('linkedin')?.touched && personaForm.get('linkedin')?.errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  Su cuentade linkedin es requerida
+                </div>
+                <!--Alerta por si el campo tiene pocos caracteres-->
+                <div
+                  *ngIf="personaForm.get('linkedin')?.touched && personaForm.get('linkedin')?.errors?.['minlength']"
+                  class="alert alert-danger"
+                >
+                  El numero de telefono tiene que tener un minimo de 5 caracteres
+                </div>
+                <!--Alerta por si el tiene muchos caracteres-->
+                <div
+                  *ngIf="personaForm.get('linkedin')?.touched && personaForm.get('linkedin')?.errors?.['maxlength']"
+                  class="alert alert-danger"
+                >
+                  El numero de telefono tiene que tener un maximo de 30 caracteres
                 </div>
               </div>
               <button
