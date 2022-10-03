@@ -165,12 +165,12 @@
     height: 100%;
     background-color: #e4e4e4; 
 }
-.usuario,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles,.tecnologia,.proyectos{
+.usuario,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles,.tecnologia,.proyectos, .acerca-de{
     color:#ffffff;
     background-color: #91c5f8;
 }
 
-.about,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles, .tecnologia,.proyectos{
+.about,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles, .tecnologia,.proyectos, .acerca-de{
     margin-top:2%;
 }
 

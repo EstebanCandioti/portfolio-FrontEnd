@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { PortfolioService } from './servicios/portfolio.service';
 import { InterceptorService } from './servicios/interceptor.service';
 import { SortPortOrdenPipe } from './pipes/sort-port-orden.pipe';
+import { AcercaDeComponent } from './componentesBody/acerca-de/acerca-de.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { SortPortOrdenPipe } from './pipes/sort-port-orden.pipe';
     ProyectosComponent,
     LoginComponent,
     SortPortOrdenPipe,
+    AcercaDeComponent,
   ],
   imports: [
     BrowserModule,

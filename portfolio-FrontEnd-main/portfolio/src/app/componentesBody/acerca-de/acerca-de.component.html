@@ -1,0 +1,100 @@
+<div class="acerca-de container">
+    <div class="informacion row">
+      <div class="col-11">
+        <h1>Acerca de mi</h1>
+        <div class="subrayadoTitulos"></div>
+      </div>
+      <div class="col-1">
+        <button
+          *ngIf="logeado"
+          class="editar"
+          type="button"
+          data-toggle="modal"
+          data-target="#editarDescripcion"
+          (click)="editarPersona()"
+        >
+          <i class="fas fa-pen"></i>
+        </button>
+      </div>
+      <div class="col-12">
+        <p style="font-size: x-large">{{ persona.descripcion }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- --------------------------------------MODAL----------------------------------------- -->
+  <div
+    class="modal fade bd-example-modal-lg"
+    id="editarDescripcion"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="PersonaForm"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="personaForm">Editar persona</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form
+          [formGroup]="descripcionForm"
+          (ngSubmit)="onSubmit($event)"
+          class="formularios"
+        >
+        <div class="form-group">
+          <label for="descripcion">Descripcion</label>
+          <input
+            type="text"
+            class="form-control"
+            required
+            formControlName="descripcion"
+            placeholder="Ingrese informacion relacionada a usted"
+          />
+          <!--Alerta por si el campo esta vacio-->
+          <div
+            *ngIf="descripcionForm.get('descripcion')?.touched && descripcionForm.get('descripcion')?.errors?.['required']"
+            class="alert alert-danger"
+          >
+            la descripcion es requerida
+          </div>
+          <!--Alerta por si el campo tiene pocos caracteres-->
+          <div
+            *ngIf="descripcionForm.get('descripcion')?.touched && descripcionForm.get('descripcion')?.errors?.['minlength']"
+            class="alert alert-danger"
+          >
+            La descripcion debe tener un minimo de 10 caracteres
+          </div>
+  
+          <!--Alerta por si el tiene muchos caracteres-->
+          <div
+            *ngIf="descripcionForm.get('descripcion')?.touched && descripcionForm.get('descripcion')?.errors?.['maxlength']"
+            class="alert alert-danger"
+          >
+            La descripcion debe tener un maximo de 200 caracteres
+          </div>
+        </div>
+        <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="
+        descripcionForm.invalid
+        "
+      >
+        Guardar
+      </button>
+        </form>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  
