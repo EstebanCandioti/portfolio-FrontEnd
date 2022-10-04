@@ -90,7 +90,6 @@ export class UsuarioComponent implements OnInit {
       instagram: [
         '',
         [
-          Validators.required,
           Validators.minLength(5),
           Validators.maxLength(30),
         ],
@@ -98,7 +97,6 @@ export class UsuarioComponent implements OnInit {
       numero: [
         '',
         [
-          Validators.required,
           Validators.minLength(13),
           Validators.maxLength(19),
         ],
@@ -106,7 +104,6 @@ export class UsuarioComponent implements OnInit {
       linkedin: [
         '',
         [
-          Validators.required,
           Validators.minLength(5),
           Validators.maxLength(30),
         ],

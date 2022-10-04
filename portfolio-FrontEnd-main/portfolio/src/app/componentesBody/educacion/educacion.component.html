@@ -21,7 +21,7 @@
         <!--Template por si el objeto no tiene foto-->
         <ng-template [ngIf]="!educacion.fotoInstitucion">
           <div class="row">
-            <div class="institucion col">
+            <div class="institucion col-11">
               <p style="font-size: xx-large">{{ educacion.institucion }}</p>
               <div class="subrayadoSubtitulos"></div>
               <p style="font-size: x-large">{{ educacion.titulo }}</p>
@@ -60,17 +60,17 @@
         <!--Template por si el objeto tiene foto-->
         <ng-template [ngIf]="educacion.fotoInstitucion">
           <div class="row">
-            <div class="col-3">
+            <div class="col-3 fotos">
               <img [src]="educacion.fotoInstitucion" />
             </div>
             <div class="institucion col-8">
-              <h2>{{ educacion.institucion }}</h2>
+              <p style="font-size: xx-large">{{ educacion.institucion }}</p>
               <div class="subrayadoSubtitulos"></div>
-              <h4>{{ educacion.titulo }}</h4>
-              <h4>
+              <p style="font-size: x-large">{{ educacion.titulo }}</p>
+              <p style="font-size: large">
                 <time>{{ educacion.inicioEducacion }}</time> -
                 <time>{{ educacion.finalizacionEducacion }}</time>
-              </h4>
+              </p>
             </div>
             <div class="botonera col-1">
               <div cdkDragHandle>

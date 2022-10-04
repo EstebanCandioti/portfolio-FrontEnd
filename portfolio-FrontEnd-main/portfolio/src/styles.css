@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 /*--------------------------------------------------------------------BOTONES-----------------------------------------------------------------*/
-.login, .editar, .crear, .borrar, .logout{
+.login, .editar, .logout{
     font-family:'Poppins', sans-serif;
     color:#ffffff;
     background-color: #75AADB ;
@@ -22,6 +22,10 @@
     cursor: pointer;
 }
 
+.login{
+    width:5vw;
+    height: 4vh;
+}
 .logout{
     color:#000000;
     background-color: #91caff ;
@@ -38,7 +42,10 @@
     transition: ease-in .35s;
 }
 .botonera{
-    padding:20px;
+    display: flex;
+    justify-content:space-around;
+    align-items: flex-start;
+    padding-right: 5%;
 }
 
 .editar{

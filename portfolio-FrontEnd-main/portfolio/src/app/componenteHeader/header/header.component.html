@@ -9,22 +9,22 @@
     <div class="col-3 contact-list">
       <!--Lista con botones de contacto(wsp, ig) y boton login-->
       <ul class="contact-list">
-        <li>
+        <li *ngIf="persona.instagram">
           <a href="https://www.instagram.com/{{ persona.instagram }}/">
             <i class="fab fa-instagram"></i>
           </a>
         </li>
-        <li>
+        <li *ngIf="persona.numero">
           <a href="https://wa.me/{{ persona.numero }}">
             <i class="fab fa-whatsapp"></i>
           </a>
         </li>
-        <li>
+        <li *ngIf="persona.email">
           <a href="mailto:{{ persona.email }}">
             <i class="fa-solid fa-envelope"></i>
           </a>
         </li>
-        <li>
+        <li *ngIf="persona.linkedin">
           <a href="https://www.linkedin.com/in/{{ persona.linkedin }}">
             <i class="fab fa-linkedin"></i>
           </a>
