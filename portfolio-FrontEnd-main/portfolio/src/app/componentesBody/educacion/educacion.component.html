@@ -22,10 +22,10 @@
         <ng-template [ngIf]="!educacion.fotoInstitucion">
           <div class="row">
             <div class="institucion col-11">
-              <p style="font-size: xx-large">{{ educacion.institucion }}</p>
+              <p class="letraGrande">{{ educacion.institucion }}</p>
               <div class="subrayadoSubtitulos"></div>
-              <p style="font-size: x-large">{{ educacion.titulo }}</p>
-              <p style="font-size: large">
+              <p class="letraMediana">{{ educacion.titulo }}</p>
+              <p class="letraChica">
                 <time>{{ educacion.inicioEducacion }}</time> -
                 <time>{{ educacion.finalizacionEducacion }}</time>
               </p>
@@ -64,10 +64,10 @@
               <img [src]="educacion.fotoInstitucion" />
             </div>
             <div class="institucion col-8">
-              <p style="font-size: xx-large">{{ educacion.institucion }}</p>
+              <p class="letraGrande">{{ educacion.institucion }}</p>
               <div class="subrayadoSubtitulos"></div>
-              <p style="font-size: x-large">{{ educacion.titulo }}</p>
-              <p style="font-size: large">
+              <p class="letraMediana">{{ educacion.titulo }}</p>
+              <p class="letraChica">
                 <time>{{ educacion.inicioEducacion }}</time> -
                 <time>{{ educacion.finalizacionEducacion }}</time>
               </p>

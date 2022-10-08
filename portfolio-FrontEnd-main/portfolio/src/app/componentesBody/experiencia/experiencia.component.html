@@ -26,11 +26,12 @@
             <img [src]="experiencia.fotoTrabajo" />
           </div>
           <div class="col-8">
-            <h2>{{ experiencia.nombreTrabajo }}</h2>
+            <p class="letraGrande">{{ experiencia.nombreTrabajo }}</p>
             <div class="subrayadoSubtitulos"></div>
-            <h4>{{ experiencia.posicionLaboral }}</h4>
-            <h4>{{ experiencia.descripcionLaboral }}</h4>
-            <p>
+            <p class="letraMediana">{{ experiencia.posicionLaboral }}</p>
+            <p class="letraMediana">{{ experiencia.descripcionLaboral }}</p>
+            <h3>Numero de referencia:</h3><p class="letraMediana">{{experiencia.numeroReferencia}}</p>
+            <p class="letraChica">
               <time>{{ experiencia.inicioTrabajo }}</time> -
               <time>{{ experiencia.finalizacionTrabajo }}</time>
             </p>
@@ -66,11 +67,12 @@
       <ng-template [ngIf]="!experiencia.fotoTrabajo">
         <div class="informacion row">
           <div class="col-11">
-            <p style="font-size: xx-large">{{ experiencia.nombreTrabajo }}</p>
+            <p class="letraGrande">{{ experiencia.nombreTrabajo }}</p>
             <div class="subrayadoSubtitulos"></div>
-            <h4>{{ experiencia.posicionLaboral }}</h4>
-            <h4>{{ experiencia.descripcionLaboral }}</h4>
-            <p style="font-size: large">
+            <p class="letraMediana">{{ experiencia.posicionLaboral }}</p>
+            <p class="letraMediana">{{ experiencia.descripcionLaboral }}</p>
+            <h3>Numero de referencia:</h3><p class="letraMediana">{{experiencia.numeroReferencia}}</p>
+            <p class="letraChica">
               <time>{{ experiencia.inicioTrabajo }}</time> -
               <time>{{ experiencia.finalizacionTrabajo }}</time>
             </p>
@@ -213,13 +215,14 @@
 
           <div class="form-group">
             <label for="descripcionLaboral">Descripcion laboral</label>
-            <input
+            <textarea
               type="text"
               class="form-control"
               required
               formControlName="descripcionLaboral"
               placeholder="Ingrese la descripcion de su labor"
-            />
+            >
+            </textarea>
 
             <!--Alerta por si el campo esta vacio-->
             <div
@@ -243,6 +246,33 @@
               class="alert alert-danger"
             >
               La descripcion laboral debe tener un maximo de 200 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="numeroReferencia">Numero de referencia</label>
+            <input
+              type="text"
+              class="form-control"
+              required
+              formControlName="numeroReferencia"
+              placeholder="ingrese un numero de referencia (opcional)"
+            />
+
+            <!--Alerta por si el campo tiene pocos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('numeroReferencia')?.touched && experienciaForm.get('numeroReferencia')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              El numero de referencia tiene que tener un minimo de 13 caracteres
+            </div>
+
+            <!--Alerta por si el tiene muchos caracteres-->
+            <div
+              *ngIf="experienciaForm.get('numeroReferencia')?.touched && experienciaForm.get('numeroReferencia')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              El numero de referencia tiene que tener un maximo de 19 caracteres
             </div>
           </div>
 

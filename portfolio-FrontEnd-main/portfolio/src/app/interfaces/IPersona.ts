@@ -9,6 +9,5 @@ export interface IPersona{
     fotoBanner:string,
     instagram:string,
     numero:string,
-    linkedin:string,
-    contrasenia: string;
+    linkedin:string;
 }

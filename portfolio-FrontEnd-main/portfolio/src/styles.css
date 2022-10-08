@@ -70,7 +70,8 @@
 }
 
 .fotos img{
-    width: 70%;
+    max-width: 70%;
+    min-width: 20%;
     margin-bottom: 1%;
 }
 /*---------------------------------------------------------------Dividores/Subtitulos------------------------------------------------------*/
@@ -170,7 +171,7 @@
 /*------------------------------------------------------------BODY-----------------------------------------------------------------------*/
 .background{
     height: 100%;
-    background-color: #e4e4e4; 
+    background-color: #d1d1d1; 
 }
 .usuario,.experiencia,.educacion,.habilidadesFuertes,.habilidadesDebiles,.tecnologia,.proyectos, .acerca-de{
     color:#ffffff;
@@ -182,12 +183,13 @@
 }
 
 .proyectos{
-    margin-bottom: -4%;
+    margin-bottom:-4%;
 }
 
 .informacion{
     padding:20px;
 }
+
 .item-list{
     list-style: none;
 }
@@ -195,14 +197,28 @@
 .links{
     margin-left: 5%;
 }
+
 .links li{
     margin-bottom: 3%;
 }
+
 .progress{
     width: 90%;
 }
 
-/*-------------------------------------------------------------------------Edicion------------------------------------------------------------*/
+
+.letraChicha{
+    font-size: large;
+}
+
+.letraMediana{
+    font-size: x-large;
+}
+
+.letraGrande{
+    font-size: xx-large;
+}
+/*-------------------------------------------------------------------------FORMULARIOS------------------------------------------------------------*/
 .formularios .form-group{
     margin-top: -2%;
     padding: 1.5%

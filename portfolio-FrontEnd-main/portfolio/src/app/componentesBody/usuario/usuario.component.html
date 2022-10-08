@@ -28,15 +28,15 @@
       </button>
     </div>
     <div class="col-12">
-      <p style="font-size: x-large">{{ persona.nombre }}</p>
+      <p class="letraMediana">{{ persona.nombre }}</p>
     </div>
 
     <div *ngIf="persona.titulos" class="col-12">
-      <p style="font-size: x-large">{{ persona.titulos }}</p>
+      <p class="letraMediana">{{ persona.titulos }}</p>
     </div>
 
     <div class="col-12">
-      <p style="font-size: x-large">{{ persona.ubicacion }}</p>
+      <p class="letraMediana">{{ persona.ubicacion }}</p>
     </div>
 
     <!-- Modal -->
@@ -292,6 +292,39 @@
                 >
                   El numero de telefono tiene que tener un maximo de 30 caracteres
                 </div>
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  required
+                  formControlName="email"
+                  placeholder=" Ingrese su email"
+                />
+                <small>Si ingresa un nuevo email tendra que iniciar sesion con el nuevo email</small>
+                <!--Alerta por si el campo esta vacio-->
+                <div
+                  *ngIf="
+                    personaForm.get('email')?.touched &&
+                    personaForm.get('email')?.hasError('required')
+                  "
+                  class="alert alert-danger"
+                >
+                  El email es requerido
+                </div>
+    
+                <!--Alerta por si el campo tiene pocos caracteres-->
+                <div
+                  *ngIf="
+                    personaForm.get('email')?.touched &&
+                    personaForm.get('email')?.hasError('email')
+                  "
+                  class="alert alert-danger"
+                >
+                  El email es invalido
+                </div>
+                >
               </div>
               <button
                 class="btn btn-primary"

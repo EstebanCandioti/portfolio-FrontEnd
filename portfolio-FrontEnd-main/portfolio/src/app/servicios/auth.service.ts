@@ -7,7 +7,7 @@ import { IPersona } from '../interfaces/IPersona';
   providedIn: 'root',
 })
 export class AuthService {
-  // url="http://locahost:8080/api/services/autentication";
+  //    url="https://backend-esteban-candioti.herokuapp.com/api/login";
 
   url = './assets/data/tokenOk.json';
   urlError = './assets/data/tokenError.json';

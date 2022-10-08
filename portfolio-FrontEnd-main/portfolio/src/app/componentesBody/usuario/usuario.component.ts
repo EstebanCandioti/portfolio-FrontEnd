@@ -13,7 +13,6 @@ export class UsuarioComponent implements OnInit {
   persona: IPersona;
   //variables creadas para contener los datos de la persona y que no se pierdan al asignarles el valor del formulario
   idPersona!: number;
-  contrasenia: string;
   email: string;
   personaForm!: FormGroup;
   logeado: any;
@@ -27,11 +26,6 @@ export class UsuarioComponent implements OnInit {
       .subscribe((persona: IPersona) => {
         this.persona = persona;
         this.idPersona= persona.id
-      });
-    this.contrasenia = this.datosPortfolio
-      .obtenerPersona()
-      .subscribe((persona: IPersona) => {
-        this.contrasenia = persona.contrasenia;
       });
     this.email = this.datosPortfolio
       .obtenerPersona()
@@ -108,16 +102,24 @@ export class UsuarioComponent implements OnInit {
           Validators.maxLength(30),
         ],
       ],
+      email:[
+        '',
+        [Validators.required,Validators.email]
+      ]
     });
   }
+    /* funcion submit para el envio del formulario: esta funcion usa la variable "AEditar"
+    para asigarnle los valores del formulario y la id de la persona,*/
   onSubmit(): void {
-    console.log('En el modal' , this.personaForm.value);
     this.persona = this.personaForm.value;
-    //Le reasigno los valores que no entraron en el formulario a la persona para que no se pierdan
     this.persona.id = this.idPersona;
-    this.persona.contrasenia = this.contrasenia;
-    this.persona.email = this.email;
     this.datosPortfolio.editPersona(this.persona).subscribe();
+    setTimeout(
+      function(){
+        location.reload()
+      },
+      500
+    )
   }
   editarPersona(persona: IPersona) {
     this.personaForm.get('nombre')?.setValue(persona.nombre);
@@ -129,5 +131,6 @@ export class UsuarioComponent implements OnInit {
     this.personaForm.get('instagram')?.setValue(persona.instagram);
     this.personaForm.get('numero')?.setValue(persona.numero);
     this.personaForm.get('linkedin')?.setValue(persona.linkedin);
+    this.personaForm.get('email')?.setValue(persona.email);
   }
 }

@@ -13,6 +13,7 @@ export class HabilidadesFuertesComponent implements OnInit {
   listaHabilidadesFuertes: IHabilidad[] = [];
   posicionesLista!: number;
   habilidadForm: FormGroup;
+  posicionHabilidad!:number;
   idHabilidad!: number;
   habilidadAEditar!: IHabilidad;
   editar!: boolean;
@@ -43,17 +44,25 @@ export class HabilidadesFuertesComponent implements OnInit {
       );
     });
   }
-
+  /* funcion submit para el envio del formulario: esta funcion usa la variable "AEditar"
+    para asigarnle los valores del formulario y la id de la persona, 
+    el id del objeto y la posicion en la lista (si se esta creando un objeto les asigna id 
+    y posicion nueva, si se esta editando uno les asigna los valores que ya tenia)*/
   onSubmit(event: Event): void {
     event.preventDefault();
     console.log('En el modal');
     this.habilidadAEditar = this.habilidadForm.value;
     this.habilidadAEditar.id = this.idHabilidad;
     this.habilidadAEditar.idPersona = 1;
-    if(!this.habilidadAEditar.posicion){
-      this.habilidadAEditar.posicion = this.posicionesLista
-    }
+    this.habilidadAEditar.posicion=this.posicionHabilidad
     this.datosPortfolio.editHabilidadFuerte(this.habilidadAEditar).subscribe();
+    this.ngOnInit();
+    setTimeout(
+      function(){
+        location.reload()
+      },
+      500
+    )
   }
 
   initForm(): FormGroup {
@@ -67,6 +76,9 @@ export class HabilidadesFuertesComponent implements OnInit {
         ],
       ],
       valor: ['', [Validators.required, Validators.max(100)]],
+
+      
+      
     });
   }
 
@@ -74,6 +86,7 @@ export class HabilidadesFuertesComponent implements OnInit {
     this.editar = true;
     this.habilidadForm.get('habilidad')?.setValue(habilidad.habilidad);
     this.habilidadForm.get('valor')?.setValue(habilidad.valor);
+    this.posicionHabilidad=habilidad.posicion
     this.idHabilidad = habilidad.id;
   }
 
@@ -81,6 +94,7 @@ export class HabilidadesFuertesComponent implements OnInit {
     this.editar = false;
     this.habilidadForm.reset();
     this.idHabilidad = 0;
+    this.posicionHabilidad=this.posicionesLista;
   }
 
   //----------------------------------------- FUNCIONES DRAG AND DROP ----------------------------------------------------

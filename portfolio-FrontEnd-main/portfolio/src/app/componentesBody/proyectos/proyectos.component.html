@@ -26,13 +26,11 @@
             <img [src]="proyecto.fotoProyecto" />
           </div>
           <div class="col-8">
-            <p style="font-size: xx-large">{{ proyecto.nombre }}</p>
+            <p class="letraGrande">{{ proyecto.nombre }}</p>
             <div class="subrayadoSubtitulos"></div>
-            <p style="font-size: x-large">{{ proyecto.descripcion }}</p>
-            <p style="font-size: large">
-              <time>{{ proyecto.inicioProyecto }}</time> -
-              <time>{{ proyecto.finalizacionProyecto }}</time>
-            </p>
+            <p class="letraMediana">{{ proyecto.descripcion }}</p>
+            <time class="letraChica">{{ proyecto.inicioProyecto }}</time> -
+            <time class="letraChica">{{ proyecto.finalizacionProyecto }}</time>
           </div>
           <div class="botonera col-1">
             <div cdkDragHandle>
@@ -50,7 +48,7 @@
             >
               <i class="fas fa-pen"></i>
             </button>
-            <button class="editar" (click)="deleteProyecto(proyecto)"               *ngIf="logeado">
+            <button class="editar" (click)="deleteProyecto(proyecto)" *ngIf="logeado">
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -88,10 +86,10 @@
       <ng-template [ngIf]="!proyecto.fotoProyecto">
         <div class="informacion row">
           <div class="col-11">
-            <p style="font-size: xx-large">{{ proyecto.nombre }}</p>
+            <p class="letraGrande">{{ proyecto.nombre }}</p>
             <div class="subrayadoSubtitulos"></div>
-            <p style="font-size: x-large">{{ proyecto.descripcion }}</p>
-            <p style="font-size: large">
+            <p class="letraMediana">{{ proyecto.descripcion }}</p>
+            <p class="letraChica">
               <time>{{ proyecto.inicioProyecto }}</time> -
               <time>{{ proyecto.finalizacionProyecto }}</time>
             </p>
@@ -363,6 +361,7 @@
               formControlName="link1"
               placeholder="Insgrese el url al proyecto "
             />
+            <small>ejemplo: https://mi-projecto.com</small>
             <!--Alerta por si el campo esta vacio-->
             <div
               *ngIf="proyectoForm.get('link1')?.touched && proyectoForm.get('link1')?.errors?.['required']"
@@ -376,7 +375,7 @@
               *ngIf="proyectoForm.get('link1')?.touched && proyectoForm.get('link1')?.errors?.['minlength']"
               class="alert alert-danger"
             >
-              La url al proyecto debe tener un minimo de 10 caracteres
+              La url al proyecto debe tener un minimo de 20 caracteres
             </div>
 
             <!--Alerta por si el tiene muchos caracteres-->
@@ -426,13 +425,14 @@
               formControlName="link2"
               placeholder="Insgrese el url al proyecto (opcional)"
             />
+            <small>ejemplo: https://mi-projecto.com</small>
 
             <!--Alerta por si el campo tiene pocos caracteres-->
             <div
               *ngIf="proyectoForm.get('link2')?.touched && proyectoForm.get('link2')?.errors?.['minlength']"
               class="alert alert-danger"
             >
-              La url al proyecto debe tener un minimo de 10 caracteres
+              La url al proyecto debe tener un minimo de 20 caracteres
             </div>
 
             <!--Alerta por si el tiene muchos caracteres-->
@@ -454,10 +454,7 @@
               formControlName="descripcionLink2"
               placeholder="Ingrese una descripcion para la url puesta (opcional)"
             />
-            <small
-              >Si ingresa una descripcion y su respectivo link esta vacio, la
-              descripcion no se mostrara</small
-            >
+
             <!--Alerta por si el campo tiene pocos caracteres-->
             <div
               *ngIf="proyectoForm.get('descripcionLink2')?.touched && proyectoForm.get('descripcionLink2')?.errors?.['minlength']"
@@ -485,13 +482,15 @@
               formControlName="link3"
               placeholder="Insgrese el url al proyecto (opcional)"
             />
+            <small>ejemplo: https://mi-projecto.com</small>
+
 
             <!--Alerta por si el campo tiene pocos caracteres-->
             <div
               *ngIf="proyectoForm.get('link3')?.touched && proyectoForm.get('link3')?.errors?.['minlength']"
               class="alert alert-danger"
             >
-              La url al proyecto debe tener un minimo de 10 caracteres
+              La url al proyecto debe tener un minimo de 20 caracteres
             </div>
 
             <!--Alerta por si el tiene muchos caracteres-->
@@ -513,10 +512,7 @@
               formControlName="descripcionLink3"
               placeholder="Ingrese una descripcion para la url puesta (opcional)"
             />
-            <small
-              >Si ingresa una descripcion y su respectivo link esta vacio, la
-              descripcion no se mostrara</small
-            >
+
             <!--Alerta por si el campo tiene pocos caracteres-->
             <div
               *ngIf="proyectoForm.get('descripcionLink3')?.touched && proyectoForm.get('descripcionLink3')?.errors?.['minlength']"

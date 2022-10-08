@@ -3,6 +3,7 @@ export interface IExperiencia {
     nombreTrabajo: string,
     posicionLaboral:string,
     descripcionLaboral:string,
+    numeroReferencia:number,
     fotoTrabajo:string,
     inicioTrabajo:string,
     finalizacionTrabajo:string,

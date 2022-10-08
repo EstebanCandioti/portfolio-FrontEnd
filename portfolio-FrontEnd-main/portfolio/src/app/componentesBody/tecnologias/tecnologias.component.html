@@ -26,9 +26,9 @@
             <img [src]="tecnologia.tecnologiaImg" />
           </div>
           <div class="col-8">
-            <p style="font-size: xx-large">{{ tecnologia.nombre }}</p>
+            <p class="letraGrande">{{ tecnologia.nombre }}</p>
             <div class="subrayadoSubtitulos"></div>
-            <p style="font-size: x-large">{{ tecnologia.descripcion }}</p>
+            <p class="letraMediana">{{ tecnologia.descripcion }}</p>
           </div>
           <div class="botonera col-1">
             <div cdkDragHandle>
@@ -61,9 +61,9 @@
       <ng-template [ngIf]="!tecnologia.tecnologiaImg">
         <div class="informacion row">
           <div class="col-11">
-            <p style="font-size: xx-large">{{ tecnologia.nombre }}</p>
+            <p class="letraGrande">{{ tecnologia.nombre }}</p>
             <div class="subrayadoSubtitulos"></div>
-            <p style="font-size: x-large">{{ tecnologia.descripcion }}</p>
+            <p class="letraMediana">{{ tecnologia.descripcion }}</p>
           </div>
           <div class="botonera col-1">
             <div cdkDragHandle>

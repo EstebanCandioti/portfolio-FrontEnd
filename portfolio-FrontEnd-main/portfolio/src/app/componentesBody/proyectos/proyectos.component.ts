@@ -12,6 +12,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 })
 export class ProyectosComponent implements OnInit {
   listaProyectos: IProyecto[] = [];
+  posicionProyecto!:number;
   posicionesLista!: number;
   proyectoForm!: FormGroup;
   idProyecto!: number;
@@ -66,20 +67,29 @@ export class ProyectosComponent implements OnInit {
       .get('descripcionLink3')
       ?.setValue(proyecto.descripcionLink3);
     this.idProyecto = proyecto.id;
+    this.posicionProyecto=proyecto.posicion
   }
 
-  /*asigna el valor del formulario a una variable junto al id de la persona y al id del proyecto antes de enviarlo en el servicio,
-    tambien recarga la pagina para mostrar los nuevos valores*/
+  /* funcion submit para el envio del formulario: esta funcion usa la variable "AEditar"
+    para asigarnle los valores del formulario y la id de la persona, 
+    el id del objeto y la posicion en la lista (si se esta creando un objeto les asigna id 
+    y posicion nueva, si se esta editando uno les asigna los valores que ya tenia)*/
   onSubmit(event: Event): void {
     event.preventDefault();
     console.log('En el componente');
     this.proyectoAEditar = this.proyectoForm.value;
     this.proyectoAEditar.id = this.idProyecto;
     this.proyectoAEditar.idPersona = 1;
-    if (!this.proyectoAEditar.posicion) {
-      this.proyectoAEditar.posicion = this.posicionesLista;
-    }
+    this.proyectoAEditar.posicion = this.posicionProyecto
     this.datosPortfolio.editProyecto(this.proyectoAEditar).subscribe();
+    this.ngOnInit();
+    setTimeout(
+      function(){
+        console.log("temporizador puesto")
+        location.reload()
+      },
+      500
+    )
   }
 
   initForm(): FormGroup {
@@ -121,7 +131,7 @@ export class ProyectosComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(10),
+          Validators.minLength(20),
           Validators.maxLength(100),
         ],
       ],
@@ -129,12 +139,12 @@ export class ProyectosComponent implements OnInit {
         '',
         [Validators.minLength(10), Validators.maxLength(100)],
       ],
-      link2: ['', [Validators.minLength(10), Validators.maxLength(100)]],
+      link2: ['', [Validators.minLength(20), Validators.maxLength(100)]],
       descripcionLink2: [
         '',
         [Validators.minLength(10), Validators.maxLength(100)],
       ],
-      link3: ['', [Validators.minLength(10), Validators.maxLength(100)]],
+      link3: ['', [Validators.minLength(20), Validators.maxLength(100)]],
       descripcionLink3: [
         '',
         [Validators.minLength(10), Validators.maxLength(100)],
@@ -152,6 +162,7 @@ export class ProyectosComponent implements OnInit {
     this.proyectoForm.get('descripcionLink3')?.setValue('');
     this.proyectoForm.get('link2')?.setValue('');
     this.proyectoForm.get('link3')?.setValue('');
+    this.posicionProyecto=this.posicionesLista
   }
 
   //----------------------------------------------------- FUNCIONES DRAG AND DROP --------------------------------------------------------

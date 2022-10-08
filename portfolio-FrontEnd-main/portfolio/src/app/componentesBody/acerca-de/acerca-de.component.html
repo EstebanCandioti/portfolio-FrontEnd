@@ -17,24 +17,24 @@
         </button>
       </div>
       <div class="col-12">
-        <p style="font-size: x-large">{{ persona.descripcion }}</p>
+        <p class="letraMediana">{{ persona.descripcion }}</p>
       </div>
     </div>
   </div>
   
   <!-- --------------------------------------MODAL----------------------------------------- -->
   <div
-    class="modal fade bd-example-modal-lg"
+    class="modal fade bd-example-modal-xl"
     id="editarDescripcion"
     tabindex="-1"
     role="dialog"
     aria-labelledby="PersonaForm"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="personaForm">Editar persona</h5>
+          <h5 class="modal-title" id="descripcionForm">Editar descripcion</h5>
           <button
             type="button"
             class="close"
@@ -52,13 +52,14 @@
         >
         <div class="form-group">
           <label for="descripcion">Descripcion</label>
-          <input
+          <textarea
             type="text"
             class="form-control"
             required
             formControlName="descripcion"
             placeholder="Ingrese informacion relacionada a usted"
-          />
+          >
+          </textarea>
           <!--Alerta por si el campo esta vacio-->
           <div
             *ngIf="descripcionForm.get('descripcion')?.touched && descripcionForm.get('descripcion')?.errors?.['required']"
@@ -91,8 +92,7 @@
       >
         Guardar
       </button>
-        </form>
-         
+        </form>       
         </div>
       </div>
     </div>

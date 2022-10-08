@@ -31,6 +31,12 @@ export class AcercaDeComponent implements OnInit {
     event.preventDefault()
     this.persona.descripcion=this.descripcionForm.get('descripcion')?.value
     this.portfolioService.editPersona(this.persona).subscribe()
+    setTimeout(
+      function(){
+        location.reload()
+      },
+      500
+    )
   }
 
   FormInit():FormGroup{

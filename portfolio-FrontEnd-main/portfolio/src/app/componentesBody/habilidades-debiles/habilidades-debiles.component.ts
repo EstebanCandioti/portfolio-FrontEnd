@@ -12,6 +12,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 export class HabilidadesDebilesComponent implements OnInit {
   listaHabilidadesDebiles:IHabilidad[]=[];
   posicionesLista!: number;
+  posicionHabilidad!:number;
   habilidadForm!:FormGroup;
   idHabilidad!:number
   habilidadAEditar!:IHabilidad
@@ -30,14 +31,24 @@ export class HabilidadesDebilesComponent implements OnInit {
 
   //---------------------------------------------------------------- FUNCIONES FORMULARIOS --------------------------------------------------------
 
+    /* funcion submit para el envio del formulario: esta funcion usa la variable "AEditar"
+    para asigarnle los valores del formulario y la id de la persona, 
+    el id del objeto y la posicion en la lista (si se esta creando un objeto les asigna id 
+    y posicion nueva, si se esta editando uno les asigna los valores que ya tenia)*/
   onSubmit(event: Event):void{
     event.preventDefault()
     console.log("En el modal")
     this.habilidadAEditar=this.habilidadForm.value;
     this.habilidadAEditar.id=this.idHabilidad
     this.habilidadAEditar.idPersona=1;
-    this.habilidadAEditar.posicion=this.listaHabilidadesDebiles.length+1
+    this.habilidadAEditar.posicion=this.posicionHabilidad
     this.datosPortfolio.editHabilidadDebil(this.habilidadAEditar).subscribe()
+    setTimeout(
+      function(){
+        location.reload()
+      },
+      500
+    )
   }
 
   initForm():FormGroup{
@@ -52,13 +63,14 @@ export class HabilidadesDebilesComponent implements OnInit {
     this.habilidadForm.get('habilidad')?.setValue(habilidad.habilidad)
     this.habilidadForm.get('valor')?.setValue(habilidad.valor)
     this.idHabilidad =habilidad.id
+    this.posicionHabilidad=habilidad.posicion
   }
 
   reiniciarForm(){
     this.editar=false
     this.idHabilidad=0
     this.habilidadForm.reset()
-    this.habilidadForm.get('fotoTrabajo')?.setValue('')
+    this.posicionHabilidad=this.posicionesLista
   }
 
   //----------------------------------------- FUNCIONES DRAG AND DROP ----------------------------------------------------

@@ -3,30 +3,32 @@ import { IEducacion } from 'src/app/interfaces/IEducacion';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/servicios/auth.service';
-import {CdkDragDrop, moveItemInArray,} from '@angular/cdk/drag-drop'
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-educacion',
   templateUrl: './educacion.component.html',
   styleUrls: ['./educacion.component.css'],
 })
 export class EducacionComponent implements OnInit {
-  id1!:number
-  id2!:number
   listaEducacion: IEducacion[] = [];
+  posicionEducacion!: number;
+  posicionesLista!: number;
   educacionAEditar!: IEducacion;
   idEducacion!: number;
   educacionForm!: FormGroup;
   editar!: boolean;
   logeado: any;
+
   constructor(
     private datosPortfolio: PortfolioService,
     private readonly fb: FormBuilder,
     private readonly auth: AuthService
   ) {}
+
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatosEducacion().subscribe((educacion) => {
       this.listaEducacion = educacion;
-      console.log(this.listaEducacion[0])
+      this.posicionesLista= this.datosPortfolio.contadorPosiciones(educacion);
     });
     this.educacionForm = this.initForm();
     this.logeado = this.auth.autenticado;
@@ -39,7 +41,7 @@ export class EducacionComponent implements OnInit {
       );
     });
   }
-
+//---------------------------------------------FUNCIONES FORMULARIOS------------------------------------
   initForm(): FormGroup {
     return this.fb.group({
       institucion: [
@@ -80,15 +82,24 @@ export class EducacionComponent implements OnInit {
       ],
     });
   }
-
+  /* funcion submit para el envio del formulario: esta funcion usa la variable "AEditar"
+    para asigarnle los valores del formulario y la id de la persona, 
+    el id del objeto y la posicion en la lista (si se esta creando un objeto les asigna id 
+    y posicion nueva, si se esta editando uno les asigna los valores que ya tenia)*/
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('En el modal');
     this.educacionAEditar = this.educacionForm.value;
     this.educacionAEditar.id = this.idEducacion;
     this.educacionAEditar.idPersona = 1;
+    this.educacionAEditar.posicion= this.posicionEducacion
     this.datosPortfolio.editEducacion(this.educacionAEditar).subscribe();
+    setTimeout(function () {
+      location.reload();
+      }, 
+      500
+    );
   }
+
   editarEducacion(educacion: IEducacion) {
     this.editar = true;
     this.educacionForm.get('institucion')?.setValue(educacion.institucion);
@@ -103,21 +114,30 @@ export class EducacionComponent implements OnInit {
       .get('finalizacionEducacion')
       ?.setValue(educacion.finalizacionEducacion);
     this.idEducacion = educacion.id;
+    this.posicionEducacion= educacion.posicion
   }
+
   reiniciarForm() {
     this.editar = false;
     this.idEducacion = 0;
     this.educacionForm.reset();
     this.educacionForm.get('fotoInstitucion')?.setValue('');
+    this.posicionEducacion=this.posicionesLista
   }
 
-  guardarLista(educacion1:IEducacion, educacion2:IEducacion){
-    this.datosPortfolio.editEducacion(educacion1)
-    this.datosPortfolio.editEducacion(educacion2);
+  //------------------------------------------FUNCIONES DRAG AND DROP --------------------------------
+  guardarLista() {
+    for (let educacion of this.listaEducacion) {
+      this.datosPortfolio.editEducacion(educacion).subscribe();
+    }
   }
 
   drop(event: CdkDragDrop<IEducacion>) {
-    moveItemInArray(this.listaEducacion, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.listaEducacion,
+      event.previousIndex,
+      event.currentIndex
+    );
     this.listaEducacion.map((tecnologia, index) => {
       tecnologia.posicion = index;
     });
@@ -129,6 +149,6 @@ export class EducacionComponent implements OnInit {
       this.listaEducacion[event.previousIndex].institucion,
       this.listaEducacion[event.previousIndex].posicion
     );
-    this.guardarLista(this.listaEducacion[event.currentIndex], this.listaEducacion[event.previousIndex]);
+    this.guardarLista();
   }
 }

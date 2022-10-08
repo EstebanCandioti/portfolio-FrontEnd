@@ -14,6 +14,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 })
 export class ExperienciaComponent implements OnInit {
   listaExperiencia: IExperiencia[] = [];
+  posicionExperiencia!: number;
   posicionesLista!: number;
   experienciaAEditar!: IExperiencia;
   idExperiencia!: number;
@@ -75,20 +76,31 @@ export class ExperienciaComponent implements OnInit {
         ],
       ],
       fotoTrabajo: ['', [Validators.minLength(10), Validators.maxLength(100)]],
+      numeroReferencia: ['', [Validators.minLength(13), Validators.maxLength(19)]],
+
     });
   }
 
+    /*funcion submit para el envio del formulario: esta funcion usa la variable "AEditar"
+    para asigarnle los valores del formulario y la id de la persona, 
+    el id del objeto y la posicion en la lista (si se esta creando un objeto les asigna id 
+    y posicion nueva, si se esta editando uno les asigna los valores que ya tenia)*/
   onSubmit(event: Event): void {
     event.preventDefault();
     console.log('En el modal');
     this.experienciaAEditar = this.experienciaForm.value;
     this.experienciaAEditar.id = this.idExperiencia;
     this.experienciaAEditar.idPersona = 1;
-    if(this.experienciaAEditar.posicion==null){
-      this.experienciaAEditar.posicion =this.posicionesLista+1
-    }
+    this.experienciaAEditar.posicion= this.posicionExperiencia
     this.datosPortfolio.editExperiencia(this.experienciaAEditar).subscribe();
+    setTimeout(
+      function(){
+        location.reload()
+      },
+      500
+    )
   }
+
   editarExperiencia(experiencia: IExperiencia) {
     this.editar = true;
     this.experienciaForm
@@ -107,13 +119,18 @@ export class ExperienciaComponent implements OnInit {
       .get('finalizacionTrabajo')
       ?.setValue(experiencia.finalizacionTrabajo);
     this.experienciaForm.get('fotoTrabajo')?.setValue(experiencia.fotoTrabajo);
+    this.experienciaForm.get('numeroReferencia')?.setValue(experiencia.numeroReferencia);
     this.idExperiencia = experiencia.id;
+    this.posicionExperiencia= experiencia.posicion
   }
+
   reiniciarForm() {
     this.editar = false;
     this.idExperiencia = 0;
     this.experienciaForm.reset();
     this.experienciaForm.get('fotoTrabajo')?.setValue('');
+    this.experienciaForm.get('numeroReferencia')?.setValue('');
+    this.posicionExperiencia=this.posicionesLista
   }
 
 

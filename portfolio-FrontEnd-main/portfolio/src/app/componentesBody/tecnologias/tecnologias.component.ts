@@ -12,6 +12,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 })
 export class TecnologiasComponent implements OnInit {
   listaTecnologia: ITecnologia[] = [];
+  posicionTecnologia!:number;
   posicionesLista!: number;
   tecnologiaForm!: FormGroup;
   tencnologiaAEditar!: ITecnologia;
@@ -22,13 +23,13 @@ export class TecnologiasComponent implements OnInit {
     private datosPortfolio: PortfolioService,
     private readonly fb: FormBuilder,
     private readonly auth: AuthService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.datosPortfolio.obtenerDatosTecnologia().subscribe((tecnologias) => {
       this.listaTecnologia = tecnologias;
-      this.posicionesLista = this.datosPortfolio.contadorPosiciones(tecnologias);
+      this.posicionesLista =
+        this.datosPortfolio.contadorPosiciones(tecnologias);
     });
     this.tecnologiaForm = this.initForm();
     this.logeado = this.auth.autenticado;
@@ -52,6 +53,7 @@ export class TecnologiasComponent implements OnInit {
       .get('tecnologiaImg')
       ?.setValue(tecnologia.tecnologiaImg);
     this.idTecnologia = tecnologia.id;
+    this.posicionTecnologia= tecnologia.posicion
   }
 
   //formulario
@@ -80,17 +82,21 @@ export class TecnologiasComponent implements OnInit {
     });
   }
 
-  //funcion enviar
+  /* funcion submit para el envio del formulario: esta funcion usa la variable "AEditar"
+    para asigarnle los valores del formulario y la id de la persona, 
+    el id del objeto y la posicion en la lista (si se esta creando un objeto les asigna id 
+    y posicion nueva, si se esta editando uno les asigna los valores que ya tenia)*/
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('En el modal');
     this.tencnologiaAEditar = this.tecnologiaForm.value;
     this.tencnologiaAEditar.id = this.idTecnologia;
     this.tencnologiaAEditar.idPersona = 1;
-    if (!this.tencnologiaAEditar.posicion) {
-      this.tencnologiaAEditar.posicion = this.listaTecnologia.length + 1;
-    }
+    this.tencnologiaAEditar.posicion = this.posicionTecnologia;
     this.datosPortfolio.editTecnologia(this.tencnologiaAEditar).subscribe();
+    this.ngOnInit();
+    setTimeout(function () {
+      location.reload();
+    }, 500);
   }
 
   //limpiar formulario
@@ -99,7 +105,7 @@ export class TecnologiasComponent implements OnInit {
     this.idTecnologia = 0;
     this.tecnologiaForm.reset();
     this.tecnologiaForm.get('tecnologiaImg')?.setValue('');
-    this.tecnologiaForm.get('posicion')?.setValue('');
+    this.posicionTecnologia=this.posicionesLista
   }
 
   guardarLista() {
@@ -117,7 +123,6 @@ export class TecnologiasComponent implements OnInit {
     );
     this.listaTecnologia.map((tecnologia, index) => {
       tecnologia.posicion = index;
-
     });
     console.log(
       this.listaTecnologia[event.currentIndex].nombre,
@@ -128,6 +133,6 @@ export class TecnologiasComponent implements OnInit {
       this.listaTecnologia[event.previousIndex].posicion
     );
 
-    this.guardarLista()
+    this.guardarLista();
   }
 }
