@@ -54,14 +54,14 @@ export class LoginComponent implements OnInit {
     let password= this.loginForm.get('password')?.value
     this.auth.logIn(email, password).then(reponse=>{
       console.log(reponse)
+      setTimeout(
+        function(){
+          location.reload()
+        },
+        500
+      )
+    }).catch(error=>this.verificado = false)
 
-    }).catch(error=>console.log(error))
-        setTimeout(
-      function(){
-        location.reload()
-      },
-      500
-    )
   }
 
   reiniciarForm() {
