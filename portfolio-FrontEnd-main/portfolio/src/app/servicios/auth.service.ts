@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { IPersona } from '../interfaces/IPersona';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class AuthService {
   contrasenia: string = 'YoProgramo2';
 
   currentUserSubject: BehaviorSubject<any>;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private auth:Auth) {
     this.currentUserSubject = new BehaviorSubject<any>(
       JSON.parse(sessionStorage.getItem('currentUser') || '{}')
     );
@@ -46,17 +46,38 @@ export class AuthService {
     }
   }
 
+  /*
   logout() {
     // puede que por el tipo de aplicación requiera notificar al backend el logout
     // ej. expirar el token
     sessionStorage.removeItem('currentUser');
     this.currentUserSubject.next({});
   }
+  */
 
   get autenticado(): boolean {
-    return this.currentUserSubject.getValue().displayName != null;
+    return this.currentUserSubject.getValue().user!= null;
   }
   get usuario(): any {
     return this.currentUserSubject.getValue();
+  }
+
+  
+  //---------------------------------------------FUNCIONES CON FIREBASE----------------------------------------------------
+  register(email: string, password: string){
+      return createUserWithEmailAndPassword(this.auth,email,password)
+  }
+
+  logIn(email: string, password: string){
+    return signInWithEmailAndPassword(this.auth,email,password).then((data) => {
+        sessionStorage.setItem('currentUser', JSON.stringify(data));
+        this.currentUserSubject.next(data);
+        return data;})
+  }
+
+  logOut(){
+    sessionStorage.removeItem('currentUser');
+    this.currentUserSubject.next({});
+    return signOut(this.auth)
   }
 }

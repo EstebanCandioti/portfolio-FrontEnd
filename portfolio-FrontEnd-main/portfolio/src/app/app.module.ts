@@ -17,11 +17,15 @@ import { HabilidadesDebilesComponent } from './componentesBody/habilidades-debil
 import { HabilidadesFuertesComponent } from './componentesBody/habilidades-fuertes/habilidades-fuertes.component';
 import { TecnologiasComponent } from './componentesBody/tecnologias/tecnologias.component';
 import { ProyectosComponent } from './componentesBody/proyectos/proyectos.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './loginComponentes/login/login.component';
 import { PortfolioService } from './servicios/portfolio.service';
 import { InterceptorService } from './servicios/interceptor.service';
 import { SortPortOrdenPipe } from './pipes/sort-port-orden.pipe';
 import { AcercaDeComponent } from './componentesBody/acerca-de/acerca-de.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { RegisterComponent } from './loginComponentes/register/register.component';
 
 
 @NgModule({
@@ -39,6 +43,7 @@ import { AcercaDeComponent } from './componentesBody/acerca-de/acerca-de.compone
     LoginComponent,
     SortPortOrdenPipe,
     AcercaDeComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,9 @@ import { AcercaDeComponent } from './componentesBody/acerca-de/acerca-de.compone
     NgbModule,ReactiveFormsModule,
     HttpClientModule,
     MatSliderModule,
-    DragDropModule
+    DragDropModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
   providers: [
     PortfolioService,

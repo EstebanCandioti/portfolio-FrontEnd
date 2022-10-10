@@ -24,7 +24,9 @@ export class HeaderComponent implements OnInit {
     return this.auth.autenticado;
   }
   logout(){
-    this.auth.logout();
+    this.auth.logOut().then(response=>{
+      console.log(response)
+    }).catch(error=>console.log(error));
     location.reload()
   }
 }

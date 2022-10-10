@@ -1,0 +1,116 @@
+<!-- Button trigger modal -->
+<button type="button" class="editar login" data-toggle="modal" data-target="#register" (click)="reiniciarForm()">
+    Sign In
+  </button>
+  
+  <!-- Modal -->
+  <div
+    class="modal fade bd-example-modal-lg"
+    id="register"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Crear Usuario</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true" #closeButton>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form
+            [formGroup]="registerForm"
+            (ngSubmit)="onSubmit($event)"
+            class="formularios"
+          >
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                required
+                formControlName="email"
+                placeholder=" Registrse "
+              />
+  
+              <!--Alerta por si el campo esta vacio-->
+              <div
+                *ngIf="
+                registerForm.get('email')?.touched &&
+                  registerForm.get('email')?.hasError('required')
+                "
+                class="alert alert-danger"
+              >
+                El email es requerido
+              </div>
+  
+              <!--Alerta por si el campo tiene pocos caracteres-->
+              <div
+                *ngIf="
+                registerForm.get('email')?.touched &&
+                registerForm.get('email')?.hasError('email')
+                "
+                class="alert alert-danger"
+              >
+                El email es invalido
+              </div>
+              >
+            </div>
+  
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+                formControlName="password"
+                placeholder="Ingrese usu contraseña"
+              />
+  
+              <!--Alerta por si el campo esta vacio-->
+              <div
+                *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['required']"
+                class="alert alert-danger"
+              >
+                La contraseña es requerida
+              </div>
+  
+              <!--Alerta por si el tiene muchos caracteres-->
+              <div
+                *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['minlength']"
+                class="alert alert-danger"
+              >
+                La contraseña debe tener un minimo de 6 caracteres
+              </div>
+  
+              <!--Alerta por si el tiene muchos caracteres-->
+              <div
+                *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['maxlength']"
+                class="alert alert-danger"
+              >
+                La contraseña debe tener un maximo de 15 caracteres
+              </div>
+            </div>
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="registerForm.invalid"
+            >
+              Enviar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

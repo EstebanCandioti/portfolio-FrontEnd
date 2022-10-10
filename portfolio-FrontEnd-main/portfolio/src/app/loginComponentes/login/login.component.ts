@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
       ],
     });
   }
+  /*
   onSubmit(event: Event) {
     event.preventDefault();
     this.auth.iniciarSesion(this.loginForm.value).subscribe((data) => {
@@ -45,11 +46,22 @@ export class LoginComponent implements OnInit {
       console.log('DATA LOGIN-COMPONENT:' + JSON.stringify(data));
     });
   }
-  get Email() {
-    return this.loginForm.get('email');
-  }
-  get Password() {
-    return this.loginForm.get('password');
+  */
+
+  onSubmit(event: Event) {
+    event.preventDefault();
+    let email = this.loginForm.get('email')?.value
+    let password= this.loginForm.get('password')?.value
+    this.auth.logIn(email, password).then(reponse=>{
+      console.log(reponse)
+
+    }).catch(error=>console.log(error))
+        setTimeout(
+      function(){
+        location.reload()
+      },
+      500
+    )
   }
 
   reiniciarForm() {

@@ -33,6 +33,7 @@ export class ExperienciaComponent implements OnInit {
       this.posicionesLista = this.datosPortfolio.contadorPosiciones(experiencia);
     });
     this.experienciaForm = this.initForm();
+    console.log(this.auth.autenticado)
     this.logeado = this.auth.autenticado;
   }
   //------------------------------FUNCIONES DE FORMULARIOS ------------------------------
