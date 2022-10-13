@@ -22,10 +22,6 @@
     cursor: pointer;
 }
 
-.login{
-    width:5vw;
-    height: 4vh;
-}
 .logout{
     color:#000000;
     background-color: #91caff ;

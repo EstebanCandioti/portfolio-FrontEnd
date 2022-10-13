@@ -70,7 +70,7 @@ export class UsuarioComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(10),
-          Validators.maxLength(100),
+          Validators.maxLength(150),
         ],
       ],
       fotoBanner: [
@@ -78,7 +78,7 @@ export class UsuarioComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(10),
-          Validators.maxLength(100),
+          Validators.maxLength(150),
         ],
       ],
       instagram: [

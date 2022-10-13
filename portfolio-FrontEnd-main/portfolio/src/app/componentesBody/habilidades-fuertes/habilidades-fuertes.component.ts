@@ -61,7 +61,7 @@ export class HabilidadesFuertesComponent implements OnInit {
       function(){
         location.reload()
       },
-      500
+      750
     )
   }
 

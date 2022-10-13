@@ -96,7 +96,8 @@ export class TecnologiasComponent implements OnInit {
     this.ngOnInit();
     setTimeout(function () {
       location.reload();
-    }, 500);
+    },750
+    );
   }
 
   //limpiar formulario

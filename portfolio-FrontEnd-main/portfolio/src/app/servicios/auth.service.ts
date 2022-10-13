@@ -21,6 +21,7 @@ export class AuthService {
     );
     console.log('auth service initialized');
   }
+  /*
   iniciarSesion(credenciales: any): Observable<any> {
     if (
       credenciales.email != this.email &&
@@ -45,6 +46,7 @@ export class AuthService {
       );
     }
   }
+*/
 
   /*
   logout() {

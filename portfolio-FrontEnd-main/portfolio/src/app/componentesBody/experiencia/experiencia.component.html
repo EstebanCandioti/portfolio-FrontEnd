@@ -30,7 +30,9 @@
             <div class="subrayadoSubtitulos"></div>
             <p class="letraMediana">{{ experiencia.posicionLaboral }}</p>
             <p class="letraMediana">{{ experiencia.descripcionLaboral }}</p>
-            <h3>Numero de referencia:</h3><p class="letraMediana">{{experiencia.numeroReferencia}}</p>
+            <div *ngIf="experiencia.numeroReferencia">
+              <h3>Numero de referencia:</h3><p class="letraMediana">{{experiencia.numeroReferencia}}</p>
+            </div>
             <p class="letraChica">
               <time>{{ experiencia.inicioTrabajo }}</time> -
               <time>{{ experiencia.finalizacionTrabajo }}</time>
@@ -71,7 +73,9 @@
             <div class="subrayadoSubtitulos"></div>
             <p class="letraMediana">{{ experiencia.posicionLaboral }}</p>
             <p class="letraMediana">{{ experiencia.descripcionLaboral }}</p>
-            <h3>Numero de referencia:</h3><p class="letraMediana">{{experiencia.numeroReferencia}}</p>
+            <div *ngIf="experiencia.numeroReferencia">
+              <h3>Numero de referencia:</h3><p class="letraMediana">{{experiencia.numeroReferencia}}</p>
+            </div>
             <p class="letraChica">
               <time>{{ experiencia.inicioTrabajo }}</time> -
               <time>{{ experiencia.finalizacionTrabajo }}</time>

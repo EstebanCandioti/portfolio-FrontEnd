@@ -96,7 +96,7 @@ export class EducacionComponent implements OnInit {
     setTimeout(function () {
       location.reload();
       }, 
-      500
+      750
     );
   }
 

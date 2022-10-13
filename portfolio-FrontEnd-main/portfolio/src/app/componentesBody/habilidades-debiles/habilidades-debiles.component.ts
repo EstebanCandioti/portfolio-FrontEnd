@@ -47,7 +47,7 @@ export class HabilidadesDebilesComponent implements OnInit {
       function(){
         location.reload()
       },
-      500
+      750
     )
   }
 

@@ -35,7 +35,7 @@ export class AcercaDeComponent implements OnInit {
       function(){
         location.reload()
       },
-      500
+      750
     )
   }
 

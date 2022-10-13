@@ -98,7 +98,7 @@ export class ExperienciaComponent implements OnInit {
       function(){
         location.reload()
       },
-      500
+      750
     )
   }
 

@@ -88,7 +88,7 @@ export class ProyectosComponent implements OnInit {
         console.log("temporizador puesto")
         location.reload()
       },
-      500
+      750
     )
   }
 
