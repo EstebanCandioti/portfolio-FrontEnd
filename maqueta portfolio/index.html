@@ -1,0 +1,244 @@
+<head>
+    <meta charset="utf-8">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<bodY>
+    <div class="background">
+        <div class="header container-fluid">
+            <!--Lista con el logo del curso y los botones de contacto-->
+            <nav class="contact row">
+                <!--Logo del curso puesto aqui para poder alinear con los botones-->
+                <div class="logo col-10">
+                    <img src="/img/ArgentinaPrograma.png" alt="logo curso">
+                    <h5>Argentina Programa #YoProgramo</h5>
+                </div>
+                <!--Lista con botones de contacto(wsp, ig) y boton login-->
+                <ul class="contact-list col-2">
+                    <li>
+                        <a href="https://www.instagram.com/mr.no_0ne/">
+                          <i class="fas fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/+5491135657044">
+                            <i class="fas fa-whatsapp"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:estebancandio@gmail.com">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </li>
+              </ul>
+            </nav>
+        </div>
+        <div class="usuario container">    
+            <div class="row">
+                <div id="banner" class="col-12">
+                    <div id="profile-picture" class="col">
+                        <img src="img/FotoPerfil.jpeg" alt="Foto Perfil">
+                    </div>
+                </div>
+        
+            </div>
+            <div class="informacion row">
+                <div class="titulo col-12">
+                    <h2>Informacion Personal</h2>
+                    <div class="subrayadoTitulos"></div>
+                </div>
+                <div id="nombres"class="col-12">
+                    <h5>Esteban Orfeo Candioti</h5>
+                </div>
+        
+                <div id="titulos" class="col-12">
+                    <h5>Full stack develepor Jr</h5>
+                </div>
+            </div>
+        </div>
+        <div class="about container">
+            <div class="informacion row">
+                <div class="col-12">
+                    <h2 class="titulo">Acerca de mi</h2>
+                    <div class="subrayadoTitulos"></div>
+                </div>
+                <div class="col-12">
+                    <h5>Estudiante de programacion web full stack jr con conocimiento en HTML, CSS y JavaScript</h5>
+                </div>
+            </div>
+        </div>
+        <div class="experiencia container">
+            <div class="informacion row">
+                <div class="titulo col-12">
+                    <h2>Experiencia</h2>
+                    <div class="subrayadoTitulos"></div>
+                </div>
+            </div>
+            <ul class="item-list">
+                <li>
+                    <div class="informacion row">
+                        <div class="imagen col-3">
+                            <img [src]="experience.jobImg"> 
+                        </div>
+                        <div class="col-9">
+                            <h2>Nesta</h2>
+                            <div class="subrayadoSubtitulos"></div>
+                            <h4>Encargado</h4>
+                            <h4>Encargado de caja y personal</h4>
+                            <time> 2022 </time> - <time>actualidad</time>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class=" educacion container">
+            <div class="informacion row">
+                <div class="titulo col-12">
+                    <h2>Educacion</h2>
+                    <div class="subrayadoTitulos"></div>
+                </div>
+                <ul class="item-list">
+                    <li>
+                        <div class="row">
+                            <div class="institucion col-12">
+                                <h2>Escuela Domingo Cullen</h2>
+                                <div class="subrayadoSubtitulos"></div>
+                                <h4>Bachiller en Informatica</h4>
+                                <time>2014</time>-<time>2018</time>
+                            </div>
+                        </div>
+                     </li>
+                </ul>
+            </div>
+        </div>
+        <div class="habilidadesDebiles container">
+            <div class="informacion row">
+                <div class="titulo col-12">
+                    <h2>Habilidades Debiles</h2>
+                    <div class="subrayadoTitulos"></div>
+                </div>
+                <ul class="item-list">
+                    <li>
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Impuntual</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="subrayadoSubtitulos col-2"></div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" attr.aria-valuenow="75" 
+                            aria-valuemin="0" aria-valuemax="100" [style.width]="75%">
+                              75%
+                            </div>
+                          </div>
+                        <div class="divisor"></div>
+                    </li>
+                </ul>        
+            </div>
+        </div>
+        <div class="habilidadesFuertes container">
+            <div class="informacion row">
+                <div class="titulo col-12">
+                    <h2>Habilidades Fuertes</h2>
+                    <div class="subrayadoTitulos"></div>
+                </div>
+                <ul class="item-list">
+                    <li>
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Proactivo</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="subrayadoSubtitulos col-2"></div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" attr.aria-valuenow="60" 
+                            aria-valuemin="0" aria-valuemax="100" [style.width]="60%">
+                              60%
+                            </div>
+                          </div>
+                        <div class="divisor"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tecnologia container-xxl">
+            <div class="informacion row">
+                <div class=" col-12">
+                    <h2>Tecnologias</h2>
+                    <div class="subrayadoTitulos"></div>
+                </div>
+            </div>
+            <div class="informacion row">
+                <ul class="item-list">
+                    <li>
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>HTML 5</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="subrayadoSubtitulos col-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="fotoTecnologia col-1">
+                            <img src="/img/html5.png" class="fotos">
+                            </div>
+                            <div class="col-11">
+                                <h4>HTML 5 es un lenguaje de enmarcado de hiper texto</h4>
+                            </div>
+                            <div class="divisor"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="proyectos container">
+            <div class="informacion row">
+                <div class="col-12">
+                    <h2>Proyectos</h2>
+                    <div class="subrayadoTitulos"></div>
+                </div>
+            </div>
+                <ul class="item-list">
+                    <li>
+                        <div class="informacion row">
+                            <div class="col-12">
+                                <h4>Portfolio web</h4>
+                            </div>
+                            <div class="row">
+                                <div class="subrayadoSubtitulos col-2"></div>
+                            </div>
+                        </div>
+                        <div class="informacion row">
+                            <div class="col-7">
+                               Portfolio web creado para el curso Argentina Programa
+                            </div>
+                            <div class="col-5">
+                                julio 2022 - octubre 2022
+                            </div>
+                            <div class="col-12">
+                                Links al proyecto:
+                            </div>
+                            <li>
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-5">
+                                       link al repositorio de github:
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="https://github.com/EstebanCandioti?tab=repositories">https://github.com/EstebanCandioti?tab=repositories</a>
+                                    </div>
+                                </div>
+                                <div class="minidivisor"></div>
+                            </li>
+                        </div>
+                        <div class="divisor"></div>
+                    </li>
+                </ul>        
+        </div>
+    </div>
+</bodY>
