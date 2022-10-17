@@ -219,13 +219,14 @@
             <!-----------------------------------------------------CAMPO DESCRIPCION DEL PROYECTO------------------------------------------------>
           <div class="form-group">
             <label for="descripcion">Descripcion del proyecto</label>
-            <input
+            <textarea
               type="text"
               class="form-control"
               required
               formControlName="descripcion"
               placeholder="Ingrese una descripcion del proyecto"
-            />
+            >
+            </textarea>
             <!--Alerta por si el campo esta vacio-->
             <div
               *ngIf="proyectoForm.get('descripcion')?.touched && proyectoForm.get('descripcion')?.errors?.['required']"
@@ -390,13 +391,14 @@
           <!-----------------------------------------------------CAMPO DESCRIPCION LINK 1 DEL PROYECTO---------------------------------------------------->
           <div class="form-group">
             <label for="descripcionLink1">Descripcion del link 1</label>
-            <input
+            <textarea
               type="text"
               class="form-control"
               required
               formControlName="descripcionLink1"
               placeholder="Insgrese una descripcion para la url puesta(opcional)"
-            />
+            >
+            </textarea>
 
             <!--Alerta por si el campo tiene pocos caracteres-->
             <div
@@ -447,13 +449,14 @@
           <!------------------------------------------------------CAMPO DESCRIPCION LINK 2 DEL PROYECTO--------------------------------------------------->
           <div class="form-group">
             <label for="descripcionLink2">Descripcion del link 2</label>
-            <input
+            <textarea
               type="text"
               class="form-control"
               required
               formControlName="descripcionLink2"
               placeholder="Ingrese una descripcion para la url puesta (opcional)"
-            />
+            >
+            </textarea>
 
             <!--Alerta por si el campo tiene pocos caracteres-->
             <div
@@ -505,13 +508,14 @@
           <!----------------------------------------------------------CAMPO DESCRIPCION LINK 3 DEL PROYECTO---------------------------------------------------------->
           <div class="form-group">
             <label for="descripcionLink3">Descripcion del link 3</label>
-            <input
+            <textarea
               type="text"
               class="form-control"
               required
               formControlName="descripcionLink3"
               placeholder="Ingrese una descripcion para la url puesta (opcional)"
-            />
+            >
+            </textarea>
 
             <!--Alerta por si el campo tiene pocos caracteres-->
             <div

@@ -59,16 +59,15 @@
 
 #profile-picture img{
     width: 8vw;
-    height:16vh;
+    height:auto;
     position: absolute;
-    margin-top:5%;
+    margin-top:3%;
     border-radius: 50%; ;
 }
 
 .fotos img{
-    max-width: 70%;
-    min-width: 20%;
-    margin-bottom: 1%;
+    max-width: 100%;
+    height: auto;
 }
 /*---------------------------------------------------------------Dividores/Subtitulos------------------------------------------------------*/
 .divisor{
@@ -132,6 +131,7 @@
 /*--------------------------------------------------------------------CABECERA------------------------------------------------------------*/
   /*Claser en la que se encuentra logo del curso, botonera de contacto y login y banner*/
 .header{
+    max-width: 100vw;
     /*color de fondo (dependiente del width u height)*/
     background-color: #a1ddff;
     /*aplica color al contenido*/
@@ -145,12 +145,15 @@
 }
 /*Imagen<img> del logo*/
 .logo img{
-    width: 100px;
+    max-width: 5vw;
+    height: auto;
 }
 /*Lista<ul> con la botonera*/
 .contact-list{
+    max-width:auto;
     display: flex;
     align-items:center;
+    justify-content: space-between;
 }
 /*Elementos de la lista<li> dentro de la lista*/
 .contact-list li{
@@ -163,7 +166,6 @@
     /*relleno entre cada elemento para que no estene tan juntos*/
     padding: 20px;
 }
-
 /*------------------------------------------------------------BODY-----------------------------------------------------------------------*/
 .background{
     height: 100%;

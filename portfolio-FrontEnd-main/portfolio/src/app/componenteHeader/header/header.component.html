@@ -1,12 +1,13 @@
-<div class="header container-fluid">
+<div class="header">
   <!--Lista con el logo del curso y los botones de contacto-->
-  <nav class="contact row">
+  <nav class="contact ">
     <!--Logo del curso puesto aqui para poder alinear con los botones-->
-    <div class="logo col-9">
-      <img src="assets/img/ArgentinaPrograma.png" alt="logo curso" />
-      <h5>Argentina Programa #YoProgramo</h5>
-    </div>
-    <div class="col-3 contact-list">
+
+    <div class="contact-list">
+      <div class="logo ">
+        <img src="assets/img/ArgentinaPrograma.png" alt="logo curso" />
+        <h5>Argentina Programa #YoProgramo</h5>
+      </div>
       <!--Lista con botones de contacto(wsp, ig) y boton login-->
       <ul class="contact-list">
         <li *ngIf="persona.instagram">
@@ -32,8 +33,8 @@
         <li *ngIf="!autenticado">
           <app-login></app-login>
         </li>
-        <li *ngIf="autenticado" id="punta">
-          <button class="logout" (click)="logout()">logout</button>
+        <li *ngIf="autenticado">
+          <button type="button" class="logout" (click)="logout()">logout</button>
         </li>
       </ul>
     </div>
